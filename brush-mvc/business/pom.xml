@@ -11,7 +11,7 @@
 
     <artifactId>business</artifactId>
     <name>web-business</name>
-    <description>刷手用后台</description>
+    <description>商家用后台</description>
     <dependencies>
         <dependency>
             <groupId>site.zido</groupId>

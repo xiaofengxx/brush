@@ -15,10 +15,15 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <!-- 编译时的编码 -->
         <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
+        <spring.boot.version>1.5.3.RELEASE</spring.boot.version>
+        <mybatisplus.starter.version>1.0.1</mybatisplus.starter.version>
+        <mysql.driver.version>5.1.40</mysql.driver.version>
+        <druid.version>1.0.31</druid.version>
+        <fastjson.version>1.2.32</fastjson.version>
+        <swagger2.version>2.6.1</swagger2.version>
     </properties>
     <modules>
         <module>brush-utils</module>
-        <module>brush-core</module>
         <module>brush-mvc</module>
     </modules>
     <dependencyManagement>
@@ -27,18 +32,22 @@
                 <!-- Import dependency management from Spring Boot -->
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
-                <version>1.5.3.RELEASE</version>
+                <version>${spring.boot.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
             <!--如果要把springboot工程打包成war执行，需要该jar-->
-            <dependency>
+            <!--<dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-legacy</artifactId>
                 <version>1.0.2.RELEASE</version>
-            </dependency>
+            </dependency>-->
         </dependencies>
+
     </dependencyManagement>
+    <dependencies>
+
+    </dependencies>
     <!--使用阿里云中心仓库-->
     <repositories>
         <repository>
@@ -52,7 +61,7 @@
         </repository>
     </repositories>
     <build>
-        <!-- 配置java版本 不配置的话默认父类配置的是1.6-->
+        <!-- 配置java版本-->
         <pluginManagement>
             <plugins>
                 <plugin>

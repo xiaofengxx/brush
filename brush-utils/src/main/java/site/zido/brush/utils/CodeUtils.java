@@ -1,8 +1,7 @@
 package site.zido.brush.utils;
 
 /**
- * description
- * <p>fill description</p>
+ * 转码工具
  *
  * @author zido
  * @since 2017/5/26 0026

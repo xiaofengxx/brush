@@ -4,8 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
- * description:
- * <p>fill description</p>
+ * 启动类
  *
  * @author zido
  * @since 2017/5/23

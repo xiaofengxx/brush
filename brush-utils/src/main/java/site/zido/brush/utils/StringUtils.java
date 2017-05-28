@@ -5,8 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 /**
- * description:
- * <p>fill description</p>
+ * 字符串工具类
  *
  * @author zido
  * @since 2017/5/26 0026

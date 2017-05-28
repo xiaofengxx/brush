@@ -5,8 +5,7 @@ import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.context.ApplicationContext;
 
 /**
- * description:
- * <p>fill description</p>
+ * spring框架工具类
  *
  * @author zido
  * @since 2017/5/25 0025

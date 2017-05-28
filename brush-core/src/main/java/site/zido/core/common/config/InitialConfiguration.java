@@ -7,8 +7,7 @@ import site.zido.brush.utils.CipherUtils;
 import javax.annotation.PostConstruct;
 
 /**
- * description
- * <p>fill description</p>
+ * 自定义初始化类
  *
  * @author zido
  * @since 2017/5/26 0026

@@ -5,8 +5,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * description:
- * <p>fill description</p>
+ * 校验工具类
  *
  * @author zido
  * @since 2017/5/25 0025

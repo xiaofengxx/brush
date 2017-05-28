@@ -33,6 +33,7 @@ public class CipherUtils {
     public static void init(boolean encryption){
         CipherUtils.encryption = encryption;
     }
+
     /**
      * RSA密钥长度必须是64的倍数，在512~65536之间。默认是1024
      */

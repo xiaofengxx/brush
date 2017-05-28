@@ -2,10 +2,9 @@ package site.zido.business.web;
 
 import org.springframework.web.bind.annotation.*;
 import site.zido.business.BusMessage;
-import site.zido.core.Common;
 
 /**
- * description:
+ * 示例controller
  * <p>fill description</p>
  *
  * @author zido

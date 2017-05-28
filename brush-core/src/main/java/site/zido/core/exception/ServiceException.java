@@ -1,7 +1,7 @@
 package site.zido.core.exception;
 
 /**
- * description:
+ * 服务异常事件，此事件抛出，自动处理
  * <p>fill description</p>
  *
  * @author zido

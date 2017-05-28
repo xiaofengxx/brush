@@ -5,14 +5,11 @@ spring:
     encoding:
       charset: UTF-8
       enabled: true
-      force: true
     converters:
       preferred-json-mapper: fastjson
 #mybatis
 mybatis-plus:
   mapper-locations: classpath:/mapper/*Mapper.xml
-  mapper-scan: site.zido.mapper
-  typeAliasesPackage: site.zido.entity
   global-config:
     id-type: 2
     field-strategy: 2

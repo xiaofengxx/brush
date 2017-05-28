@@ -8,3 +8,7 @@
 * business：商家后台
 * center：中心后台
 * subscriber：用户后台
+
+## 开发规范
+
+* 所有忽略代码（比如代码生成类generator类全部放在文件夹名为ignore的文件夹下）

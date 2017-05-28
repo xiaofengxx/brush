@@ -25,11 +25,11 @@
     <modules>
         <module>brush-core</module>
         <module>brush-utils</module>
-        <module>brush-mvc</module>
         <module>brush-entities</module>
         <module>center</module>
         <module>subscriber</module>
         <module>business</module>
+        <module>starter</module>
     </modules>
     <dependencyManagement>
         <dependencies>

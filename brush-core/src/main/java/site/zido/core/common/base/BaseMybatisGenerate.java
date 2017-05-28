@@ -1,4 +1,4 @@
-package site.zido.core.common.config;
+package site.zido.core.common.base;
 
 import com.baomidou.mybatisplus.generator.AutoGenerator;
 import com.baomidou.mybatisplus.generator.config.*;
@@ -15,7 +15,7 @@ import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
  * @author zido
  * @since  2017/5/25
  */
-public abstract class MyBatisGenerator {
+public abstract class BaseMybatisGenerate {
     /**
      * 全局配置，包括生成路径等
      * @param gc 全局配置
@@ -89,8 +89,8 @@ public abstract class MyBatisGenerator {
         mpg.execute();
         System.err.println("执行完成");
     }
-    protected static void start(Class<? extends MyBatisGenerator> classzz) {
-        MyBatisGenerator generator = null;
+    protected static void start(Class<? extends BaseMybatisGenerate> classzz) {
+        BaseMybatisGenerate generator = null;
         try {
             generator = classzz.newInstance();
         } catch (InstantiationException | IllegalAccessException e) {

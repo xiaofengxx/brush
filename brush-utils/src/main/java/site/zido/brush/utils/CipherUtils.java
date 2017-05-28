@@ -119,7 +119,7 @@ public class CipherUtils {
         // 模长
         int key_len = publicKey.getModulus().bitLength() / 8;
         // 加密数据长度 <= 模长-11
-        String[] datas = splitString(data, key_len - 11);
+        String[] datas = StringUtils.splitString(data, key_len - 11);
         StringBuilder mi = new StringBuilder();
         //如果明文长度大于模长-11则要分组加密
         for (String s : datas) {
@@ -148,57 +148,11 @@ public class CipherUtils {
         byte[] bcd = CodeUtils.ASCII_To_BCD(bytes, bytes.length);
         //如果密文长度大于模长则要分组解密
         StringBuilder ming = new StringBuilder();
-        byte[][] arrays = splitArray(bcd, key_len);
+        byte[][] arrays = CollectionUtils.splitArray(bcd, key_len);
         for(byte[] arr : arrays){
             ming.append(new String(cipher.doFinal(arr)));
         }
         return ming.toString();
-    }
-
-    /**
-     * 拆分字符串
-     */
-    public static String[] splitString(String string, int len) {
-        int x = string.length() / len;
-        int y = string.length() % len;
-        int z = 0;
-        if (y != 0) {
-            z = 1;
-        }
-        String[] strings = new String[x + z];
-        String str = "";
-        for (int i=0; i<x+z; i++) {
-            if (i==x+z-1 && y!=0) {
-                str = string.substring(i*len, i*len+y);
-            }else{
-                str = string.substring(i*len, i*len+len);
-            }
-            strings[i] = str;
-        }
-        return strings;
-    }
-    /**
-     *拆分数组
-     */
-    public static byte[][] splitArray(byte[] data,int len){
-        int x = data.length / len;
-        int y = data.length % len;
-        int z = 0;
-        if(y!=0){
-            z = 1;
-        }
-        byte[][] arrays = new byte[x+z][];
-        byte[] arr;
-        for(int i=0; i<x+z; i++){
-            arr = new byte[len];
-            if(i==x+z-1 && y!=0){
-                System.arraycopy(data, i*len, arr, 0, y);
-            }else{
-                System.arraycopy(data, i*len, arr, 0, len);
-            }
-            arrays[i] = arr;
-        }
-        return arrays;
     }
 
     /**
@@ -233,7 +187,7 @@ public class CipherUtils {
         } catch (BadPaddingException e) {
             e.printStackTrace();
         }
-        return null;
+        return "";
     }
 
     /**解密
@@ -253,7 +207,7 @@ public class CipherUtils {
             Cipher cipher = Cipher.getInstance(AES);// 创建密码器
             cipher.init(Cipher.DECRYPT_MODE, key);// 初始化
             byte[] result = cipher.doFinal(Base64.getDecoder().decode(content));
-            return new String(result); // 加密
+            return new String(result);
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         } catch (NoSuchPaddingException e) {
@@ -265,6 +219,6 @@ public class CipherUtils {
         } catch (BadPaddingException e) {
             e.printStackTrace();
         }
-        return null;
+        return "";
     }
 }

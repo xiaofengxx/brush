@@ -1,7 +1,8 @@
 package site.zido.brush.utils.cipher;
 
-import org.testng.Assert;
-import org.testng.annotations.Test;
+
+import org.junit.Assert;
+import org.junit.Test;
 import site.zido.brush.utils.CipherUtils;
 
 import java.security.interfaces.RSAPrivateKey;
@@ -56,7 +57,7 @@ public class TestCipherUtils {
 
         System.out.println("解密后：" + result);
 
-        Assert.assertTrue(start.equals(result),"加解密错误");
+        Assert.assertTrue("加解密错误",start.equals(result));
 
     }
 }

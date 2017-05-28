@@ -23,8 +23,13 @@
         <swagger2.version>2.6.1</swagger2.version>
     </properties>
     <modules>
+        <module>brush-core</module>
         <module>brush-utils</module>
         <module>brush-mvc</module>
+        <module>brush-entities</module>
+        <module>center</module>
+        <module>subscriber</module>
+        <module>business</module>
     </modules>
     <dependencyManagement>
         <dependencies>

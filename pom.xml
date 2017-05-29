@@ -30,6 +30,7 @@
         <module>subscriber</module>
         <module>business</module>
         <module>starter</module>
+        <module>brush-service</module>
     </modules>
     <dependencyManagement>
         <dependencies>

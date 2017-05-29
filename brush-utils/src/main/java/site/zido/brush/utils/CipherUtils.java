@@ -31,7 +31,7 @@ public class CipherUtils {
     public static final int KEY_SIZE = 2048;
     /**
      * 生成公钥和私钥
-     * @throws NoSuchAlgorithmException
+     * @throws NoSuchAlgorithmException 不可用
      *
      */
     public static HashMap<String, Object> getKeys() throws NoSuchAlgorithmException{
@@ -55,7 +55,7 @@ public class CipherUtils {
      *            模
      * @param exponent
      *            指数
-     * @return
+     * @return 公钥
      */
     public static RSAPublicKey getPublicKey(String modulus, String exponent) {
         try {

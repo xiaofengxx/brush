@@ -23,14 +23,14 @@ public class IndexController {
     private UserService userService;
     @PostMapping(value = "/index")
     public BusMessage index(@RequestBody BusMessage message){
-        List<User> users = userService.getAllUser();
+        List<User> users = userService.getAllUser("asdw");
         System.out.println(users.size());
         return message;
     }
 
     @PostMapping(value = "/users")
     public List<User> index(){
-        List<User> users = userService.getAllUser();
+        List<User> users = userService.getAllUser("qweyhuo");
         return users;
     }
 }

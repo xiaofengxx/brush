@@ -8,17 +8,3 @@ spring:
       force: true
     converters:
       preferred-json-mapper: fastjson
-#mybatis
-mybatis-plus:
-  mapper-locations: classpath:/mapper/*Mapper.xml
-  mapper-scan: site.zido.mapper
-  typeAliasesPackage: site.zido.entity
-  global-config:
-    id-type: 2
-    field-strategy: 2
-    auto-set-db-type: true
-    db-column-underline: true
-    refresh-mapper: true
-  configuration:
-    map-underscore-to-camel-case: true
-    cache-enabled: false

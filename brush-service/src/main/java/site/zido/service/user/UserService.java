@@ -12,5 +12,5 @@ import java.util.List;
  * @since 2017/5/29 0029
  */
 public interface UserService {
-    public List<User> getAllUser();
+    public List<User> getAllUser(String id);
 }

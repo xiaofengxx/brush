@@ -21,6 +21,7 @@
         <druid.version>1.0.31</druid.version>
         <fastjson.version>1.2.32</fastjson.version>
         <swagger2.version>2.6.1</swagger2.version>
+        <kotlin.version>1.1.2-4</kotlin.version>
     </properties>
     <modules>
         <module>brush-core</module>

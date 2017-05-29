@@ -31,12 +31,12 @@ public class CacheConfiguration extends CachingConfigurerSupport{
         return new RedisCacheManager(redisTemplate);
     }
 
-    @Bean
+    /*@Bean
     public RedisTemplate<String, String> redisTemplate(RedisConnectionFactory factory) {
         RedisTemplate<String, String> redisTemplate = new RedisTemplate<>();
         redisTemplate.setConnectionFactory(factory);
         return redisTemplate;
-    }
+    }*/
 
     @Override
     public KeyGenerator keyGenerator() {

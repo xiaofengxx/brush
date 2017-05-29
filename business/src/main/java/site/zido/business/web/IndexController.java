@@ -1,7 +1,13 @@
 package site.zido.business.web;
 
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 import site.zido.business.BusMessage;
+import site.zido.entity.User;
+import site.zido.service.user.UserService;
+
+import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * 示例controller
@@ -13,9 +19,18 @@ import site.zido.business.BusMessage;
 @RestController
 @RequestMapping("/api")
 public class IndexController {
+    @Resource
+    private UserService userService;
     @PostMapping(value = "/index")
     public BusMessage index(@RequestBody BusMessage message){
-        System.out.println(message.getName());
+        List<User> users = userService.getAllUser();
+        System.out.println(users.size());
         return message;
+    }
+
+    @PostMapping(value = "/users")
+    public List<User> index(){
+        List<User> users = userService.getAllUser();
+        return users;
     }
 }

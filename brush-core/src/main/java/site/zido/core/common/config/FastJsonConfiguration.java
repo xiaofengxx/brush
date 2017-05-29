@@ -6,6 +6,7 @@ import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter4;
 import org.springframework.boot.autoconfigure.web.HttpMessageConverters;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.http.converter.HttpMessageConverter;
 import site.zido.core.common.CipherConverter;
 
@@ -19,8 +20,19 @@ import site.zido.core.common.CipherConverter;
 @Configuration
 public class FastJsonConfiguration {
     @Bean
+    @Profile("prod")
     public HttpMessageConverters getCipherConverter(){
         FastJsonHttpMessageConverter4 fastConverter = new CipherConverter();
+        FastJsonConfig fastJsonConfig = new FastJsonConfig();
+        fastJsonConfig.setSerializerFeatures(SerializerFeature.PrettyFormat);
+        fastConverter.setFastJsonConfig(fastJsonConfig);
+        return new HttpMessageConverters((HttpMessageConverter<?>) fastConverter);
+    }
+
+    @Profile("dev")
+    @Bean
+    public HttpMessageConverters getConverter(){
+        FastJsonHttpMessageConverter4 fastConverter = new FastJsonHttpMessageConverter4();
         FastJsonConfig fastJsonConfig = new FastJsonConfig();
         fastJsonConfig.setSerializerFeatures(SerializerFeature.PrettyFormat);
         fastConverter.setFastJsonConfig(fastJsonConfig);

@@ -2,15 +2,20 @@ package site.zido.core.common.config;
 
 import com.baomidou.mybatisplus.plugins.PaginationInterceptor;
 import com.baomidou.mybatisplus.spring.MybatisMapperRefresh;
+import com.baomidou.mybatisplus.spring.MybatisSqlSessionFactoryBean;
+import com.baomidou.mybatisplus.spring.boot.starter.MybatisPlusProperties;
 import org.apache.ibatis.session.SqlSessionFactory;
+import org.mapstruct.Mapper;
 import org.mybatis.spring.annotation.MapperScan;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.util.ResourceUtils;
 
 import javax.annotation.Resource;
+import javax.sql.DataSource;
 
 /**
  * mybatis配置
@@ -20,12 +25,8 @@ import javax.annotation.Resource;
  * @since 2017/5/25
  */
 @Configuration
+@MapperScan(basePackages = "site.zido.mapper*")
 public class MyBatisConfiguration {
-    @Resource
-    private SqlSessionFactory factory;
-    @Value("${spring.profiles.active}")
-    private String profile;
-    private static Logger logger = LoggerFactory.getLogger(MyBatisConfiguration.class);
 
     /**
      * 配置分页插件
@@ -38,21 +39,5 @@ public class MyBatisConfiguration {
         paginationInterceptor.setOptimizeType("aliDruid");
 
         return paginationInterceptor;
-    }
-
-    /**
-     * 配置xml文件自动刷新(仅开发环境有效)
-     * @return 自动刷新
-     */
-    @Bean
-    public MybatisMapperRefresh refresh(){
-        MybatisMapperRefresh refresh = null;
-        try {
-            refresh = new MybatisMapperRefresh(factory,profile.equals("dev"));
-        } catch (Exception e) {
-            logger.error("开启自动xml自动刷新失败");
-            e.printStackTrace();
-        }
-        return refresh;
     }
 }

@@ -2,6 +2,7 @@ package site.zido.core.common;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter4;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.http.HttpInputMessage;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import site.zido.brush.utils.CipherUtils;
@@ -17,7 +18,6 @@ import java.lang.reflect.Type;
  * @since 2017/5/26 0026
  */
 public class CipherConverter extends FastJsonHttpMessageConverter4 {
-
     @Override
     public Object read(Type type, Class<?> contextClass, HttpInputMessage inputMessage) throws IOException, HttpMessageNotReadableException {
         String s = StringUtils.toString(inputMessage.getBody());

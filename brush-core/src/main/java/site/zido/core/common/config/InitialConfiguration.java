@@ -15,20 +15,5 @@ import javax.annotation.PostConstruct;
 @Configuration
 @ConfigurationProperties("brush")
 public class InitialConfiguration {
-    private Boolean encryption;
 
-
-    @PostConstruct
-    public void initEncryption(){
-        if(encryption != null)
-            CipherUtils.init(encryption);
-    }
-
-    public Boolean getEncryption() {
-        return encryption;
-    }
-
-    public void setEncryption(Boolean encryption) {
-        this.encryption = encryption;
-    }
 }

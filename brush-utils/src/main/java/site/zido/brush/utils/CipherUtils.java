@@ -24,15 +24,6 @@ public class CipherUtils {
     public static final String CIPHER_ALGORITHM = "RSA/ECB/PKCS1Padding";
     public static final String PUBLIC_KEY = "publicKey";
     public static final String PRIVATE_KEY = "privateKey";
-    private static Boolean encryption = true;
-
-    /**
-     * 选择加密是否生效，设置之后以后都会选择此策略
-     * @param encryption 是否加密
-     */
-    public static void init(boolean encryption){
-        CipherUtils.encryption = encryption;
-    }
 
     /**
      * RSA密钥长度必须是64的倍数，在512~65536之间。默认是1024
@@ -113,8 +104,6 @@ public class CipherUtils {
      */
     public static String RSAEncode(String data, RSAPublicKey publicKey)
             throws Exception {
-        if(!encryption)
-            return data;
         Cipher cipher = Cipher.getInstance(CIPHER_ALGORITHM);
         cipher.init(Cipher.ENCRYPT_MODE, publicKey);
         // 模长
@@ -139,8 +128,6 @@ public class CipherUtils {
      */
     public static String RSADecode(String data, RSAPrivateKey privateKey)
             throws Exception {
-        if(!encryption)
-            return data;
         Cipher cipher = Cipher.getInstance(CIPHER_ALGORITHM);
         cipher.init(Cipher.DECRYPT_MODE, privateKey);
         //模长
@@ -163,8 +150,6 @@ public class CipherUtils {
      * @return 密文
      */
     public static String AESEncode(String content, String password){
-        if(!encryption)
-            return content;
         try {
             KeyGenerator kgen = KeyGenerator.getInstance(AES);
             kgen.init(128, new SecureRandom(password.getBytes()));
@@ -197,8 +182,6 @@ public class CipherUtils {
      * @return 明文
      */
     public static String AESDecode(String content, String password) {
-        if(!encryption)
-            return content;
         try {
             KeyGenerator kgen = KeyGenerator.getInstance(AES);
             kgen.init(128, new SecureRandom(password.getBytes()));

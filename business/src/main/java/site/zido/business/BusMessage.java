@@ -1,7 +1,7 @@
 package site.zido.business;
 
 /**
- * description:
+ * 实力消息类:
  * <p>fill description</p>
  *
  * @author zido

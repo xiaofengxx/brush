@@ -7,10 +7,7 @@ import org.springframework.cache.interceptor.KeyGenerator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.cache.RedisCacheManager;
-import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
-
-import java.lang.reflect.Method;
 
 /**
  * 缓存配置类
@@ -20,14 +17,15 @@ import java.lang.reflect.Method;
  */
 @Configuration
 @EnableCaching
-public class CacheConfiguration extends CachingConfigurerSupport{
+public class CacheConfiguration extends CachingConfigurerSupport {
     /**
      * 缓存管理器
+     *
      * @param redisTemplate redis template
      * @return 缓存管理器
      */
     @Bean
-    public CacheManager cacheManager(RedisTemplate<?,?> redisTemplate) {
+    public CacheManager cacheManager(RedisTemplate<?, ?> redisTemplate) {
         return new RedisCacheManager(redisTemplate);
     }
 

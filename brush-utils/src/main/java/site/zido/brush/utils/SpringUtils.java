@@ -11,14 +11,16 @@ import org.springframework.context.ApplicationContext;
  * @since 2017/5/25 0025
  */
 public class SpringUtils {
-    /** Spring框架应用上下文对象 */
+    /**
+     * Spring框架应用上下文对象
+     */
     private static ApplicationContext context;
 
-    static{
+    static {
         context = getApplicationContext();
     }
 
-    public static void setFactoryBean(ApplicationContext context){
+    public static void setFactoryBean(ApplicationContext context) {
         SpringUtils.context = context;
     }
 

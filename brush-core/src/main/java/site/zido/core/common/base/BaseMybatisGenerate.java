@@ -8,40 +8,44 @@ import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 /**
  * mybatis代码构造生成器
  * <p>
- *     继承此方法，编写main函数，调用start方法即可生成构造函数 </br>
- *     重写config前缀的函数，实现自定义
+ * 继承此方法，编写main函数，调用start方法即可生成构造函数 </br>
+ * 重写config前缀的函数，实现自定义
  * </p>
  *
  * @author zido
- * @since  2017/5/25
+ * @since 2017/5/25
  */
 public abstract class BaseMybatisGenerate {
     /**
      * 全局配置，包括生成路径等
+     *
      * @param gc 全局配置
      */
-    public void configGlobal(GlobalConfig gc){
+    public void configGlobal(GlobalConfig gc) {
 
     }
 
     /**
      * 数据源配置，默认配置为项目开发数据源
+     *
      * @param dsc 数据源配置
      */
-    public void configDataSource(DataSourceConfig dsc){
+    public void configDataSource(DataSourceConfig dsc) {
 
     }
 
     /**
      * 命名策略配置 ，默认驼峰命名，不建议更改
+     *
      * @param sc 命名配置
      */
-    public void configStrategy(StrategyConfig sc){
-        
+    public void configStrategy(StrategyConfig sc) {
+
     }
 
     /**
      * 包名配置,默认为项目包名,根据实际情况进行修改
+     *
      * @param pc 包名配置
      */
     public void configPackage(PackageConfig pc) {
@@ -51,7 +55,7 @@ public abstract class BaseMybatisGenerate {
     /**
      * 执行
      */
-    private void execute(){
+    private void execute() {
         AutoGenerator mpg = new AutoGenerator();
         GlobalConfig gc = new GlobalConfig();
         gc.setFileOverride(true);
@@ -72,7 +76,7 @@ public abstract class BaseMybatisGenerate {
         configDataSource(dsc);
         mpg.setDataSource(dsc);
         StrategyConfig strategy = new StrategyConfig();
-        strategy.setTablePrefix(new String[] {"brush_"});// 此处可以修改为您的表前缀
+        strategy.setTablePrefix(new String[]{"brush_"});// 此处可以修改为您的表前缀
         strategy.setNaming(NamingStrategy.underline_to_camel);// 表名生成策略
         mpg.setStrategy(strategy);
 
@@ -89,6 +93,7 @@ public abstract class BaseMybatisGenerate {
         mpg.execute();
         System.err.println("执行完成");
     }
+
     protected static void start(Class<? extends BaseMybatisGenerate> classzz) {
         BaseMybatisGenerate generator = null;
         try {
@@ -96,9 +101,9 @@ public abstract class BaseMybatisGenerate {
         } catch (InstantiationException | IllegalAccessException e) {
             e.printStackTrace();
         }
-        if(generator == null){
+        if (generator == null) {
             System.err.println("执行失败");
-            return ;
+            return;
         }
         generator.execute();
     }

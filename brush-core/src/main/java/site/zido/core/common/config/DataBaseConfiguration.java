@@ -11,7 +11,6 @@ import org.springframework.context.ApplicationContextException;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import javax.sql.DataSource;
 import java.sql.SQLException;
 
 /**
@@ -48,6 +47,7 @@ public class DataBaseConfiguration {
 
     /**
      * 注册dataSource
+     *
      * @return 数据源
      * @throws SQLException sql异常
      */
@@ -92,6 +92,7 @@ public class DataBaseConfiguration {
         reg.addInitParameter("loginPassword", druidUserPassword);
         return reg;
     }
+
     @Bean
     public FilterRegistrationBean filterRegistrationBean() {
         FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean();

@@ -20,10 +20,11 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
     @Resource
     private UserMapper userMapper;
+
     @Override
-    @Cacheable(value = "democache",key = "'allUser' + #id")
+    @Cacheable(value = "democache", key = "'allUser' + #id")
     public List<User> getAllUser(String id) {
         System.out.println("write write");
-        return userMapper.searchById();
+        return null;
     }
 }

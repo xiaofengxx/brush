@@ -41,11 +41,12 @@ public class BaseController {
 
     /**
      * 成功，返回成功数据
+     *
      * @param data 数据
      * @return ajax result
      */
-    protected AjaxResult successData(final Object data){
-        return success("操作成功",data);
+    protected AjaxResult successData(final Object data) {
+        return success("操作成功", data);
     }
 
     /**
@@ -154,17 +155,19 @@ public class BaseController {
 
     /**
      * 当前用户是否登陆
+     *
      * @return true/false
      */
-    protected boolean isLogged(){
+    protected boolean isLogged() {
         return null != loggedInChecker.getLoggedInUser();
     }
 
     /**
      * 获取当前登陆用户
+     *
      * @return {@link User}
      */
-    protected User getCurrentUser(){
+    protected User getCurrentUser() {
         return loggedInChecker.getLoggedInUser();
     }
 }

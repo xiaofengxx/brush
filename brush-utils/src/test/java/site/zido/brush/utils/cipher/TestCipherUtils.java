@@ -5,14 +5,12 @@ import org.junit.Assert;
 import org.junit.Test;
 import site.zido.brush.utils.CipherUtils;
 
-import java.security.NoSuchAlgorithmException;
 import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
 import java.util.HashMap;
 
 /**
- * description:
- * <p>fill description</p>
+ * 加密解密测试
  *
  * @author zido
  * @since 2017/5/26 0026
@@ -46,7 +44,7 @@ public class TestCipherUtils {
     }
 
     @Test
-    public void testAES(){
+    public void testAES() {
         String start = "123456";
         System.out.println("明文：" + start);
 
@@ -54,11 +52,11 @@ public class TestCipherUtils {
 
         System.out.println("密文：" + s);
 
-        String result = CipherUtils.AESDecode(s,"123456");
+        String result = CipherUtils.AESDecode(s, "123456");
 
         System.out.println("解密后：" + result);
 
-        Assert.assertTrue("加解密错误",start.equals(result));
+        Assert.assertTrue("加解密错误", start.equals(result));
 
     }
 
@@ -87,11 +85,11 @@ public class TestCipherUtils {
         String password = CipherUtils.RSAEncode(aesPassword, pubKey);
         System.out.println("aesKey：" + password);
         //加密后的密文
-        String mi = CipherUtils.AESEncode(ming,aesPassword);
+        String mi = CipherUtils.AESEncode(ming, aesPassword);
         System.out.println("密文：" + mi);
-        String newKey = CipherUtils.RSADecode(password,priKey);
+        String newKey = CipherUtils.RSADecode(password, priKey);
         //解密后的明文
-        ming = CipherUtils.AESDecode(mi,newKey);
+        ming = CipherUtils.AESDecode(mi, newKey);
         System.out.println("明文：" + ming);
     }
 }

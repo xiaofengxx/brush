@@ -35,7 +35,7 @@ public class SwaggerConfiguration {
                 .title("business api")
                 .description("商家用后台api接口")
                 .termsOfServiceUrl("http://zido.site")
-                .contact(new Contact("zido","http://zido.site","wuhongxu@1208@gmail.com"))
+                .contact(new Contact("zido", "http://zido.site", "wuhongxu@1208@gmail.com"))
                 .version("0.0.1")
                 .build();
     }

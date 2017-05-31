@@ -5,6 +5,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import site.zido.entity.User;
 
 import java.util.Collection;
+import java.util.Objects;
 
 /**
  * 用户认证实体
@@ -15,9 +16,11 @@ import java.util.Collection;
  */
 public class SysUser implements UserDetails {
     private User user;
-    public SysUser(User user){
+
+    public SysUser(User user) {
         this.user = user;
     }
+
     /**
      * Returns the authorities granted to the user. Cannot return <code>null</code>.
      *
@@ -92,7 +95,7 @@ public class SysUser implements UserDetails {
      */
     @Override
     public boolean isEnabled() {
-        return user.getEnabled() == 1;
+        return Objects.equals(user.getEnabled(), 1);
     }
 
     public User getUser() {

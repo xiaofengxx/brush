@@ -5,7 +5,7 @@ package site.zido.core.dto;
  * <p>包装成功失败结果集，信息，数据等</p>
  *
  * @author zido
- * date: 2017/5/25 0025 14:52
+ *         date: 2017/5/25 0025 14:52
  */
 public class AjaxResult {
 

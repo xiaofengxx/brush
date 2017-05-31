@@ -20,18 +20,20 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/api")
-@Api(value = "/api", description = "Operations about user")
+@Api(value = "/api", description = "用户相关操作")
 public class IndexController {
     @Resource
     private UserService userService;
-    @ApiOperation(value = "这是首页",notes = "获取所有的用户信息")
+
+    @ApiOperation(value = "这是首页", notes = "获取所有的用户信息")
     @PostMapping(value = "/index")
-    public BusMessage index(@RequestBody @ApiParam(value = "提供一个消息",required = true) BusMessage message){
+    public BusMessage index(@RequestBody @ApiParam(value = "提供一个消息", required = true) BusMessage message) {
         return message;
     }
-    @ApiOperation(value = "这不是首页",notes = "还是可以获取所有的用户信息")
+
+    @ApiOperation(value = "这不是首页", notes = "还是可以获取所有的用户信息")
     @PostMapping(value = "/users")
-    public List<User> index(){
+    public List<User> index() {
         return userService.getAllUser("qweyhuo");
     }
 }

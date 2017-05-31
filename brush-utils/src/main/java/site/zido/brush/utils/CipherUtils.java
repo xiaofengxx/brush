@@ -29,12 +29,13 @@ public class CipherUtils {
      * RSA密钥长度必须是64的倍数，在512~65536之间。默认是1024
      */
     public static final int KEY_SIZE = 2048;
+
     /**
      * 生成公钥和私钥
-     * @throws NoSuchAlgorithmException 不可用
      *
+     * @throws NoSuchAlgorithmException 不可用
      */
-    public static HashMap<String, Object> getKeys() throws NoSuchAlgorithmException{
+    public static HashMap<String, Object> getKeys() throws NoSuchAlgorithmException {
         HashMap<String, Object> map = new HashMap<>();
         KeyPairGenerator keyPairGen = KeyPairGenerator.getInstance(RSA);
         keyPairGen.initialize(KEY_SIZE);
@@ -51,10 +52,8 @@ public class CipherUtils {
      * 注意：【此代码用了默认补位方式，为RSA/None/PKCS1Padding，不同JDK默认的补位方式可能不同，如Android默认是RSA
      * /None/NoPadding】
      *
-     * @param modulus
-     *            模
-     * @param exponent
-     *            指数
+     * @param modulus  模
+     * @param exponent 指数
      * @return 公钥
      */
     public static RSAPublicKey getPublicKey(String modulus, String exponent) {
@@ -75,10 +74,8 @@ public class CipherUtils {
      * 注意：【此代码用了默认补位方式，为RSA/None/PKCS1Padding，不同JDK默认的补位方式可能不同，如Android默认是RSA
      * /None/NoPadding】
      *
-     * @param modulus
-     *            模
-     * @param exponent
-     *            指数
+     * @param modulus  模
+     * @param exponent 指数
      * @return
      */
     public static RSAPrivateKey getPrivateKey(String modulus, String exponent) {
@@ -137,7 +134,7 @@ public class CipherUtils {
         //如果密文长度大于模长则要分组解密
         StringBuilder ming = new StringBuilder();
         byte[][] arrays = CollectionUtils.splitArray(bcd, key_len);
-        for(byte[] arr : arrays){
+        for (byte[] arr : arrays) {
             ming.append(new String(cipher.doFinal(arr)));
         }
         return ming.toString();
@@ -145,11 +142,12 @@ public class CipherUtils {
 
     /**
      * aes加密
-     * @param content 明文
+     *
+     * @param content  明文
      * @param password 密码
      * @return 密文
      */
-    public static String AESEncode(String content, String password){
+    public static String AESEncode(String content, String password) {
         try {
             KeyGenerator kgen = KeyGenerator.getInstance(AES);
             kgen.init(128, new SecureRandom(password.getBytes()));
@@ -176,7 +174,9 @@ public class CipherUtils {
         return "";
     }
 
-    /**解密
+    /**
+     * 解密
+     *
      * @param content  待解密内容
      * @param password 解密密钥
      * @return 明文

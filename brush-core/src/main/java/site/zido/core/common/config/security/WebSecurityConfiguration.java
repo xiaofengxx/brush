@@ -32,6 +32,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     private AuthSuccessHandler successHandler;
     @Resource
     private HttpLogoutSuccessHandler logoutSuccessHandler;
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 //        if (profile != null && Objects.equals(profile, "dev"))

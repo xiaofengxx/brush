@@ -10,7 +10,7 @@ import java.security.interfaces.RSAPrivateKey;
  * @author zido
  * @since 2017/5/28 0028
  */
-public class CipherDTO implements Serializable{
+public class CipherDTO implements Serializable {
     private static final long serialVersionUID = 1738399846398814044L;
     /**
      * rsa 公钥指数

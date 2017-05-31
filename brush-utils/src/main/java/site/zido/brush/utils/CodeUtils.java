@@ -9,7 +9,6 @@ package site.zido.brush.utils;
 public class CodeUtils {
     /**
      * ASCII码转BCD码
-     *
      */
     public static byte[] ASCII_To_BCD(byte[] ascii, int asc_len) {
         byte[] bcd = new byte[asc_len / 2];

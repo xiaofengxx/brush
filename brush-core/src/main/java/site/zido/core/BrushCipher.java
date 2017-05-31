@@ -12,13 +12,13 @@ import java.util.Map;
 /**
  * brush 加解密对象
  * <p>
- *
+ * <p>
  * </p>
  *
  * @author zido
  * @since 2017/5/26 0026
  */
-public class BrushCipher implements Serializable{
+public class BrushCipher implements Serializable {
 
     private static final long serialVersionUID = 1738399846398814044L;
 

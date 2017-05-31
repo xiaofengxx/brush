@@ -45,7 +45,7 @@ public class AuthSuccessHandler extends SavedRequestAwareAuthenticationSuccessHa
         response.setContentType("application/json; charset=utf-8");
         PrintWriter writer = response.getWriter();
         //登录成功
-        JSON.writeJSONString(writer,new AjaxResult(true,"登录成功"));
+        JSON.writeJSONString(writer, new AjaxResult(true, "登录成功"));
         writer.flush();
     }
 }

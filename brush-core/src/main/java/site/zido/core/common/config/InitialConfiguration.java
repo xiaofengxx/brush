@@ -2,9 +2,6 @@ package site.zido.core.common.config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
-import site.zido.brush.utils.CipherUtils;
-
-import javax.annotation.PostConstruct;
 
 /**
  * 自定义初始化类

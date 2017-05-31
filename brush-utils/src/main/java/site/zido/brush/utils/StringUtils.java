@@ -14,13 +14,13 @@ public class StringUtils {
     public static String toString(InputStream inputStream) throws IOException {
         StringBuilder out = new StringBuilder();
         byte[] b = new byte[4096];
-        for (int n; (n = inputStream.read(b)) != -1;) {
+        for (int n; (n = inputStream.read(b)) != -1; ) {
             out.append(new String(b, 0, n));
         }
         return out.toString();
     }
 
-    public static InputStream toInputStream(String str){
+    public static InputStream toInputStream(String str) {
         return new ByteArrayInputStream(str.getBytes());
     }
 
@@ -36,11 +36,11 @@ public class StringUtils {
         }
         String[] strings = new String[x + z];
         String str = "";
-        for (int i=0; i<x+z; i++) {
-            if (i==x+z-1 && y!=0) {
-                str = string.substring(i*len, i*len+y);
-            }else{
-                str = string.substring(i*len, i*len+len);
+        for (int i = 0; i < x + z; i++) {
+            if (i == x + z - 1 && y != 0) {
+                str = string.substring(i * len, i * len + y);
+            } else {
+                str = string.substring(i * len, i * len + len);
             }
             strings[i] = str;
         }

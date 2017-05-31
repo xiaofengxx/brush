@@ -15,12 +15,12 @@ import site.zido.entity.User;
  */
 @Component
 public class LoggedInChecker {
-    public User getLoggedInUser(){
+    public User getLoggedInUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User user = null;
-        if(authentication != null){
+        if (authentication != null) {
             Object principal = authentication.getPrincipal();
-            if(principal instanceof SysUser){
+            if (principal instanceof SysUser) {
                 user = ((SysUser) principal).getUser();
             }
         }

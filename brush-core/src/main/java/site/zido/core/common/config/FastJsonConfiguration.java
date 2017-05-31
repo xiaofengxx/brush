@@ -21,7 +21,7 @@ import site.zido.core.common.CipherConverter;
 public class FastJsonConfiguration {
     @Bean
     @Profile("prod")
-    public HttpMessageConverters getCipherConverter(){
+    public HttpMessageConverters getCipherConverter() {
         FastJsonHttpMessageConverter4 fastConverter = new CipherConverter();
         FastJsonConfig fastJsonConfig = new FastJsonConfig();
         fastJsonConfig.setSerializerFeatures(SerializerFeature.PrettyFormat);
@@ -31,7 +31,7 @@ public class FastJsonConfiguration {
 
     @Profile("dev")
     @Bean
-    public HttpMessageConverters getConverter(){
+    public HttpMessageConverters getConverter() {
         FastJsonHttpMessageConverter4 fastConverter = new FastJsonHttpMessageConverter4();
         FastJsonConfig fastJsonConfig = new FastJsonConfig();
         fastJsonConfig.setSerializerFeatures(SerializerFeature.PrettyFormat);

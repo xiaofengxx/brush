@@ -1,7 +1,10 @@
 package site.zido.core.common.base;
 
+import site.zido.core.common.config.security.LoggedInChecker;
 import site.zido.core.dto.AjaxResult;
+import site.zido.entity.User;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
@@ -14,6 +17,8 @@ import java.util.Map;
  * @since 2017/5/25
  */
 public class BaseController {
+    @Resource
+    private LoggedInChecker loggedInChecker;
 
     /**
      * 成功,返回状态
@@ -145,5 +150,21 @@ public class BaseController {
      */
     protected String redirectTo(final String url) {
         return "redirect:" + url;
+    }
+
+    /**
+     * 当前用户是否登陆
+     * @return true/false
+     */
+    protected boolean isLogged(){
+        return null != loggedInChecker.getLoggedInUser();
+    }
+
+    /**
+     * 获取当前登陆用户
+     * @return {@link User}
+     */
+    protected User getCurrentUser(){
+        return loggedInChecker.getLoggedInUser();
     }
 }

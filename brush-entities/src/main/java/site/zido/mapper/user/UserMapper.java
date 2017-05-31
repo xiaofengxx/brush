@@ -1,7 +1,6 @@
 package site.zido.mapper.user;
 
 import com.baomidou.mybatisplus.mapper.BaseMapper;
-import org.springframework.stereotype.Repository;
 import site.zido.entity.User;
 
 import java.util.List;
@@ -14,4 +13,7 @@ import java.util.List;
  */
 public interface UserMapper extends BaseMapper<User> {
     public List<User> searchById();
+
+    User findUserByUsername(String s);
+
 }

@@ -44,6 +44,11 @@
                 </exclusion>
             </exclusions>
         </dependency>
+        <!--引入权限验证-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
         <!--引入redis支持-->
         <dependency>
             <groupId>org.springframework.boot</groupId>

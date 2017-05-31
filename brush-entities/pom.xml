@@ -37,6 +37,12 @@
             <version>${kotlin.version}</version>
             <scope>test</scope>
         </dependency>
+        <!--引入权限验证-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
 
     <build>

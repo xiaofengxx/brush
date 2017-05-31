@@ -26,6 +26,9 @@ spring:
     host: 192.168.75.128
     password: 123456
     database: 1
+    port: 6379
+    ssl: false
+    timeout: 0
     pool:
       max-idle: 8
       min-idle: 0

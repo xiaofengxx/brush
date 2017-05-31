@@ -1,6 +1,8 @@
 package site.zido.business.web;
 
-import org.springframework.stereotype.Service;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.web.bind.annotation.*;
 import site.zido.business.BusMessage;
 import site.zido.entity.User;
@@ -18,19 +20,18 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/api")
+@Api(value = "/api", description = "Operations about user")
 public class IndexController {
     @Resource
     private UserService userService;
+    @ApiOperation(value = "这是首页",notes = "获取所有的用户信息")
     @PostMapping(value = "/index")
-    public BusMessage index(@RequestBody BusMessage message){
-        List<User> users = userService.getAllUser("asdw");
-        System.out.println(users.size());
+    public BusMessage index(@RequestBody @ApiParam(value = "提供一个消息",required = true) BusMessage message){
         return message;
     }
-
+    @ApiOperation(value = "这不是首页",notes = "还是可以获取所有的用户信息")
     @PostMapping(value = "/users")
     public List<User> index(){
-        List<User> users = userService.getAllUser("qweyhuo");
-        return users;
+        return userService.getAllUser("qweyhuo");
     }
 }

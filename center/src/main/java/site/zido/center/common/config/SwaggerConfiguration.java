@@ -1,4 +1,4 @@
-package site.zido.center;
+package site.zido.center.common.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

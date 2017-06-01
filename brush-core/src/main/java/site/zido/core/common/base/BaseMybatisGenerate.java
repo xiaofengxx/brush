@@ -72,7 +72,7 @@ public abstract class BaseMybatisGenerate {
         dsc.setDriverName("com.mysql.jdbc.Driver");
         dsc.setUsername("root");
         dsc.setPassword("123456");
-        dsc.setUrl("jdbc:mysql://127.0.0.1:3306/dc_brush?characterEncoding=utf8");
+        dsc.setUrl("jdbc:mysql://192.168.0.103:3306/dc_brush?characterEncoding=utf8");
         configDataSource(dsc);
         mpg.setDataSource(dsc);
         StrategyConfig strategy = new StrategyConfig();

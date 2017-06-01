@@ -4,6 +4,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Component;
 import site.zido.core.common.config.security.SysUser;
 import site.zido.entity.User;
 import site.zido.mapper.user.UserMapper;
@@ -18,6 +19,7 @@ import javax.annotation.Resource;
  * @author <a href="http://zido.site">wuhongxu</a>.
  * @version 1.0.0
  */
+@Component
 public class CustomUserService implements UserDetailsService {
     @Resource
     private UserMapper userMapper;

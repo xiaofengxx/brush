@@ -1,6 +1,8 @@
  package site.zido.dto
 
+ import site.zido.entity.BankCard
  import java.util.*
+ import kotlin.collections.ArrayList
 
  /**
  * Created by CDDC on 2017/6/1.
@@ -35,12 +37,7 @@ class UserWithInfoDTO{
 
     var createTime:Date? = null
 
-     /**
-      * 银行账户
-      */
-     var bankCarNumber:String = ""
-     /**
-      * 持卡人姓名
-      */
-     var bindname:String = ""
+
+    var bankCards:List<BankCard>? = ArrayList()
+
  }

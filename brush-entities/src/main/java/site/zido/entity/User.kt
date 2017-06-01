@@ -35,6 +35,8 @@ class User : Model<User>() {
      */
     var password: String? = null
 
+    var ip:String? = null
+
     /**
      * 主键值
      */

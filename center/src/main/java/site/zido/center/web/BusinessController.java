@@ -2,10 +2,21 @@ package site.zido.center.web;
 
 import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
+import site.zido.brush.utils.BankCardUtils;
+import site.zido.brush.utils.EntityUtils;
+import site.zido.brush.utils.StringUtils;
+import site.zido.core.exception.ServiceException;
 import site.zido.dto.UserWithInfoDTO;
+import site.zido.entity.BankCard;
+import site.zido.entity.BusinessUser;
+import site.zido.entity.User;
 import site.zido.service.user.BusinessService;
+import site.zido.service.user.BusinessUserService;
+import site.zido.service.user.UserService;
 
 import javax.annotation.Resource;
+import java.util.Date;
+import java.util.List;
 
 /**
  * Created by CDDC on 2017/6/1.
@@ -14,12 +25,34 @@ import javax.annotation.Resource;
 @RequestMapping(value = "api/business")
 public class BusinessController {
     @Resource
-    private BusinessService businessService;
+    private BusinessUserService businessUserService;
+    @Resource
+    private UserService userService;
     /**
      * 商家信息录入
      */
     @PostMapping(value = "/add")
-    public void addBusiness(@RequestBody UserWithInfoDTO uwid){
-        businessService.addBusiness(uwid);
+    public User addBusiness(@RequestBody UserWithInfoDTO uwid) throws ServiceException {
+        User user = new User();
+        user.setPassword("123456");
+        if(StringUtils.isEmpty(uwid.getNickname())){
+            throw new ServiceException("用户昵称不能为空");
+        }
+        user.setNickname(uwid.getNickname());
+        user.setEnabled(1);
+
+        BusinessUser businessUser = new BusinessUser();
+        businessUser.setCreateTime(new Date());
+        businessUser.setState(0);
+        List<BankCard> bankCards = uwid.getBankCards();
+        if(bankCards == null)
+            throw new ServiceException("必须填写一个银行卡信息");
+        for (BankCard bankCard : bankCards) {
+            boolean b = BankCardUtils.checkBankCard(bankCard.getBindCard());
+            if(!b)
+                throw new ServiceException("请输入正确的银行卡号");
+        }
+        businessUserService.save(user,businessUser,bankCards);
+        return user;
     }
 }

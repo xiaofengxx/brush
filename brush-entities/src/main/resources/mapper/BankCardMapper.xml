@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="site.zido.mapper.BankCardMapper">
+<mapper namespace="site.zido.mapper.user.BankCardMapper">
 
 	<!-- 通用查询映射结果 -->
 	<resultMap id="BaseResultMap" type="site.zido.entity.BankCard">
@@ -17,5 +17,12 @@
     <sql id="Base_Column_List">
         id, bankName, bankCardNumber, phoneNumber, bindName, bindCard, userId
     </sql>
+	<insert id="insertBatch">
+	  	insert into brush_bank_card (id,bankName,bankCardNumber,phoneNumber,bindName,bindCard,userId)
+	  	VALUES
+	  	<foreach collection="bankCards" open="(" close=")" separator="," item="card">
+			#{card.bankName},#{card.bankCardNumber},#{card.phoneNumber},#{card.bindName},#{card.bindCard},#{card.userId}
+		</foreach>
+	</insert>
 
 </mapper>

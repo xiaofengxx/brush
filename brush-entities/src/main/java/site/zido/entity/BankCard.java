@@ -2,6 +2,8 @@ package site.zido.entity;
 
 import com.baomidou.mybatisplus.activerecord.Model;
 import com.baomidou.mybatisplus.annotations.TableName;
+import org.hibernate.validator.constraints.NotEmpty;
+
 import java.io.Serializable;
 
 /**
@@ -21,22 +23,27 @@ public class BankCard extends Model<BankCard> {
     /**
      * 开户银行名
      */
+    @NotEmpty(message = "开户行不能为空")
 	private String bankName;
     /**
      * 银行卡号
      */
+	@NotEmpty(message = "银行卡号不能为空")
 	private String bankCardNumber;
     /**
      * 开户手机号
      */
+	@NotEmpty(message = "开户银行手机号不能为空")
 	private String phoneNumber;
     /**
      * 银行卡号绑定的手机号
      */
+	@NotEmpty(message = "银行卡绑定姓名不能为空")
 	private String bindName;
     /**
      * 银行卡号绑定的身份证号
      */
+	@NotEmpty(message = "开户行绑定身份证号不能为空")
 	private String bindCard;
     /**
      * 归属用户id（注意对应的User表）

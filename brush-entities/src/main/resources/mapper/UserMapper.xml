@@ -13,7 +13,7 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, name
+        id,username,password,nickname,enabled
     </sql>
     <select id="findUserByUsername" resultMap="BaseResultMap">
 		select * from brush_user where username = #{s}

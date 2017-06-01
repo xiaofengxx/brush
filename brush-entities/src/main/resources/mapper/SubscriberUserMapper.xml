@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="site.zido.mapper.SubscriberUserMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="site.zido.entity.SubscriberUser">
+		<id column="id" property="id" />
+		<result column="phoneNumber" property="phoneNumber" />
+		<result column="IDCardFrontUrl" property="IDCardFrontUrl" />
+		<result column="IDCardBehindUrl" property="IDCardBehindUrl" />
+		<result column="IDCard" property="IDCard" />
+		<result column="realName" property="realName" />
+		<result column="avatar" property="avatar" />
+		<result column="aliPay" property="aliPay" />
+		<result column="aliTM" property="aliTM" />
+		<result column="wechat" property="wechat" />
+		<result column="taobaoStar" property="taobaoStar" />
+		<result column="sex" property="sex" />
+		<result column="birthDay" property="birthDay" />
+		<result column="Qq" property="Qq" />
+		<result column="brushed" property="brushed" />
+		<result column="recommandScreenShotUrl" property="recommandScreenShotUrl" />
+		<result column="starScreenShotUrl" property="starScreenShotUrl" />
+		<result column="aliPayScreenShotUrl" property="aliPayScreenShotUrl" />
+		<result column="userId" property="userId" />
+	</resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, phoneNumber, IDCardFrontUrl, IDCardBehindUrl, IDCard, realName, avatar, aliPay, aliTM, wechat, taobaoStar, sex, birthDay, Qq, brushed, recommandScreenShotUrl, starScreenShotUrl, aliPayScreenShotUrl, userId
+    </sql>
+
+</mapper>

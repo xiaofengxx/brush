@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="site.zido.mapper.BankCardMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="site.zido.entity.BankCard">
+		<id column="id" property="id" />
+		<result column="bankName" property="bankName" />
+		<result column="bankCardNumber" property="bankCardNumber" />
+		<result column="phoneNumber" property="phoneNumber" />
+		<result column="bindName" property="bindName" />
+		<result column="bindCard" property="bindCard" />
+		<result column="userId" property="userId" />
+	</resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, bankName, bankCardNumber, phoneNumber, bindName, bindCard, userId
+    </sql>
+
+</mapper>

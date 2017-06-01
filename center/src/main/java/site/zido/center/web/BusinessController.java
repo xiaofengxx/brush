@@ -14,7 +14,7 @@ public class BusinessController {
      * 商家信息录入
      */
     @PostMapping(value = "/add")
-    public void AddBusiness(){
+    public void addBusiness(){
 
     }
 }

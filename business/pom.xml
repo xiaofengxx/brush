@@ -16,12 +16,10 @@
         <dependency>
             <groupId>site.zido</groupId>
             <artifactId>brush-core</artifactId>
-            <version>0.0.2</version>
         </dependency>
         <dependency>
             <groupId>site.zido</groupId>
             <artifactId>brush-service</artifactId>
-            <version>0.0.1</version>
         </dependency>
 
         <!-- JUnit test dependency -->

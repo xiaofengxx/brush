@@ -15,17 +15,14 @@
         <dependency>
             <groupId>site.zido</groupId>
             <artifactId>business</artifactId>
-            <version>0.0.2</version>
         </dependency>
         <dependency>
             <groupId>site.zido</groupId>
             <artifactId>subscriber</artifactId>
-            <version>0.0.1</version>
         </dependency>
         <dependency>
             <groupId>site.zido</groupId>
             <artifactId>center</artifactId>
-            <version>0.0.2</version>
         </dependency>
     </dependencies>
 </project>

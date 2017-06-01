@@ -15,12 +15,10 @@
         <dependency>
             <groupId>site.zido</groupId>
             <artifactId>brush-utils</artifactId>
-            <version>0.0.1</version>
         </dependency>
         <dependency>
             <groupId>site.zido</groupId>
             <artifactId>brush-entities</artifactId>
-            <version>0.0.1</version>
         </dependency>
         <!--mybatis plus 支持-->
         <dependency>

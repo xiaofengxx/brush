@@ -22,6 +22,7 @@
         <fastjson.version>1.2.32</fastjson.version>
         <swagger2.version>2.6.1</swagger2.version>
         <kotlin.version>1.1.2-4</kotlin.version>
+        <brush.version>0.0.2</brush.version>
     </properties>
     <modules>
         <module>brush-core</module>
@@ -49,6 +50,46 @@
                 <artifactId>spring-boot-legacy</artifactId>
                 <version>1.0.2.RELEASE</version>
             </dependency>-->
+            <dependency>
+                <groupId>site.zido</groupId>
+                <artifactId>brush-core</artifactId>
+                <version>${brush.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>site.zido</groupId>
+                <artifactId>brush-service</artifactId>
+                <version>${brush.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>site.zido</groupId>
+                <artifactId>brush-entities</artifactId>
+                <version>${brush.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>site.zido</groupId>
+                <artifactId>brush-utils</artifactId>
+                <version>${brush.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>site.zido</groupId>
+                <artifactId>subscriber</artifactId>
+                <version>${brush.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>site.zido</groupId>
+                <artifactId>center</artifactId>
+                <version>${brush.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>site.zido</groupId>
+                <artifactId>business</artifactId>
+                <version>${brush.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>site.zido</groupId>
+                <artifactId>starter</artifactId>
+                <version>${brush.version}</version>
+            </dependency>
         </dependencies>
 
     </dependencyManagement>

@@ -46,4 +46,12 @@ public class StringUtils {
         }
         return strings;
     }
+
+    public static boolean isEmpty(String s) {
+        return null == s || "".equals(s);
+    }
+
+    public static boolean isNotEmpty(String s) {
+        return !isEmpty(s);
+    }
 }

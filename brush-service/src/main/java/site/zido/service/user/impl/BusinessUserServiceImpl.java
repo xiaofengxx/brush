@@ -46,15 +46,7 @@ public class BusinessUserServiceImpl implements BusinessUserService {
     @Override
     @Transactional
     public synchronized void save(User user, BusinessUser businessUser, List<BankCard> bankCards){
-        String maxUserName = businessUserService.getMaxUserName();
-        if(maxUserName == null)
-            maxUserName = "10003";
-        Long aLong = Long.valueOf(maxUserName);
-        aLong++;
-        user.setId(EntityUtils.generatorId());
-        user.setUsername(aLong+"");
         userMapper.insert(user);
-
         Integer maxSort = businessUserService.getMaxSort();
         if(maxSort == null)
             maxSort = 1000;
@@ -66,5 +58,18 @@ public class BusinessUserServiceImpl implements BusinessUserService {
         bankCardMapper.insertBatch(bankCards);
 
 
+    }
+
+    @Override
+    @Transactional
+    public synchronized void autoCreateIdAndPws(User user) {
+        String maxUserName = businessUserService.getMaxUserName();
+        if(maxUserName == null)
+            maxUserName = "10003";
+        Long aLong = Long.valueOf(maxUserName);
+        aLong++;
+        user.setId(EntityUtils.generatorId());
+        user.setUsername(aLong+"");
+        userMapper.insert(user);
     }
 }

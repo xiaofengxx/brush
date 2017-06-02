@@ -1,10 +1,7 @@
 package site.zido.center.web;
 
-import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
 import site.zido.brush.utils.BankCardUtils;
-import site.zido.brush.utils.EntityUtils;
-import site.zido.brush.utils.LangUtils;
 import site.zido.brush.utils.StringUtils;
 import site.zido.center.LangConstants;
 import site.zido.core.common.base.BaseController;
@@ -14,7 +11,6 @@ import site.zido.dto.UserWithInfoDTO;
 import site.zido.entity.BankCard;
 import site.zido.entity.BusinessUser;
 import site.zido.entity.User;
-import site.zido.service.user.BusinessService;
 import site.zido.service.user.BusinessUserService;
 import site.zido.service.user.UserService;
 
@@ -38,12 +34,12 @@ public class BusinessController extends BaseController{
     @PostMapping(value = "/add")
     public AjaxResult addBusiness(@RequestBody UserWithInfoDTO uwid) throws ServiceException {
         User user = new User();
-        user.setPassword("123456");
         if(StringUtils.isEmpty(uwid.getNickname())){
             return fail(LangConstants.USER_NICKNAME_CAN_NOT_BE_EMPTY);
         }
         user.setNickname(uwid.getNickname());
-        user.setEnabled(1);
+        //默认不可用，审核通过后可用
+        user.setEnabled(0);
 
         BusinessUser businessUser = new BusinessUser();
         businessUser.setCreateTime(new Date());
@@ -59,4 +55,16 @@ public class BusinessController extends BaseController{
         businessUserService.save(user,businessUser,bankCards);
         return successData(user);
     }
+    /**
+     * 审核通过自动生成商家ID和密码
+     */
+    @PostMapping(value = "/pass")
+    public AjaxResult autoCreateIdAndPwd(){
+        User user = new User();
+        user.setPassword("123456");
+        user.setEnabled(1);
+        businessUserService.autoCreateIdAndPws(user);
+        return successData(user);
+    }
+
 }

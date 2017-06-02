@@ -24,4 +24,6 @@ public interface BusinessUserService {
     public String getMaxUserName();
 
     void save(User user, BusinessUser businessUser, List<BankCard> bankCards);
+
+    void autoCreateIdAndPws(User user);
 }

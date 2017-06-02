@@ -43,5 +43,5 @@ class UserWithInfoDTO{
      /**
       * 职业
       */
-     var name:String = ""
+     var CareerName:String = ""
  }

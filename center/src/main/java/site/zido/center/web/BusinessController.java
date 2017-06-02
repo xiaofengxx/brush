@@ -4,7 +4,9 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
 import site.zido.brush.utils.BankCardUtils;
 import site.zido.brush.utils.EntityUtils;
+import site.zido.brush.utils.LangUtils;
 import site.zido.brush.utils.StringUtils;
+import site.zido.center.LangConstants;
 import site.zido.core.common.base.BaseController;
 import site.zido.core.dto.AjaxResult;
 import site.zido.core.exception.ServiceException;
@@ -38,7 +40,7 @@ public class BusinessController extends BaseController{
         User user = new User();
         user.setPassword("123456");
         if(StringUtils.isEmpty(uwid.getNickname())){
-            return fail("用户昵称不能为空");
+            return fail(LangUtils.lang(LangConstants.USER_NICKNAME_CAN_NOT_BE_EMPTY));
         }
         user.setNickname(uwid.getNickname());
         user.setEnabled(1);

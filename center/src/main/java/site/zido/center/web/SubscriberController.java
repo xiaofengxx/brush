@@ -92,7 +92,7 @@ public class SubscriberController extends BaseController {
        if(StringUtils.isEmpty(userWithInfoDTO.getNickname())){
             return fail(LangConstants.USER_NICKNAME_CAN_NOT_BE_EMPTY);
         }
-
+        subscriberUser.setStatu(0);
         subscriberService.addSubscriber(user,subscriberUser,career);
 
         return successData(user);
@@ -105,6 +105,7 @@ public class SubscriberController extends BaseController {
 
         user.setUsername(subscriberUser.getPhoneNumber());
         user.setPassword("123456");
+        user.setEnabled(1);
         subscriberService.autoCreateIdAndPwd(user);
     }
 }

@@ -92,6 +92,12 @@ public class SubscriberUser extends Model<SubscriberUser> {
      */
 	private Long userId;
 
+	/**
+	 * 刷手审核状态
+	 * @return
+	 */
+	private Integer statu;
+
 
 	public Long getId() {
 		return id;
@@ -250,4 +256,11 @@ public class SubscriberUser extends Model<SubscriberUser> {
 		return this.id;
 	}
 
+	public Integer getStatu() {
+		return statu;
+	}
+
+	public void setStatu(Integer statu) {
+		this.statu = statu;
+	}
 }

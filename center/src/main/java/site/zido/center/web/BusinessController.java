@@ -40,7 +40,7 @@ public class BusinessController extends BaseController{
         User user = new User();
         user.setPassword("123456");
         if(StringUtils.isEmpty(uwid.getNickname())){
-            return fail(LangUtils.lang(LangConstants.USER_NICKNAME_CAN_NOT_BE_EMPTY));
+            return fail(LangConstants.USER_NICKNAME_CAN_NOT_BE_EMPTY);
         }
         user.setNickname(uwid.getNickname());
         user.setEnabled(1);

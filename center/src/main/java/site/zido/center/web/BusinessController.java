@@ -24,7 +24,7 @@ import java.util.List;
  * Created by CDDC on 2017/6/1.
  */
 @RestController
-@RequestMapping(value = "api/business")
+@RequestMapping(value = "/api/business")
 public class BusinessController extends BaseController{
     @Resource
     private BusinessUserService businessUserService;

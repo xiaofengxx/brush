@@ -40,4 +40,8 @@ class UserWithInfoDTO{
 
     var bankCards:List<BankCard>? = ArrayList()
 
+     /**
+      * 职业
+      */
+     var name:String = ""
  }

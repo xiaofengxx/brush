@@ -5,6 +5,8 @@ import org.springframework.web.bind.annotation.*;
 import site.zido.brush.utils.BankCardUtils;
 import site.zido.brush.utils.EntityUtils;
 import site.zido.brush.utils.StringUtils;
+import site.zido.core.common.base.BaseController;
+import site.zido.core.dto.AjaxResult;
 import site.zido.core.exception.ServiceException;
 import site.zido.dto.UserWithInfoDTO;
 import site.zido.entity.BankCard;
@@ -23,7 +25,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping(value = "api/business")
-public class BusinessController {
+public class BusinessController extends BaseController{
     @Resource
     private BusinessUserService businessUserService;
     @Resource
@@ -32,11 +34,11 @@ public class BusinessController {
      * 商家信息录入
      */
     @PostMapping(value = "/add")
-    public User addBusiness(@RequestBody UserWithInfoDTO uwid) throws ServiceException {
+    public AjaxResult addBusiness(@RequestBody UserWithInfoDTO uwid) throws ServiceException {
         User user = new User();
         user.setPassword("123456");
         if(StringUtils.isEmpty(uwid.getNickname())){
-            throw new ServiceException("用户昵称不能为空");
+            return fail("用户昵称不能为空");
         }
         user.setNickname(uwid.getNickname());
         user.setEnabled(1);
@@ -46,13 +48,13 @@ public class BusinessController {
         businessUser.setState(0);
         List<BankCard> bankCards = uwid.getBankCards();
         if(bankCards == null)
-            throw new ServiceException("必须填写一个银行卡信息");
+            return fail("必须填写一个银行卡信息");
         for (BankCard bankCard : bankCards) {
             boolean b = BankCardUtils.checkBankCard(bankCard.getBindCard());
             if(!b)
-                throw new ServiceException("请输入正确的银行卡号");
+                return fail("请输入正确的银行卡号");
         }
         businessUserService.save(user,businessUser,bankCards);
-        return user;
+        return successData(user);
     }
 }

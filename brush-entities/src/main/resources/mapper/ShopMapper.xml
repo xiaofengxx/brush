@@ -1,15 +1,22 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="site.zido.mapper.ShopMapper">
-
-	<!-- 通用查询映射结果 -->
-	<resultMap id="BaseResultMap" type="site.zido.entity.Shop">
-		<result column="id" property="id" />
-	</resultMap>
-
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="site.zido.mapper.user.ShopMapper">
+    <resultMap id="BaseResultMap" type="site.zido.entity.Shop">
+        <id property="id" column="id" javaType="Long" jdbcType="BIGINT"/>
+        <result property="platformId" column="platformId" jdbcType="BIGINT" javaType="Long"/>
+        <result property="shopName" column="shopName" javaType="String" jdbcType="VARCHAR"/>
+        <result property="shopType" column="shopType" javaType="String" jdbcType="VARCHAR"/>
+        <result property="shopUrl" column="shopUrl" javaType="String" jdbcType="VARCHAR"/>
+        <result property="userId" column="userId" javaType="Long" jdbcType="VARCHAR"/>
+    </resultMap>
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id
+        id,platformId,shopName,shopType,shopUrl,userId
     </sql>
-
+    <insert id="insertBatch">
+        INSERT INTO brush_shop (id,shop_name,shop_type,shop_url,platform_id,user_id) VALUES
+        <foreach collection="list" open="(" close=")" separator="," item="shop">
+            #{shop.id},#{shop.shopName},#{shop.shopType},#{shop.shopUrl},#{shop.platformId},#{shop.userId}
+        </foreach>
+    </insert>
 </mapper>

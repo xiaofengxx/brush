@@ -3,17 +3,23 @@
 <mapper namespace="site.zido.mapper.user.BusinessUserMapper">
 
 	<!-- 通用查询映射结果 -->
-	<resultMap id="BaseResultMap" type="site.zido.entity.BusinessUser">
-		<id column="id" property="id" />
-		<result column="userId" property="userId" />
-		<result column="sort" property="sort" />
-		<result column="state" property="state" />
-		<result column="createTime" property="createTime" />
+	<resultMap type="site.zido.entity.BusinessUser" id="BaseResultMap">
+		<id property="id" column="id"/>
+		<result property="userId" column="userId"/>
+		<result property="sort" column="sort"/>
+		<result property="state" column="state"/>
+		<result property="createTime" column="createTime"/>
+		<result property="contactName" column="contactName"/>
+		<result property="qq" column="qq"/>
+		<result property="phoneNumber" column="phoneNumber"/>
+		<result property="wechat" column="wechat"/>
+		<result property="introduceId" column="introduceId"/>
+		<result property="nickname" column="nickname"/>
 	</resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, userId, sort, state, createTime
+         id, userId, sort, state, createTime, contactName, qq, phoneNumber, wechat, introduceId, nickname
     </sql>
 	<select id="selectMaxSort" resultType="java.lang.Integer">
 		  select max(sort) from brush_business_user

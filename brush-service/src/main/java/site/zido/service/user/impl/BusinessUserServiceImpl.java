@@ -3,13 +3,13 @@ package site.zido.service.user.impl;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import site.zido.brush.utils.EntityUtils;
-import site.zido.core.exception.ServiceException;
-import site.zido.core.service.CustomUserService;
 import site.zido.entity.BankCard;
 import site.zido.entity.BusinessUser;
+import site.zido.entity.Shop;
 import site.zido.entity.User;
 import site.zido.mapper.user.BankCardMapper;
 import site.zido.mapper.user.BusinessUserMapper;
+import site.zido.mapper.user.ShopMapper;
 import site.zido.mapper.user.UserMapper;
 import site.zido.service.user.BusinessUserService;
 
@@ -33,6 +33,8 @@ public class BusinessUserServiceImpl implements BusinessUserService {
     private BusinessUserService businessUserService;
     @Resource
     private BankCardMapper bankCardMapper;
+    @Resource
+    private ShopMapper shopMapper;
     @Override
     public Integer getMaxSort() {
         return businessUserMapper.selectMaxSort();
@@ -43,22 +45,22 @@ public class BusinessUserServiceImpl implements BusinessUserService {
         return businessUserMapper.selectMaxUserName();
     }
 
+    /**
+     * 保存商家用户
+     * @param user 用户对象
+     * @param businessUser 商家对象
+     * @param bankCards 银行卡集合
+     * @param shops 店铺集合
+     */
     @Override
     @Transactional
-    public synchronized void save(User user, BusinessUser businessUser, List<BankCard> bankCards){
+    public synchronized void save(User user, BusinessUser businessUser, List<BankCard> bankCards, List<Shop> shops) {
         userMapper.insert(user);
-        Integer maxSort = businessUserService.getMaxSort();
-        if(maxSort == null)
-            maxSort = 1000;
-        maxSort++;
-        businessUser.setSort(maxSort);
-        businessUser.setUserId(user.getId());
         businessUserMapper.insert(businessUser);
-
         bankCardMapper.insertBatch(bankCards);
-
-
+        shopMapper.insertBatch(shops);
     }
+
 
     @Override
     @Transactional

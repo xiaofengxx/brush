@@ -1,11 +1,7 @@
 package site.zido.mapper.user;
 
 import com.baomidou.mybatisplus.mapper.BaseMapper;
-import site.zido.entity.BankCard;
 import site.zido.entity.BusinessUser;
-import site.zido.entity.User;
-
-import java.util.List;
 
 /**
  * description

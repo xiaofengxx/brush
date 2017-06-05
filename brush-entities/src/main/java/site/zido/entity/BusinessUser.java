@@ -11,7 +11,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author zido
- * @since 2017-06-01
+ * @since 2017-06-05
  */
 @TableName("brush_business_user")
 public class BusinessUser extends Model<BusinessUser> {
@@ -20,9 +20,42 @@ public class BusinessUser extends Model<BusinessUser> {
 
 	private Long id;
 	private Long userId;
+    /**
+     * 序号
+     */
 	private Integer sort;
+    /**
+     * 审核状态（0：未审核，1：审核通过，2：审核未通过）
+     */
 	private Integer state;
+    /**
+     * 入驻时间
+     */
 	private Date createTime;
+    /**
+     * 联系人姓名
+     */
+	private String contactName;
+    /**
+     * 联系QQ号
+     */
+	private String qq;
+    /**
+     * 联系手机号
+     */
+	private String phoneNumber;
+    /**
+     * 联系微信号
+     */
+	private String wechat;
+    /**
+     * 介绍人id（注意对应user表）
+     */
+	private Long introduceId;
+    /**
+     * 商家名
+     */
+	private String nickname;
 
 
 	public Long getId() {
@@ -63,6 +96,54 @@ public class BusinessUser extends Model<BusinessUser> {
 
 	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
+	}
+
+	public String getContactName() {
+		return contactName;
+	}
+
+	public void setContactName(String contactName) {
+		this.contactName = contactName;
+	}
+
+	public String getQq() {
+		return qq;
+	}
+
+	public void setQq(String qq) {
+		this.qq = qq;
+	}
+
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+
+	public String getWechat() {
+		return wechat;
+	}
+
+	public void setWechat(String wechat) {
+		this.wechat = wechat;
+	}
+
+	public Long getIntroduceId() {
+		return introduceId;
+	}
+
+	public void setIntroduceId(Long introduceId) {
+		this.introduceId = introduceId;
+	}
+
+	public String getNickname() {
+		return nickname;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
 
 	@Override

@@ -25,7 +25,7 @@ public class AjaxResult {
 
     public AjaxResult(boolean success) {
         this.success = success;
-        this.message = "";
+        this.message = null;
     }
 
     /**

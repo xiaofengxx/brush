@@ -1,8 +1,8 @@
 package site.zido.service.user;
 
-import site.zido.core.exception.ServiceException;
 import site.zido.entity.BankCard;
 import site.zido.entity.BusinessUser;
+import site.zido.entity.Shop;
 import site.zido.entity.User;
 
 import java.util.List;
@@ -23,7 +23,14 @@ public interface BusinessUserService {
 
     public String getMaxUserName();
 
-    void save(User user, BusinessUser businessUser, List<BankCard> bankCards);
+    /**
+     * 保存商家用户
+     * @param user 用户对象
+     * @param businessUser 商家对象
+     * @param bankCards 银行卡集合
+     * @param shops 店铺集合
+     */
+    void save(User user, BusinessUser businessUser, List<BankCard> bankCards, List<Shop> shops);
 
     void autoCreateIdAndPws(User user);
 }

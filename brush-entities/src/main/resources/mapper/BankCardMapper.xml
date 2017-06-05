@@ -5,23 +5,23 @@
 	<!-- 通用查询映射结果 -->
 	<resultMap id="BaseResultMap" type="site.zido.entity.BankCard">
 		<id column="id" property="id" />
-		<result column="bankName" property="bankName" />
-		<result column="bankCardNumber" property="bankCardNumber" />
-		<result column="phoneNumber" property="phoneNumber" />
-		<result column="bindName" property="bindName" />
-		<result column="bindCard" property="bindCard" />
-		<result column="userId" property="userId" />
+		<result column="bank_name" property="bankName" />
+		<result column="bank_card_number" property="bankCardNumber" />
+		<result column="phone_number" property="phoneNumber" />
+		<result column="bind_name" property="bindName" />
+		<result column="bind_card" property="bindCard" />
+		<result column="user_id" property="userId" />
 	</resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, bankName, bankCardNumber, phoneNumber, bindName, bindCard, userId
+        id, bank_name, bank_card_number, phone_number, bind_name, bind_card, user_id
     </sql>
 	<insert id="insertBatch">
-	  	insert into brush_bank_card (id,bankName,bankCardNumber,phoneNumber,bindName,bindCard,userId)
+	  	insert into brush_bank_card (id,bank_name,bank_card_number,phone_number,bind_name,bind_card,user_id)
 	  	VALUES
 	  	<foreach collection="bankCards" open="(" close=")" separator="," item="card">
-			#{card.bankName},#{card.bankCardNumber},#{card.phoneNumber},#{card.bindName},#{card.bindCard},#{card.userId}
+			#{card.id},#{card.bankName},#{card.bankCardNumber},#{card.phoneNumber},#{card.bindName},#{card.bindCard},#{card.userId}
 		</foreach>
 	</insert>
 

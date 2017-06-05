@@ -25,15 +25,15 @@ public class SwaggerConfiguration {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("site.zido.business.web"))
+                .apis(RequestHandlerSelectors.basePackage("site.zido.center.web"))
                 .paths(PathSelectors.any())
                 .build();
     }
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("business api")
-                .description("商家用后台api接口")
+                .title("center api")
+                .description("公司用后台api接口")
                 .termsOfServiceUrl("http://zido.site")
                 .contact(new Contact("zido", "http://zido.site", "wuhongxu@1208@gmail.com"))
                 .version("0.0.1")

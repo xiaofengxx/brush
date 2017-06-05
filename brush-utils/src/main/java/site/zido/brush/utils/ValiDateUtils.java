@@ -56,6 +56,22 @@ public class ValiDateUtils {
         return !isEmpty(list);
     }
 
+    public static boolean isEmpty(String s){
+        return s == null || s.length() == 0;
+    }
+
+    public static boolean isEmpty(Integer i){
+        return i == null;
+    }
+
+    public static boolean isEmpty(Long l){
+        return l == null;
+    }
+
+    public static boolean isEmpty(Boolean b){
+        return b == null;
+    }
+
     public static boolean isAllEmpty(List... lists) {
         for (List list : lists) {
             if (isNotEmpty(list))

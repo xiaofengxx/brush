@@ -24,6 +24,7 @@ public class SubscriberServiceImpl implements SubscriberService{
     @Resource
     private CareerMapper careerMapper;
     @Override
+    @Transactional
     public synchronized void addSubscriber(User user, SubscriberUser subscriberUser, Career career) {
         userMapper.insert(user);
         careerMapper.insert(career);

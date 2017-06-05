@@ -9,12 +9,10 @@ import site.zido.center.LangConstants;
 import site.zido.core.common.base.BaseController;
 import site.zido.core.dto.AjaxResult;
 import site.zido.dto.UserWithInfoDTO;
-import site.zido.entity.BankCard;
 import site.zido.entity.Career;
 import site.zido.entity.SubscriberUser;
 import site.zido.entity.User;
 import site.zido.service.user.SubscriberService;
-import site.zido.service.user.UserService;
 
 import javax.annotation.Resource;
 
@@ -24,16 +22,20 @@ import javax.annotation.Resource;
 @RestController
 @RequestMapping(value = "/api/subscriber")
 public class SubscriberController extends BaseController {
-    User user = new User();
 
     @Resource
     private SubscriberService subscriberService;
+    @PostMapping("/print")
+    public AjaxResult print(){
+        return success();
+    }
+
     /**
      * 添加刷手
      */
     @PostMapping(value = "/add")
     public AjaxResult addSubscriberUser(@RequestBody UserWithInfoDTO userWithInfoDTO) throws Exception {
-
+        User user = new User();
         SubscriberUser subscriberUser = new SubscriberUser();
         Career career = new Career();
 
@@ -92,7 +94,7 @@ public class SubscriberController extends BaseController {
        if(StringUtils.isEmpty(userWithInfoDTO.getNickname())){
             return fail(LangConstants.USER_NICKNAME_CAN_NOT_BE_EMPTY);
         }
-        subscriberUser.setStatu(0);
+        subscriberUser.setState(0);
         subscriberService.addSubscriber(user,subscriberUser,career);
 
         return successData(user);
@@ -102,7 +104,7 @@ public class SubscriberController extends BaseController {
      */
     @PostMapping(value = "/pass")
     public void autoCreateIdAndPwd(@RequestBody SubscriberUser subscriberUser){
-
+        User user = new User();
         user.setUsername(subscriberUser.getPhoneNumber());
         user.setPassword("123456");
         user.setEnabled(1);

@@ -10,6 +10,7 @@ import site.zido.entity.User;
 import site.zido.mapper.user.UserMapper;
 
 import javax.annotation.Resource;
+import java.util.Objects;
 
 /**
  * 用户认证服务
@@ -30,6 +31,8 @@ public class CustomUserService implements UserDetailsService {
         User user = userMapper.findUserByUsername(s);
         if (user == null)
             throw new UsernameNotFoundException("该账号不存在");
+        if( !Objects.equals(user.getEnabled(),1))
+            throw new UsernameNotFoundException("该账号暂不可用");
         return new SysUser(user);
     }
 }

@@ -23,10 +23,6 @@ class User : Model<User>() {
      */
     var username: String? = null
     /**
-     * 用户昵称
-     */
-    var nickname: String? = null
-    /**
      * 账号是否可用
      */
     var enabled: Int? = null

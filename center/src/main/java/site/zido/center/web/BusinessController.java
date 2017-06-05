@@ -101,5 +101,17 @@ public class BusinessController extends BaseController {
         businessUserService.autoCreateIdAndPws(user);
         return successData(user);
     }
+    /**
+     * 商家不通过审核
+     */
+    @PostMapping(value = "/nopass")
+    public AjaxResult createFail(Integer id){
+        User user = userService.findAll(id);
+        if (user != null){
+            return fail(LangConstants.OPERATE_SUCCESS);
+        }
+        userService.updateFail(user);
+        return successData(user);
+    }
 
 }

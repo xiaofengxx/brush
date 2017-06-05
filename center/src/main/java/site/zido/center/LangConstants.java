@@ -24,7 +24,7 @@ public class LangConstants {
     public static final  String IDCARDBEHINDURL_CAN_NOT_BE_EMPTY = LangUtils.lang("IDCARDBEHINDURL_CAN_NOT_BE_EMPTY");
     public static final  String STARPICTURE_CAN_NOT_BE_EMPTY = LangUtils.lang("STARPICTURE_CAN_NOT_BE_EMPTY");
     public static final  String ALIPAYPICTURE_CAN_NOT_BE_EMPTY = LangUtils.lang("ALIPAYPICTURE_CAN_NOT_BE_EMPTY");
-
+    public static final  String PHONENUMBER_REPEAT = LangUtils.lang("PHONENUMBER_REPEAT");
 
 
 }

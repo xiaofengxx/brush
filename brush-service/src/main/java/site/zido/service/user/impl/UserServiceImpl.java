@@ -27,4 +27,20 @@ public class UserServiceImpl implements UserService {
         System.out.println("write write");
         return null;
     }
+
+    @Override
+    public User findLoginUser(String username) {
+        User user = userMapper.findUserByUsername(username);
+        return user;
+    }
+
+    @Override
+    public User findAll(Integer id) {
+        return userMapper.findAll(id);
+    }
+
+    @Override
+    public void updateFail(User user) {
+        userMapper.updateUser(user);
+    }
 }

@@ -22,7 +22,7 @@ import java.util.List;
  * Created by CDDC on 2017/6/1.
  */
 @RestController
-@RequestMapping(value = "/api/business")
+@RequestMapping(value = "/api/center")
 public class BusinessController extends BaseController{
     @Resource
     private BusinessUserService businessUserService;
@@ -31,7 +31,7 @@ public class BusinessController extends BaseController{
     /**
      * 商家信息录入
      */
-    @PostMapping(value = "/add")
+    @PostMapping(value = "/business/add")
     public AjaxResult addBusiness(@RequestBody UserWithInfoDTO uwid) throws ServiceException {
         User user = new User();
         if(StringUtils.isEmpty(uwid.getNickname())){

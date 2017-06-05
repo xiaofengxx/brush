@@ -13,4 +13,10 @@ import java.util.List;
  */
 public interface UserService {
     public List<User> getAllUser(String id);
+
+    User findLoginUser(String loginname);
+
+    User findAll(Integer id);
+
+    void updateFail(User user);
 }

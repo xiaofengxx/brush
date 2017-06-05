@@ -13,6 +13,7 @@ import site.zido.entity.Career;
 import site.zido.entity.SubscriberUser;
 import site.zido.entity.User;
 import site.zido.service.user.SubscriberService;
+import site.zido.service.user.UserService;
 
 import javax.annotation.Resource;
 
@@ -23,6 +24,8 @@ import javax.annotation.Resource;
 @RequestMapping(value = "/api/subscriber")
 public class SubscriberController extends BaseController {
 
+    @Resource
+    private UserService userService;
     @Resource
     private SubscriberService subscriberService;
     @PostMapping("/print")
@@ -38,58 +41,61 @@ public class SubscriberController extends BaseController {
         User user = new User();
         SubscriberUser subscriberUser = new SubscriberUser();
         Career career = new Career();
-
+        //查找已有的刷手登录账号
+        User subUser = userService.findLoginUser(subscriberUser.getPhoneNumber());
+        //支付宝不能为空
         if(StringUtils.isEmpty(subscriberUser.getAliPay())){
-            //支付宝不能为空
             return fail(LangConstants.USER_ALIPAY_CAN_NOT_BE_EMPTY);
         }
+        //旺旺不能为空
         if(StringUtils.isEmpty(subscriberUser.getAliTM())){
-            //旺旺不能为空
             return fail(LangConstants.USER_ALITM_CAN_NOT_BE_EMPTY);
         }
+        //微信号不能为空
         if(StringUtils.isEmpty(subscriberUser.getWechat())){
-            //微信号不能为空
             return fail(LangConstants.WECHAT_CAN_NOT_BE_EMPTY);
         }
+        //淘宝星级不能为空
         if(subscriberUser.getTaobaoStar() == null){
-            //淘宝星级不能为空
             return fail(LangConstants.TAOBAOSTAR_CAN_NOT_BE_EMPTY);
         }
+        //职业不能为空
         if(StringUtils.isEmpty(userWithInfoDTO.getCareerName())){
-            //职业不能为空
             return fail(LangConstants.CAREER_CAN_NOT_BE_EMPTY);
         }
+        //性别不能为空
         if(subscriberUser.getSex() == null){
-            //性别不能为空
             return fail(LangConstants.SEX_CAN_NOT_BE_EMPTY);
         }
+        //QQ不能为空
         if(StringUtils.isEmpty(subscriberUser.getQq())){
-            //QQ不能为空
             return fail(LangConstants.QQ_CAN_NOT_BE_EMPTY);
         }
+        //身份证正面不能为空
         if(StringUtils.isEmpty(subscriberUser.getIDCardFrontUrl())){
-            //身份证正面不能为空
             return fail(LangConstants.IDCARDFRONTURL_CAN_NOT_BE_EMPTY);
         }
+        //身份证背面不能为空
         if(StringUtils.isEmpty(subscriberUser.getIDCardBehindUrl())){
-            //身份证背面不能为空
             return fail(LangConstants.IDCARDBEHINDURL_CAN_NOT_BE_EMPTY);
         }
+        //淘宝星级图片不能为空
         if(StringUtils.isEmpty(subscriberUser.getStarScreenShotUrl())){
-            //淘宝星级图片不能为空
             return fail(LangConstants.STARPICTURE_CAN_NOT_BE_EMPTY);
         }
+        //支付宝图片不能为空
         if(StringUtils.isEmpty(subscriberUser.getPhoneNumber())){
-            //支付宝图片不能为空
             return fail(LangConstants.ALIPAYPICTURE_CAN_NOT_BE_EMPTY);
         }
+        //真实姓名不能为空
         if(StringUtils.isEmpty(subscriberUser.getRealName())){
-            //真实姓名不能为空
             return fail(LangConstants.USER_REALNAME_CAN_NOT_BE_EMPTY);
         }
+        //电话不能为空或者重复
         if(StringUtils.isEmpty(subscriberUser.getPhoneNumber())){
-            //电话PHONENUMBER_CAN_NOT_BE_EMPTY姓名不能为空
             return fail(LangConstants.PHONENUMBER_CAN_NOT_BE_EMPTY);
+        }else if(subUser.equals(subscriberUser.getPhoneNumber())) {
+            return fail(LangConstants.PHONENUMBER_REPEAT);
         }
        if(StringUtils.isEmpty(userWithInfoDTO.getNickname())){
             return fail(LangConstants.USER_NICKNAME_CAN_NOT_BE_EMPTY);
@@ -103,11 +109,25 @@ public class SubscriberController extends BaseController {
      * 刷手通过审核自动创建登录用户名和密码
      */
     @PostMapping(value = "/pass")
-    public void autoCreateIdAndPwd(@RequestBody SubscriberUser subscriberUser){
+    public AjaxResult autoCreateIdAndPwd(@RequestBody SubscriberUser subscriberUser){
         User user = new User();
         user.setUsername(subscriberUser.getPhoneNumber());
         user.setPassword("123456");
         user.setEnabled(1);
         subscriberService.autoCreateIdAndPwd(user);
+        return successData(user);
+    }
+    /**
+     * 刷手审核不通过
+     */
+    @PostMapping(value = "/nopass")
+    public AjaxResult createFail(Integer id){
+
+        User user = userService.findAll(id);
+        if (user != null){
+            return fail(LangConstants.OPERATE_SUCCESS);
+        }
+        userService.updateFail(user);
+        return successData(user);
     }
 }

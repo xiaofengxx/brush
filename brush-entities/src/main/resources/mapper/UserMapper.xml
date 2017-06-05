@@ -22,7 +22,7 @@
 		SET
 			username = "",
 			password = "",
-			enabled = 2
+			enabled = 0
 		WHERE
 			id = #{id}
 	</update>

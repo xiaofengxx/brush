@@ -55,4 +55,8 @@ public class LangConstants {
     public static final java.lang.String SHOP_URL_CAN_NOT_BE_EMPTY = LangUtils.lang("SHOP_URL_CAN_NOT_BE_EMPTY");
 
     public static final java.lang.String SHOP_TYPE_CAN_NOT_BE_EMPTY = LangUtils.lang("SHOP_TYPE_CAN_NOT_BE_EMPTY");
+
+    public static final String PHONENUMBER_REPEAT = LangUtils.lang("PHONENUMBER_REPEAT");
+
+    public static final String OPERATE_SUCCESS = LangUtils.lang("OPERATE_SUCCESS");
 }

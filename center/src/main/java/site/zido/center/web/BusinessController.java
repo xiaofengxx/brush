@@ -34,6 +34,11 @@ public class BusinessController extends BaseController {
     @Resource
     private UserService userService;
 
+    /**
+     * 添加商家
+     * @param dto 商家信息，包含商家基本信息，店铺信息，其他信息
+     * @return 操作结果
+     */
     @PostMapping("/add")
     @ApiOperation(value = "添加商家")
     public AjaxResult addBusiness(@RequestBody BusinessUserInfoDTO dto) {
@@ -87,6 +92,15 @@ public class BusinessController extends BaseController {
         businessUser.setCreateTime(new Date());
         businessUser.setUserId(user.getId());
         businessUserService.save(user,businessUser,bankCards,shops);
+        return success("操作成功");
+    }
+
+    /**
+     * 获取当前页商家数据
+     * @param currentPage 当前页数
+     * @return 操作结果
+     */
+    public AjaxResult getBusinessList(Integer currentPage){
         return success();
     }
 

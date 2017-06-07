@@ -2,7 +2,10 @@ package site.zido.entity;
 
 import java.util.Date;
 import com.baomidou.mybatisplus.activerecord.Model;
+import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableName;
+import site.zido.brush.utils.DateUtils;
+
 import java.io.Serializable;
 
 /**
@@ -32,6 +35,11 @@ public class BusinessUser extends Model<BusinessUser> {
      * 入驻时间
      */
 	private Date createTime;
+	/**
+	 * 格式化时间戳
+	 */
+	@TableField(exist=false)
+	private String createTimeLabel;
     /**
      * 联系人姓名
      */
@@ -96,6 +104,7 @@ public class BusinessUser extends Model<BusinessUser> {
 
 	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
+		this.setCreateTimeLabel(DateUtils.formatDateTime(createTime));
 	}
 
 	public String getContactName() {
@@ -151,4 +160,12 @@ public class BusinessUser extends Model<BusinessUser> {
 		return this.id;
 	}
 
+	public String getCreateTimeLabel() {
+		return createTimeLabel;
+	}
+
+	public BusinessUser setCreateTimeLabel(String createTimeLabel) {
+		this.createTimeLabel = createTimeLabel;
+		return this;
+	}
 }

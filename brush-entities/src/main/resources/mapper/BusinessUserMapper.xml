@@ -5,17 +5,27 @@
 	<!-- 通用查询映射结果 -->
 	<resultMap type="site.zido.entity.BusinessUser" id="BaseResultMap">
 		<id property="id" column="id"/>
-		<result property="userId" column="userId"/>
+		<result property="userId" column="user_id"/>
 		<result property="sort" column="sort"/>
 		<result property="state" column="state"/>
-		<result property="createTime" column="createTime"/>
-		<result property="contactName" column="contactName"/>
+		<result property="createTime" column="create_time"/>
+		<result property="contactName" column="contact_name"/>
 		<result property="qq" column="qq"/>
-		<result property="phoneNumber" column="phoneNumber"/>
+		<result property="phoneNumber" column="phone_number"/>
 		<result property="wechat" column="wechat"/>
-		<result property="introduceId" column="introduceId"/>
+		<result property="introduceId" column="introduce_id"/>
 		<result property="nickname" column="nickname"/>
 	</resultMap>
+
+	<resultMap id="minInfoDTO" type="site.zido.dto.BusinessUserInfoDTO">
+		<association columnPrefix="u_" property="user" resultMap="site.zido.mapper.user.UserMapper.BaseResultMap"/>
+		<association columnPrefix="b_" property="businessUser" resultMap="BaseResultMap"/>
+	</resultMap>
+
+
+	<sql id="businessInfoSelect">
+
+	</sql>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
@@ -29,5 +39,51 @@
 		from brush_user
 		  INNER join brush_business_user on brush_business_user.userId = brush_user.id
 		ORDER BY brush_business_user.sort DESC LIMIT 1
+	</select>
+	<select id="selectBusinessList" resultMap="minInfoDTO">
+		select
+		user.id as u_id,
+		user.username as u_name,
+		user.password as u_password,
+		user.enabled as u_enabled,
+		user.ip as u_ip,
+		businessUser.id as b_id,
+		businessUser.user_id as b_user_id,
+		businessUser.sort as b_sort,
+		businessUser.state as b_state,
+		businessUser.create_time as  b_create_time,
+		businessUser.contact_name as b_contact_name,
+		businessUser.qq as b_qq,
+		businessUser.phone_number as b_phone_number,
+		businessUser.wechat as b_wechat,
+		businessUser.introduce_id as b_introduce_id,
+		businessUser.nickname as b_nickname
+		from brush_user user inner join brush_business_user businessUser on businessUser.user_id = user.id
+		<where>
+			<if test="condition.key != null">
+			  	and businessUser.nickname like '%${condition.key}%'
+			</if>
+			<if test="condition.startTime != null and condition.endTime != null">
+				and (create_time &gt; #{condition.startTime} and create_time &lt; #{condition.endTime})
+			</if>
+			<if test="condition.states != null and condition.length() &gt; 0">
+				<trim prefixOverrides="or" prefix="and (" suffix=" )">
+					<foreach collection="condition" item="state">
+						or businessUser.state = state
+					</foreach>
+				</trim>
+			</if>
+		</where>
+		<if test="condition.sortName != null">
+			order by #{condition.sortName}
+			<choose>
+				<when test="condition.desc != null and condition.desc == false">
+					ASC
+				</when>
+				<otherwise>
+					DESC
+				</otherwise>
+			</choose>
+		</if>
 	</select>
 </mapper>

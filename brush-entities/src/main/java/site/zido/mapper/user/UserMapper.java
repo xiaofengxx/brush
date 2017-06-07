@@ -1,7 +1,10 @@
 package site.zido.mapper.user;
 
 import com.baomidou.mybatisplus.mapper.BaseMapper;
+import site.zido.dto.BusinessUserInfoDTO;
 import site.zido.entity.User;
+
+import java.util.List;
 
 /**
  * 用户mapper

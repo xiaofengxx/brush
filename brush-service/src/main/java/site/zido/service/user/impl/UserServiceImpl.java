@@ -1,7 +1,10 @@
 package site.zido.service.user.impl;
 
+import com.baomidou.mybatisplus.plugins.Page;
+import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import site.zido.dto.BusinessUserInfoDTO;
 import site.zido.entity.User;
 import site.zido.mapper.user.UserMapper;
 import site.zido.service.user.UserService;
@@ -17,7 +20,7 @@ import java.util.List;
  * @since 2017/5/29 0029
  */
 @Service
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl extends ServiceImpl<UserMapper,User> implements UserService {
     @Resource
     private UserMapper userMapper;
 
@@ -30,8 +33,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findLoginUser(String username) {
-        User user = userMapper.findUserByUsername(username);
-        return user;
+        return userMapper.findUserByUsername(username);
     }
 
     @Override

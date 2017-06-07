@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 import site.zido.brush.utils.StringUtils;
 import site.zido.center.LangConstants;
 import site.zido.core.common.base.BaseController;
-import site.zido.core.dto.AjaxResult;
+import site.zido.dto.AjaxResult;
 import site.zido.dto.UserWithInfoDTO;
 import site.zido.entity.Career;
 import site.zido.entity.SubscriberUser;

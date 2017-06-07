@@ -1,5 +1,6 @@
 package site.zido.service.user.impl;
 
+import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import site.zido.entity.Career;
@@ -16,7 +17,7 @@ import javax.annotation.Resource;
  * Created by CDDC on 2017/6/2.
  */
 @Service
-public class SubscriberServiceImpl implements SubscriberService{
+public class SubscriberServiceImpl extends ServiceImpl<SubscriberUserMapper,SubscriberUser> implements SubscriberService{
     @Resource
     private SubscriberUserMapper subscriberUserMapper;
     @Resource

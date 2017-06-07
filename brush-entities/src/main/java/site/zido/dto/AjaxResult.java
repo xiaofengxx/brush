@@ -1,4 +1,4 @@
-package site.zido.core.dto;
+package site.zido.dto;
 
 /**
  * 数据传输json实体对象

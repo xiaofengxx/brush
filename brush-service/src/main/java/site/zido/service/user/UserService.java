@@ -1,5 +1,8 @@
 package site.zido.service.user;
 
+import com.baomidou.mybatisplus.plugins.Page;
+import com.baomidou.mybatisplus.service.IService;
+import site.zido.dto.BusinessUserInfoDTO;
 import site.zido.entity.User;
 
 import java.util.List;
@@ -11,7 +14,7 @@ import java.util.List;
  * @author zido
  * @since 2017/5/29 0029
  */
-public interface UserService {
+public interface UserService extends IService<User>{
     public List<User> getAllUser(String id);
 
     User findLoginUser(String loginname);

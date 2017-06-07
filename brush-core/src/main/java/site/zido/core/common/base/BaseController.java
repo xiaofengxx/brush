@@ -1,7 +1,7 @@
 package site.zido.core.common.base;
 
 import site.zido.core.common.config.security.LoggedInChecker;
-import site.zido.core.dto.AjaxResult;
+import site.zido.dto.AjaxResult;
 import site.zido.entity.User;
 
 import javax.annotation.Resource;

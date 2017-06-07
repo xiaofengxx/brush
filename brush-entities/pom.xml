@@ -49,6 +49,10 @@
             <version>${spring.boot.version}</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>site.zido</groupId>
+            <artifactId>brush-utils</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

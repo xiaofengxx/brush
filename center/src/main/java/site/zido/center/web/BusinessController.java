@@ -1,19 +1,24 @@
 package site.zido.center.web;
 
+import com.baomidou.mybatisplus.plugins.Page;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 import site.zido.brush.utils.BankCardUtils;
 import site.zido.brush.utils.EntityUtils;
 import site.zido.brush.utils.ValiDateUtils;
 import site.zido.center.LangConstants;
-import site.zido.center.dto.BusinessUserInfoDTO;
+import site.zido.dto.BusinessUserInfoDTO;
 import site.zido.core.common.base.BaseController;
-import site.zido.core.dto.AjaxResult;
+import site.zido.core.constants.BrushConstants;
+import site.zido.dto.AjaxResult;
 import site.zido.entity.BankCard;
 import site.zido.entity.BusinessUser;
 import site.zido.entity.Shop;
 import site.zido.entity.User;
+import site.zido.dto.BusinessCondition;
+import site.zido.service.user.BankCardService;
 import site.zido.service.user.BusinessUserService;
+import site.zido.service.user.ShopService;
 import site.zido.service.user.UserService;
 
 import javax.annotation.Resource;
@@ -33,9 +38,16 @@ public class BusinessController extends BaseController {
     private BusinessUserService businessUserService;
     @Resource
     private UserService userService;
+    @Resource
+    private BankCardService bankCardService;
+    @Resource
+    private ShopService shopService;
+    @Resource
+    private BrushConstants constants;
 
     /**
      * 添加商家
+     *
      * @param dto 商家信息，包含商家基本信息，店铺信息，其他信息
      * @return 操作结果
      */
@@ -45,7 +57,7 @@ public class BusinessController extends BaseController {
         List<BankCard> bankCards = dto.getBankCards();
         BusinessUser businessUser = dto.getBusinessUser();
         List<Shop> shops = dto.getShops();
-        if(businessUser == null)
+        if (businessUser == null)
             return fail(LangConstants.PHONENUMBER_CAN_NOT_BE_EMPTY);
 
         User user = new User();
@@ -75,13 +87,13 @@ public class BusinessController extends BaseController {
         if (ValiDateUtils.isEmpty(shops))
             return fail(LangConstants.SHOP_MUST_MORE_THAN_ONE);
         for (Shop shop : shops) {
-            if(ValiDateUtils.isEmpty(shop.getPlatformId()))
+            if (ValiDateUtils.isEmpty(shop.getPlatformId()))
                 return fail(LangConstants.PLATFORM_CAN_NOT_BE_EMPTY);
-            if(ValiDateUtils.isEmpty(shop.getShopName()))
+            if (ValiDateUtils.isEmpty(shop.getShopName()))
                 return fail(LangConstants.SHOP_NAME_CAN_NOT_BE_EMPTY);
-            if(ValiDateUtils.isEmpty(shop.getShopUrl()))
+            if (ValiDateUtils.isEmpty(shop.getShopUrl()))
                 return fail(LangConstants.SHOP_URL_CAN_NOT_BE_EMPTY);
-            if(ValiDateUtils.isEmpty(shop.getShopType()))
+            if (ValiDateUtils.isEmpty(shop.getShopType()))
                 return fail(LangConstants.SHOP_TYPE_CAN_NOT_BE_EMPTY);
             shop.setId(EntityUtils.generatorId());
             shop.setUserId(user.getId());
@@ -91,17 +103,57 @@ public class BusinessController extends BaseController {
         businessUser.setState(0);
         businessUser.setCreateTime(new Date());
         businessUser.setUserId(user.getId());
-        businessUserService.save(user,businessUser,bankCards,shops);
+        businessUserService.save(user, businessUser, bankCards, shops);
         return success("操作成功");
     }
 
     /**
      * 获取当前页商家数据
+     *
      * @param currentPage 当前页数
+     * @param level       分页大小（0,1,2...）
      * @return 操作结果
      */
-    public AjaxResult getBusinessList(Integer currentPage){
-        return success();
+    @PostMapping("/get/list")
+    public AjaxResult getBusinessList(@RequestParam(defaultValue = "1") Integer currentPage, @RequestParam(defaultValue = "0") Integer level, @RequestBody BusinessCondition condition) {
+        Page<BusinessUserInfoDTO> page = businessUserService.selectBusinessList(currentPage,constants.getPageSize(level),condition);
+        return successData(page);
+    }
+
+    /**
+     * 根据商家id获取商家信息
+     *
+     * @param id id号
+     * @return 商家信息
+     */
+    @PostMapping("/get/info")
+    public AjaxResult getBusinessUserInfoByBusinessId(Long id) {
+        BusinessUser businessUser = businessUserService.selectById(id);
+        User user = userService.selectById(businessUser.getId());
+        List<BankCard> bankCards = bankCardService.getByUserId(user.getId());
+        List<Shop> shops = shopService.getByUserId(user.getId());
+        return successData(new BusinessUserInfoDTO()
+                .setBankCards(bankCards).setUser(user)
+                .setBusinessUser(businessUser)
+                .setShops(shops));
+    }
+
+    /**
+     * 根据用户id获取商家信息
+     *
+     * @param id 用户id
+     * @return 商家信息
+     */
+    @PostMapping("/get/infoByUser")
+    public AjaxResult getBusinessUserInfoByUserId(Long id) {
+        User user = userService.selectById(id);
+        BusinessUser businessUser = businessUserService.selectByUserId(user.getId());
+        List<BankCard> bankCards = bankCardService.getByUserId(user.getId());
+        List<Shop> shops = shopService.getByUserId(user.getId());
+        return successData(new BusinessUserInfoDTO()
+                .setBankCards(bankCards).setUser(user)
+                .setBusinessUser(businessUser)
+                .setShops(shops));
     }
 
     /**
@@ -115,13 +167,14 @@ public class BusinessController extends BaseController {
         businessUserService.autoCreateIdAndPws(user);
         return successData(user);
     }
+
     /**
      * 商家不通过审核
      */
     @PostMapping(value = "/nopass")
-    public AjaxResult createFail(Integer id){
+    public AjaxResult createFail(Integer id) {
         User user = userService.findAll(id);
-        if (user != null){
+        if (user != null) {
             return fail(LangConstants.OPERATE_SUCCESS);
         }
         userService.updateFail(user);

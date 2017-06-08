@@ -17,18 +17,18 @@ public class Role extends Model<Role> {
 
     private static final long serialVersionUID = 1L;
 
-	private Long id;
+	private String id;
     /**
      * 角色名
      */
 	private String name;
 
 
-	public Long getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 

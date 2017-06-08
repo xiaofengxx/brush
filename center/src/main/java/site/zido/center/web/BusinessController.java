@@ -52,20 +52,23 @@ public class BusinessController extends BaseController {
      * @return 操作结果
      */
     @PostMapping("/add")
-    @ApiOperation(value = "添加商家")
+    @ApiOperation(value = "添加/修改商家")
     public AjaxResult addBusiness(@RequestBody BusinessUserInfoDTO dto) {
         List<BankCard> bankCards = dto.getBankCards();
         BusinessUser businessUser = dto.getBusinessUser();
         List<Shop> shops = dto.getShops();
         if (businessUser == null)
             return fail(LangConstants.PHONENUMBER_CAN_NOT_BE_EMPTY);
-
-        User user = new User();
-        user.setId(EntityUtils.generatorId());
-        user.setEnabled(0);
-        user.setUsername("");
-        user.setId(EntityUtils.generatorId());
-
+        boolean isAdd = true;
+        User user = dto.getUser();
+        if (user != null) {
+            isAdd = false;
+        } else {
+            user = new User();
+            user.setId(EntityUtils.generatorId());
+            user.setEnabled(0);
+            user.setUsername("");
+        }
         //校验输入商家
         if (ValiDateUtils.isEmpty(businessUser.getIntroduceId()))
             return fail(LangConstants.INTRODUCER_CAN_NOT_BE_EMPTY);
@@ -80,7 +83,6 @@ public class BusinessController extends BaseController {
         for (BankCard bankCard : bankCards) {
             if (!BankCardUtils.checkBankCard(bankCard.getBankCardNumber()))
                 return fail(LangConstants.BANK_CARD_IS_INCORRECT);
-            bankCard.setId(EntityUtils.generatorId());
             bankCard.setUserId(user.getId());
         }
         //校验店铺
@@ -95,15 +97,20 @@ public class BusinessController extends BaseController {
                 return fail(LangConstants.SHOP_URL_CAN_NOT_BE_EMPTY);
             if (ValiDateUtils.isEmpty(shop.getShopType()))
                 return fail(LangConstants.SHOP_TYPE_CAN_NOT_BE_EMPTY);
-            shop.setId(EntityUtils.generatorId());
             shop.setUserId(user.getId());
         }
 
         //初始化
-        businessUser.setState(0);
+        if (isAdd) {
+            businessUser.setId(EntityUtils.generatorId());
+            businessUser.setState(0);
+        }
         businessUser.setCreateTime(new Date());
         businessUser.setUserId(user.getId());
-        businessUserService.save(user, businessUser, bankCards, shops);
+        if (isAdd)
+            businessUserService.save(user, businessUser, bankCards, shops);
+        else
+            businessUserService.updateBusiness(user, businessUser, bankCards, shops);
         return success("操作成功");
     }
 
@@ -116,10 +123,10 @@ public class BusinessController extends BaseController {
      */
     @PostMapping("/get/list")
     public AjaxResult getBusinessList(@RequestParam(defaultValue = "1") Integer currentPage, @RequestParam(defaultValue = "0") Integer level, @RequestBody BusinessCondition condition) {
-        if(condition == null){
+        if (condition == null) {
             condition = new BusinessCondition().setSort(0).setDesc(true);
         }
-        Page<BusinessUserInfoDTO> page = businessUserService.selectBusinessList(currentPage,constants.getPageSize(level),condition);
+        Page<BusinessUserInfoDTO> page = businessUserService.selectBusinessList(currentPage, constants.getPageSize(level), condition);
         return successData(page);
     }
 
@@ -130,9 +137,9 @@ public class BusinessController extends BaseController {
      * @return 商家信息
      */
     @PostMapping("/get/info")
-    public AjaxResult getBusinessUserInfoByBusinessId(Long id) {
+    public AjaxResult getBusinessUserInfoByBusinessId(String id) {
         BusinessUser businessUser = businessUserService.selectById(id);
-        User user = userService.selectById(businessUser.getId());
+        User user = userService.selectById(businessUser.getUserId());
         List<BankCard> bankCards = bankCardService.getByUserId(user.getId());
         List<Shop> shops = shopService.getByUserId(user.getId());
         return successData(new BusinessUserInfoDTO()
@@ -148,7 +155,7 @@ public class BusinessController extends BaseController {
      * @return 商家信息
      */
     @PostMapping("/get/infoByUser")
-    public AjaxResult getBusinessUserInfoByUserId(Long id) {
+    public AjaxResult getBusinessUserInfoByUserId(String id) {
         User user = userService.selectById(id);
         BusinessUser businessUser = businessUserService.selectByUserId(user.getId());
         List<BankCard> bankCards = bankCardService.getByUserId(user.getId());

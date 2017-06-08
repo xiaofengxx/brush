@@ -2,19 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="site.zido.mapper.user.ShopMapper">
     <resultMap id="BaseResultMap" type="site.zido.entity.Shop">
-        <id property="id" column="id" javaType="Long" jdbcType="BIGINT"/>
-        <result property="platformId" column="platformId" jdbcType="BIGINT" javaType="Long"/>
-        <result property="shopName" column="shopName" javaType="String" jdbcType="VARCHAR"/>
-        <result property="shopType" column="shopType" javaType="String" jdbcType="VARCHAR"/>
-        <result property="shopUrl" column="shopUrl" javaType="String" jdbcType="VARCHAR"/>
-        <result property="userId" column="userId" javaType="Long" jdbcType="VARCHAR"/>
+        <id property="id" column="id" javaType="String" jdbcType="VARCHAR"/>
+        <result property="platformId" column="platform_id" jdbcType="VARCHAR" javaType="String"/>
+        <result property="shopName" column="shop_name" javaType="String" jdbcType="VARCHAR"/>
+        <result property="shopType" column="shop_type" javaType="String" jdbcType="VARCHAR"/>
+        <result property="shopUrl" column="shop_url" javaType="String" jdbcType="VARCHAR"/>
+        <result property="userId" column="user_id" javaType="String" jdbcType="VARCHAR"/>
     </resultMap>
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
         id,platformId,shopName,shopType,shopUrl,userId
     </sql>
     <insert id="insertBatch">
-        INSERT INTO brush_shop (id,shop_name,shop_type,shop_url,platform_id,user_id) VALUES
+        INSERT INTO brush_shop (id,shop_name,shopType,shop_url,platform_id,user_id) VALUES
         <foreach collection="list" open="(" close=")" separator="," item="shop">
             #{shop.id},#{shop.shopName},#{shop.shopType},#{shop.shopUrl},#{shop.platformId},#{shop.userId}
         </foreach>

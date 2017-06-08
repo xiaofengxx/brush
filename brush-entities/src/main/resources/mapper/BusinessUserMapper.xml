@@ -66,16 +66,16 @@
 			<if test="condition.startTime != null and condition.endTime != null">
 				and (create_time &gt; #{condition.startTime} and create_time &lt; #{condition.endTime})
 			</if>
-			<if test="condition.states != null and condition.length() &gt; 0">
+			<if test="condition.state != null and condition.state.length &gt; 0">
 				<trim prefixOverrides="or" prefix="and (" suffix=" )">
-					<foreach collection="condition" item="state">
-						or businessUser.state = state
+					<foreach collection="condition.state" item="s">
+						or businessUser.state = #{s}
 					</foreach>
 				</trim>
 			</if>
 		</where>
 		<if test="condition.sortName != null">
-			order by #{condition.sortName}
+			order by ${condition.sortName}
 			<choose>
 				<when test="condition.desc != null and condition.desc == false">
 					ASC

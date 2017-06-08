@@ -10,7 +10,7 @@ import java.util.Date;
  * @since 2017/6/6 0006
  */
 public class BusinessCondition {
-    public static final String[] SORTS = {"sort", "states", "create_time"};
+    public static final String[] SORTS = {"sort", "state", "create_time"};
     /**
      * 排序字段
      */
@@ -36,7 +36,7 @@ public class BusinessCondition {
     /**
      * 状态
      */
-    private Integer[] states;
+    private Integer[] state;
 
     public String getSortName() {
         return sortName;
@@ -83,12 +83,12 @@ public class BusinessCondition {
         return this;
     }
 
-    public Integer[] getStates() {
-        return states;
+    public Integer[] getState() {
+        return state;
     }
 
-    public BusinessCondition setStates(Integer[] states) {
-        this.states = states;
+    public BusinessCondition setState(Integer[] state) {
+        this.state = state;
         return this;
     }
 

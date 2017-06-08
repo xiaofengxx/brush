@@ -183,5 +183,4 @@ public class BusinessController extends BaseController {
         userService.updateFail(user);
         return successData(user);
     }
-
 }

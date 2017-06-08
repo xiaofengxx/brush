@@ -116,6 +116,9 @@ public class BusinessController extends BaseController {
      */
     @PostMapping("/get/list")
     public AjaxResult getBusinessList(@RequestParam(defaultValue = "1") Integer currentPage, @RequestParam(defaultValue = "0") Integer level, @RequestBody BusinessCondition condition) {
+        if(condition == null){
+            condition = new BusinessCondition().setSort(0).setDesc(true);
+        }
         Page<BusinessUserInfoDTO> page = businessUserService.selectBusinessList(currentPage,constants.getPageSize(level),condition);
         return successData(page);
     }

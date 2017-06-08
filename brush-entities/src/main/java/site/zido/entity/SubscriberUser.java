@@ -18,7 +18,7 @@ public class SubscriberUser extends Model<SubscriberUser> {
 
     private static final long serialVersionUID = 1L;
 
-	private Long id;
+	private String id;
     /**
      * 刷手手机号
      */
@@ -90,7 +90,7 @@ public class SubscriberUser extends Model<SubscriberUser> {
     /**
      * 对应用户id
      */
-	private Long userId;
+	private String userId;
 
 	/**
 	 * 刷手审核状态
@@ -99,11 +99,11 @@ public class SubscriberUser extends Model<SubscriberUser> {
 	private Integer state;
 
 
-	public Long getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
@@ -243,11 +243,11 @@ public class SubscriberUser extends Model<SubscriberUser> {
 		this.aliPayScreenShotUrl = aliPayScreenShotUrl;
 	}
 
-	public Long getUserId() {
+	public String getUserId() {
 		return userId;
 	}
 
-	public void setUserId(Long userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 

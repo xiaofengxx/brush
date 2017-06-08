@@ -18,7 +18,7 @@ public class BankCard extends Model<BankCard> {
 
     private static final long serialVersionUID = 1L;
 
-	private Long id;
+	private String id;
     /**
      * 开户银行名
      */
@@ -42,14 +42,14 @@ public class BankCard extends Model<BankCard> {
     /**
      * 归属用户id（注意对应的User表）
      */
-	private Long userId;
+	private String userId;
 
 
-	public Long getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
@@ -93,11 +93,11 @@ public class BankCard extends Model<BankCard> {
 		this.bindCard = bindCard;
 	}
 
-	public Long getUserId() {
+	public String getUserId() {
 		return userId;
 	}
 
-	public void setUserId(Long userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 

@@ -12,5 +12,5 @@ import java.util.List;
  * @since 2017/6/6 0006
  */
 public interface ShopService extends IService<Shop> {
-    List<Shop> getByUserId(Long id);
+    List<Shop> getByUserId(String id);
 }

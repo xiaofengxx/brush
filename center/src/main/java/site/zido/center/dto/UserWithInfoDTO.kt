@@ -1,4 +1,4 @@
- package site.zido.dto
+ package site.zido.center.dto
 
  import site.zido.entity.BankCard
  import java.util.*

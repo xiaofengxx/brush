@@ -38,7 +38,9 @@ public interface BusinessUserService extends IService<BusinessUser> {
 
     void autoCreateIdAndPws(User user);
 
-    BusinessUser selectByUserId(Long id);
+    BusinessUser selectByUserId(String id);
 
     Page<BusinessUserInfoDTO> selectBusinessList(Integer currentPage, Integer pageSize, BusinessCondition condition);
+
+    void updateBusiness(User user, BusinessUser businessUser, List<BankCard> bankCards, List<Shop> shops);
 }

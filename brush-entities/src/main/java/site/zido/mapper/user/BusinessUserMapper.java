@@ -21,4 +21,12 @@ public interface BusinessUserMapper extends BaseMapper<BusinessUser> {
     String selectMaxUserName();
 
     List<BusinessUserInfoDTO> selectBusinessList(@Param("condition") BusinessCondition condition);
+
+    /**
+     * 通过关键字搜索模糊搜索
+     * @param key 关键字
+     * @param state 状态
+     * @return 仅包含用户名/sort/用户id字段
+     */
+    List<BusinessUser> selectByKey(@Param("key") String key, @Param("state") Integer state, @Param("max") Integer max);
 }

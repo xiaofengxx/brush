@@ -36,10 +36,6 @@ public class UserServiceImpl extends ServiceImpl<UserMapper,User> implements Use
         return userMapper.findUserByUsername(username);
     }
 
-    @Override
-    public User findAll(Integer id) {
-        return userMapper.findAll(id);
-    }
 
     @Override
     public void updateFail(User user) {

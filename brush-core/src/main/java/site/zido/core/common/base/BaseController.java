@@ -46,7 +46,7 @@ public class BaseController {
      * @return ajax result
      */
     protected AjaxResult successData(final Object data) {
-        return success("操作成功", data);
+        return success("", data);
     }
 
     /**

@@ -59,4 +59,6 @@ public class LangConstants {
     public static final String PHONENUMBER_REPEAT = LangUtils.lang("PHONENUMBER_REPEAT");
 
     public static final String OPERATE_SUCCESS = LangUtils.lang("OPERATE_SUCCESS");
+    public static final String USER_NOT_FOUNT = LangUtils.lang("USER_NOT_FOUNT");
+    public static final String INTRODUCE_IS_INCORRECT = LangUtils.lang("INTRODUCE_IS_INCORRECT");
 }

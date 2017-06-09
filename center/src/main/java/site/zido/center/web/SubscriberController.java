@@ -123,7 +123,7 @@ public class SubscriberController extends BaseController {
     @PostMapping(value = "/nopass")
     public AjaxResult createFail(Integer id){
 
-        User user = userService.findAll(id);
+        User user = userService.selectById(id);
         if (user != null){
             return fail(LangConstants.OPERATE_SUCCESS);
         }

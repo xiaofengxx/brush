@@ -2,6 +2,7 @@ package site.zido.core.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 import site.zido.entity.User;
 
 /**
@@ -10,6 +11,7 @@ import site.zido.entity.User;
  * @author zido
  * @since 2017/6/12 0012
  */
+@Service
 public class CipherService {
     private Logger logger = LoggerFactory.getLogger(CipherService.class);
     /**

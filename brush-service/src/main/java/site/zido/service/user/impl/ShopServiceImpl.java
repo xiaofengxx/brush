@@ -21,7 +21,7 @@ public class ShopServiceImpl extends ServiceImpl<ShopMapper,Shop> implements Sho
     @Resource
     private ShopMapper shopMapper;
     @Override
-    public List<Shop> getByUserId(String id) {
+    public List<Shop> getByUserId(Long id) {
         return shopMapper.selectList(new EntityWrapper<Shop>().where("user_id = {0}",id));
     }
 }

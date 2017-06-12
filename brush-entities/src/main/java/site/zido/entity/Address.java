@@ -1,5 +1,7 @@
 package site.zido.entity;
 
+import com.alibaba.fastjson.annotation.JSONField;
+import com.alibaba.fastjson.annotation.JSONType;
 import com.baomidou.mybatisplus.activerecord.Model;
 import com.baomidou.mybatisplus.annotations.TableName;
 import java.io.Serializable;
@@ -16,8 +18,8 @@ import java.io.Serializable;
 public class Address extends Model<Address> {
 
     private static final long serialVersionUID = 1L;
-
-	private String id;
+	
+	private Long id;
     /**
      * 地址字符串
      */
@@ -28,11 +30,11 @@ public class Address extends Model<Address> {
 	private Long userId;
 
 
-	public String getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

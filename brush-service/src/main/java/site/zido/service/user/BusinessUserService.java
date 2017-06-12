@@ -38,13 +38,13 @@ public interface BusinessUserService extends IService<BusinessUser> {
 
     void autoCreateIdAndPws(User user);
 
-    BusinessUser selectByUserId(String id);
+    BusinessUser selectByUserId(Long id);
 
     Page<BusinessUserInfoDTO> selectBusinessList(Integer currentPage, Integer pageSize, BusinessCondition condition);
 
     void updateBusiness(User user, BusinessUser businessUser, List<BankCard> bankCards, List<Shop> shops);
 
-    boolean updateStateByUserId(String id, Integer state);
+    boolean updateStateByUserId(Long id, Integer state);
 
     List<BusinessUser> selectByKey(String key,Integer max);
 

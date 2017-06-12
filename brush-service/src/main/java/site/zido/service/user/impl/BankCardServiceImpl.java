@@ -22,7 +22,7 @@ public class BankCardServiceImpl extends ServiceImpl<BankCardMapper,BankCard> im
     @Resource
     private BankCardMapper bankCardMapper;
     @Override
-    public List<BankCard> getByUserId(String id) {
+    public List<BankCard> getByUserId(Long id) {
         return bankCardMapper.selectList(new EntityWrapper<BankCard>().where("user_id = {0}", id));
     }
 }

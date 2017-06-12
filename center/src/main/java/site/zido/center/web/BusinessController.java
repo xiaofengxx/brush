@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 import site.zido.brush.utils.BankCardUtils;
 import site.zido.brush.utils.EntityUtils;
+import site.zido.brush.utils.StringUtils;
 import site.zido.brush.utils.ValiDateUtils;
 import site.zido.center.LangConstants;
 import site.zido.dto.BusinessUserInfoDTO;
@@ -85,6 +86,7 @@ public class BusinessController extends BaseController {
         if (ValiDateUtils.isEmpty(bankCards))
             return fail(LangConstants.BANK_CARD_MUST_MORE_THAN_ONE);
         for (BankCard bankCard : bankCards) {
+            bankCard.setBankCardNumber(StringUtils.replaceBlank(bankCard.getBankCardNumber()));
             if (!BankCardUtils.checkBankCard(bankCard.getBankCardNumber()))
                 return fail(LangConstants.BANK_CARD_IS_INCORRECT);
             bankCard.setUserId(user.getId());

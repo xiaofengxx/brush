@@ -72,8 +72,8 @@ public class BusinessUserServiceImpl extends ServiceImpl<BusinessUserMapper, Bus
         Integer maxSort = getMaxSort();
         businessUser.setSort(++maxSort);
         businessUserMapper.insert(businessUser);
-        bankCardMapper.insertBatch(bankCards);
-        shopMapper.insertBatch(shops);
+        bankCardService.insertBatch(bankCards);
+        shopService.insertBatch(shops);
     }
 
 
@@ -96,7 +96,7 @@ public class BusinessUserServiceImpl extends ServiceImpl<BusinessUserMapper, Bus
      * @param state 审核状态
      * @return 是否成功
      */
-    public boolean updateStateByUserId(String userId, Integer state) {
+    public boolean updateStateByUserId(Long userId, Integer state) {
         return businessUserService.update(
                 new BusinessUser().setState(state),
                 new EntityWrapper<BusinessUser>().where("user_id = {0}",userId));
@@ -113,7 +113,7 @@ public class BusinessUserServiceImpl extends ServiceImpl<BusinessUserMapper, Bus
     }
 
     @Override
-    public BusinessUser selectByUserId(String id) {
+    public BusinessUser selectByUserId(Long id) {
         return selectOne(new EntityWrapper<BusinessUser>().where("user_id = {0}", id));
     }
 

@@ -21,8 +21,8 @@ public class BusinessUser extends Model<BusinessUser> {
 
     private static final long serialVersionUID = 1L;
 
-	private String id;
-	private String userId;
+	private Long id;
+	private Long userId;
     /**
      * 序号
      */
@@ -59,7 +59,7 @@ public class BusinessUser extends Model<BusinessUser> {
     /**
      * 介绍人id（注意对应user表）
      */
-	private String introduceId;
+	private Long introduceId;
 	/**
 	 * 介绍人姓名
 	 */
@@ -75,20 +75,20 @@ public class BusinessUser extends Model<BusinessUser> {
 		return this.id;
 	}
 
-	public String getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public BusinessUser setId(String id) {
+	public BusinessUser setId(Long id) {
 		this.id = id;
 		return this;
 	}
 
-	public String getUserId() {
+	public Long getUserId() {
 		return userId;
 	}
 
-	public BusinessUser setUserId(String userId) {
+	public BusinessUser setUserId(Long userId) {
 		this.userId = userId;
 		return this;
 	}
@@ -166,11 +166,11 @@ public class BusinessUser extends Model<BusinessUser> {
 		return this;
 	}
 
-	public String getIntroduceId() {
+	public Long getIntroduceId() {
 		return introduceId;
 	}
 
-	public BusinessUser setIntroduceId(String introduceId) {
+	public BusinessUser setIntroduceId(Long introduceId) {
 		this.introduceId = introduceId;
 		return this;
 	}

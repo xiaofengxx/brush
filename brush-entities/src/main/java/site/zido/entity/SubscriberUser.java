@@ -18,7 +18,7 @@ public class SubscriberUser extends Model<SubscriberUser> {
 
     private static final long serialVersionUID = 1L;
 
-	private String id;
+	private Long id;
     /**
      * 刷手手机号
      */
@@ -99,11 +99,11 @@ public class SubscriberUser extends Model<SubscriberUser> {
 	private Integer state;
 
 
-	public String getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

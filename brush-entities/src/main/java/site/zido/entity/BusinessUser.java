@@ -21,8 +21,8 @@ public class BusinessUser extends Model<BusinessUser> {
 
     private static final long serialVersionUID = 1L;
 
-	private String id;
-	private String userId;
+	private Long id;
+	private Long userId;
     /**
      * 序号
      */
@@ -60,104 +60,65 @@ public class BusinessUser extends Model<BusinessUser> {
      * 介绍人id（注意对应user表）
      */
 	private Long introduceId;
+	/**
+	 * 介绍人姓名
+	 */
+	@TableField(exist = false)
+	private String introduceName;
     /**
      * 商家名
      */
 	private String nickname;
 
+	@Override
+	protected Serializable pkVal() {
+		return this.id;
+	}
 
-	public String getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public BusinessUser setId(Long id) {
 		this.id = id;
+		return this;
 	}
 
-	public String getUserId() {
+	public Long getUserId() {
 		return userId;
 	}
 
-	public void setUserId(String userId) {
+	public BusinessUser setUserId(Long userId) {
 		this.userId = userId;
+		return this;
 	}
 
 	public Integer getSort() {
 		return sort;
 	}
 
-	public void setSort(Integer sort) {
+	public BusinessUser setSort(Integer sort) {
 		this.sort = sort;
+		return this;
 	}
 
 	public Integer getState() {
 		return state;
 	}
 
-	public void setState(Integer state) {
+	public BusinessUser setState(Integer state) {
 		this.state = state;
+		return this;
 	}
 
 	public Date getCreateTime() {
 		return createTime;
 	}
 
-	public void setCreateTime(Date createTime) {
+	public BusinessUser setCreateTime(Date createTime) {
 		this.createTime = createTime;
 		this.setCreateTimeLabel(DateUtils.formatDateTime(createTime));
-	}
-
-	public String getContactName() {
-		return contactName;
-	}
-
-	public void setContactName(String contactName) {
-		this.contactName = contactName;
-	}
-
-	public String getQq() {
-		return qq;
-	}
-
-	public void setQq(String qq) {
-		this.qq = qq;
-	}
-
-	public String getPhoneNumber() {
-		return phoneNumber;
-	}
-
-	public void setPhoneNumber(String phoneNumber) {
-		this.phoneNumber = phoneNumber;
-	}
-
-	public String getWechat() {
-		return wechat;
-	}
-
-	public void setWechat(String wechat) {
-		this.wechat = wechat;
-	}
-
-	public Long getIntroduceId() {
-		return introduceId;
-	}
-
-	public void setIntroduceId(Long introduceId) {
-		this.introduceId = introduceId;
-	}
-
-	public String getNickname() {
-		return nickname;
-	}
-
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
-	}
-
-	@Override
-	protected Serializable pkVal() {
-		return this.id;
+		return this;
 	}
 
 	public String getCreateTimeLabel() {
@@ -166,6 +127,69 @@ public class BusinessUser extends Model<BusinessUser> {
 
 	public BusinessUser setCreateTimeLabel(String createTimeLabel) {
 		this.createTimeLabel = createTimeLabel;
+		return this;
+	}
+
+	public String getContactName() {
+		return contactName;
+	}
+
+	public BusinessUser setContactName(String contactName) {
+		this.contactName = contactName;
+		return this;
+	}
+
+	public String getQq() {
+		return qq;
+	}
+
+	public BusinessUser setQq(String qq) {
+		this.qq = qq;
+		return this;
+	}
+
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public BusinessUser setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+		return this;
+	}
+
+	public String getWechat() {
+		return wechat;
+	}
+
+	public BusinessUser setWechat(String wechat) {
+		this.wechat = wechat;
+		return this;
+	}
+
+	public Long getIntroduceId() {
+		return introduceId;
+	}
+
+	public BusinessUser setIntroduceId(Long introduceId) {
+		this.introduceId = introduceId;
+		return this;
+	}
+
+	public String getNickname() {
+		return nickname;
+	}
+
+	public BusinessUser setNickname(String nickname) {
+		this.nickname = nickname;
+		return this;
+	}
+
+	public String getIntroduceName() {
+		return introduceName;
+	}
+
+	public BusinessUser setIntroduceName(String introduceName) {
+		this.introduceName = introduceName;
 		return this;
 	}
 }

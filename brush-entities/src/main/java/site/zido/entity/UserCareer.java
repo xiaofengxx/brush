@@ -20,26 +20,26 @@ public class UserCareer extends Model<UserCareer> {
     /**
      * 用户id
      */
-	private String userId;
+	private Long userId;
     /**
      * 职业id
      */
-	private String careerId;
+	private Long careerId;
 
 
-	public String getUserId() {
+	public Long getUserId() {
 		return userId;
 	}
 
-	public void setUserId(String userId) {
+	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
 
-	public String getCareerId() {
+	public Long getCareerId() {
 		return careerId;
 	}
 
-	public void setCareerId(String careerId) {
+	public void setCareerId(Long careerId) {
 		this.careerId = careerId;
 	}
 

@@ -26,18 +26,8 @@
 			id = #{id}
 	</update>
 	<select id="findUserByUsername" resultType="site.zido.entity.User">
-		  SELECT username FROM brush_user
+		  select * from brush_user where username = #{s}
 	</select>
-	<select id="findAll" resultType="site.zido.entity.User">
-		SELECT
-	    	*
-		FROM
-			brush_user
-		WHERE 
-			<if test="id != null and id != ''">id=#{id}</if>
-			<if test="username != null and username != '' ">and username=#{username}</if>
-			<if test="password != null and password != ''">and password=#{password}</if>
-			<if test="nickname != null and nickname != ''">and nickname=#{nickname}</if>
-			<if test="enabled != null and enabled != ''">and enabled=#{enabled}</if>
-	</select>
+
+
 </mapper>

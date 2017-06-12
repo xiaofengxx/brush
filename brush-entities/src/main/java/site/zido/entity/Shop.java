@@ -14,12 +14,12 @@ import java.io.Serializable;
  */
 @TableName("brush_shop")
 public class Shop extends Model<Shop> {
-    private String id;
+    private Long id;
     private String shopName;
     private String shopType;
     private String shopUrl;
     private String platformId;
-    private String userId;
+    private Long userId;
     /**
      * 主键值
      */
@@ -28,11 +28,11 @@ public class Shop extends Model<Shop> {
         return null;
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public Shop setId(String id) {
+    public Shop setId(Long id) {
         this.id = id;
         return this;
     }
@@ -73,11 +73,11 @@ public class Shop extends Model<Shop> {
         return this;
     }
 
-    public String getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
-    public Shop setUserId(String userId) {
+    public Shop setUserId(Long userId) {
         this.userId = userId;
         return this;
     }

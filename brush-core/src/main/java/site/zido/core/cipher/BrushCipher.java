@@ -1,4 +1,4 @@
-package site.zido.core;
+package site.zido.core.cipher;
 
 import site.zido.brush.utils.CipherUtils;
 import site.zido.core.exception.ServiceException;

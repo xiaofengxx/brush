@@ -5,7 +5,6 @@ import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import site.zido.brush.utils.EntityUtils;
 import site.zido.dto.BusinessUserInfoDTO;
 import site.zido.entity.BankCard;
 import site.zido.entity.BusinessUser;
@@ -70,9 +69,11 @@ public class BusinessUserServiceImpl extends ServiceImpl<BusinessUserMapper, Bus
     @Transactional
     public synchronized void save(User user, BusinessUser businessUser, List<BankCard> bankCards, List<Shop> shops) {
         userMapper.insert(user);
+        Integer maxSort = getMaxSort();
+        businessUser.setSort(++maxSort);
         businessUserMapper.insert(businessUser);
-        bankCardMapper.insertBatch(bankCards);
-        shopMapper.insertBatch(shops);
+        bankCardService.insertBatch(bankCards);
+        shopService.insertBatch(shops);
     }
 
 
@@ -84,13 +85,35 @@ public class BusinessUserServiceImpl extends ServiceImpl<BusinessUserMapper, Bus
             maxUserName = "10003";
         Long aLong = Long.valueOf(maxUserName);
         aLong++;
-        user.setId(EntityUtils.generatorId());
         user.setUsername(aLong + "");
-        userMapper.insert(user);
+        updateStateByUserId(user.getId(),1);
+        userMapper.updateById(user);
+    }
+
+    /**
+     * 通过用户id更新商家审核状态
+     * @param userId 用户id
+     * @param state 审核状态
+     * @return 是否成功
+     */
+    public boolean updateStateByUserId(Long userId, Integer state) {
+        return businessUserService.update(
+                new BusinessUser().setState(state),
+                new EntityWrapper<BusinessUser>().where("user_id = {0}",userId));
     }
 
     @Override
-    public BusinessUser selectByUserId(String id) {
+    public List<BusinessUser> selectByKey(String key,Integer max) {
+        return businessUserMapper.selectByKey(key,1,max);
+    }
+
+    @Override
+    public BusinessUser selectByNickname(String introduceName) {
+        return businessUserService.selectOne(new EntityWrapper<BusinessUser>().where("nickname = {0}",introduceName));
+    }
+
+    @Override
+    public BusinessUser selectByUserId(Long id) {
         return selectOne(new EntityWrapper<BusinessUser>().where("user_id = {0}", id));
     }
 
@@ -114,19 +137,28 @@ public class BusinessUserServiceImpl extends ServiceImpl<BusinessUserMapper, Bus
     public synchronized void updateBusiness(User user, BusinessUser businessUser, List<BankCard> bankCards, List<Shop> shops) {
         userMapper.updateById(user);
         businessUserMapper.updateById(businessUser);
-
-        List<BankCard> updateBankCards = bankCards.stream().filter(bankCard -> bankCard.getId() != null).collect(Collectors.toList());
-        if (!updateBankCards.isEmpty())
+        bankCards.forEach(bankCard -> {
+            if(bankCard.getId() != null)
+                bankCardService.updateById(bankCard);
+            else
+                bankCardService.insert(bankCard);
+        });
+        /*if (!updateBankCards.isEmpty())
             bankCardService.updateBatchById(updateBankCards);
         List<BankCard> addBankCards = bankCards.stream().filter(bankCard -> bankCard.getId() == null).collect(Collectors.toList());
         if (!addBankCards.isEmpty())
-            bankCardService.insertBatch(addBankCards);
+            bankCardService.insertBatch(addBankCards);*/
 
-        List<Shop> updateShops = shops.stream().filter(shop -> shop.getId() != null).collect(Collectors.toList());
-        if (!updateShops.isEmpty())
+        shops.forEach(shop -> {
+            if(shop.getId() != null)
+                shopService.updateById(shop);
+            else
+                shopService.insert(shop);
+        });
+        /*if (!updateShops.isEmpty())
             shopService.updateBatchById(updateShops);
         List<Shop> addShops = shops.stream().filter(shop -> shop.getId() == null).collect(Collectors.toList());
         if (!addShops.isEmpty())
-            shopService.insertBatch(addShops);
+            shopService.insertBatch(addShops);*/
     }
 }

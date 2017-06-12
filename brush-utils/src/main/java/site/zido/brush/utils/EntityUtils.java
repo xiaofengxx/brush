@@ -9,7 +9,7 @@ import com.baomidou.mybatisplus.toolkit.IdWorker;
  * @since 2017/6/1 0001
  */
 public class EntityUtils {
-    public static String generatorId(){
-        return IdWorker.getId()+"";
+    public static Long generatorId(){
+        return IdWorker.getId();
     }
 }

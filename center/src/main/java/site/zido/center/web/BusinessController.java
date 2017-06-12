@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 import site.zido.brush.utils.BankCardUtils;
 import site.zido.brush.utils.EntityUtils;
+import site.zido.brush.utils.StringUtils;
 import site.zido.brush.utils.ValiDateUtils;
 import site.zido.center.LangConstants;
 import site.zido.dto.BusinessUserInfoDTO;
@@ -32,7 +33,7 @@ import java.util.List;
  * @since 2017/6/2 0002
  */
 @RestController
-@RequestMapping(value = "/api/business")
+@RequestMapping(value = "/api/center/business")
 public class BusinessController extends BaseController {
     @Resource
     private BusinessUserService businessUserService;
@@ -70,8 +71,12 @@ public class BusinessController extends BaseController {
             user.setUsername("");
         }
         //校验输入商家
-        if (ValiDateUtils.isEmpty(businessUser.getIntroduceId()))
+        if (ValiDateUtils.isEmpty(businessUser.getIntroduceName()))
             return fail(LangConstants.INTRODUCER_CAN_NOT_BE_EMPTY);
+        BusinessUser introducer = businessUserService.selectByNickname(businessUser.getIntroduceName());
+        if(null == introducer)
+            return fail(LangConstants.INTRODUCE_IS_INCORRECT);
+        businessUser.setIntroduceId(introducer.getUserId());
         if (ValiDateUtils.isEmpty(businessUser.getPhoneNumber()))
             return fail(LangConstants.PHONENUMBER_CAN_NOT_BE_EMPTY);
         if (ValiDateUtils.isEmpty(businessUser.getNickname()))
@@ -81,6 +86,7 @@ public class BusinessController extends BaseController {
         if (ValiDateUtils.isEmpty(bankCards))
             return fail(LangConstants.BANK_CARD_MUST_MORE_THAN_ONE);
         for (BankCard bankCard : bankCards) {
+            bankCard.setBankCardNumber(StringUtils.replaceBlank(bankCard.getBankCardNumber()));
             if (!BankCardUtils.checkBankCard(bankCard.getBankCardNumber()))
                 return fail(LangConstants.BANK_CARD_IS_INCORRECT);
             bankCard.setUserId(user.getId());
@@ -140,6 +146,7 @@ public class BusinessController extends BaseController {
     public AjaxResult getBusinessUserInfoByBusinessId(String id) {
         BusinessUser businessUser = businessUserService.selectById(id);
         User user = userService.selectById(businessUser.getUserId());
+        businessUser.setIntroduceName(businessUserService.selectByUserId(businessUser.getIntroduceId()).getNickname());
         List<BankCard> bankCards = bankCardService.getByUserId(user.getId());
         List<Shop> shops = shopService.getByUserId(user.getId());
         return successData(new BusinessUserInfoDTO()
@@ -167,27 +174,35 @@ public class BusinessController extends BaseController {
     }
 
     /**
-     * 审核通过自动生成商家ID和密码
+     * 审核通过自动生成商家账号和密码以及序列号
      */
     @PostMapping(value = "/pass")
-    public AjaxResult autoCreateIdAndPwd() {
-        User user = new User();
-        user.setPassword("123456");
-        user.setEnabled(1);
-        businessUserService.autoCreateIdAndPws(user);
-        return successData(user);
+    public AjaxResult autoCreateIdAndPwd(String id,Boolean pass) {
+        User user = userService.selectById(id);
+        if(user == null)
+            return fail(LangConstants.USER_NOT_FOUNT);
+        if(pass){
+            user.setPassword("123456");
+            user.setEnabled(1);
+            businessUserService.autoCreateIdAndPws(user);
+        }else
+            businessUserService.updateStateByUserId(user.getId(),2);
+        return success(LangConstants.OPERATE_SUCCESS);
     }
 
-    /**
-     * 商家不通过审核
-     */
-    @PostMapping(value = "/nopass")
-    public AjaxResult createFail(Integer id) {
-        User user = userService.findAll(id);
-        if (user != null) {
-            return fail(LangConstants.OPERATE_SUCCESS);
-        }
-        userService.updateFail(user);
-        return successData(user);
+    @PostMapping("/introduce/list")
+    public AjaxResult getIntroduces(@RequestParam(defaultValue = "") String key){
+        List<BusinessUser> users = businessUserService.selectByKey(key,20);
+        return successData(users);
+    }
+
+    @PostMapping("/bankCardCheck")
+    public AjaxResult check(@RequestParam String cardNumber){
+        if(!BankCardUtils.checkBankCard(cardNumber))
+            return fail(LangConstants.BANK_CARD_IS_INCORRECT);
+        String name = BankCardUtils.getNameOfBank(cardNumber);
+        if(ValiDateUtils.isEmpty(name))
+            return fail(LangConstants.BANK_CARD_IS_INCORRECT);
+        return successData(name);
     }
 }

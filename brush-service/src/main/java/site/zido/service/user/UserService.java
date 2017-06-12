@@ -19,7 +19,5 @@ public interface UserService extends IService<User>{
 
     User findLoginUser(String loginname);
 
-    User findAll(Integer id);
-
     void updateFail(User user);
 }

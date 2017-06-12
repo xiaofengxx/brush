@@ -14,7 +14,7 @@ import java.io.Serializable;
  */
 @TableName("brush_user")
 public class User extends Model<User>{
-    private String id;
+    private Long id;
     private String username;
     private String password;
     private Integer enabled;
@@ -27,11 +27,11 @@ public class User extends Model<User>{
         return id;
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public User setId(String id) {
+    public User setId(Long id) {
         this.id = id;
         return this;
     }

@@ -16,7 +16,5 @@ public interface UserMapper extends BaseMapper<User> {
 
     User findUserByUsername(String s);
 
-    User findAll(Integer id);
-
     void updateUser(User user1);
 }

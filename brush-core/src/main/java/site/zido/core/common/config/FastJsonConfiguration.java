@@ -2,17 +2,22 @@ package site.zido.core.common.config;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
+import com.alibaba.fastjson.serializer.ValueFilter;
 import com.alibaba.fastjson.support.config.FastJsonConfig;
 import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter4;
+import com.baomidou.mybatisplus.activerecord.Model;
 import org.springframework.boot.autoconfigure.web.HttpMessageConverters;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.http.HttpInputMessage;
+import org.springframework.http.HttpOutputMessage;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.http.converter.HttpMessageNotWritableException;
 import site.zido.brush.utils.CipherUtils;
 import site.zido.brush.utils.StringUtils;
+import site.zido.dto.AjaxResult;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -42,9 +47,13 @@ public class FastJsonConfiguration {
         FastJsonHttpMessageConverter4 fastConverter = new FastJsonHttpMessageConverter4();
         FastJsonConfig fastJsonConfig = new FastJsonConfig();
         fastJsonConfig.setSerializerFeatures(SerializerFeature.PrettyFormat);
+        //将属性为id的long类型
+        ValueFilter filter = (object, name, value) -> ((value instanceof Long) && value.toString().length() > 15) ? value.toString(): value;
+        fastJsonConfig.setSerializeFilters(filter);
         fastConverter.setFastJsonConfig(fastJsonConfig);
         return new HttpMessageConverters((HttpMessageConverter<?>) fastConverter);
     }
+
     /**
      * 传输加密解密转换器
      *

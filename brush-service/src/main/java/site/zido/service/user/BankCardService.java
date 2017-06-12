@@ -12,5 +12,5 @@ import java.util.List;
  * @since 2017/6/6 0006
  */
 public interface BankCardService extends IService<BankCard> {
-    List<BankCard> getByUserId(String id);
+    List<BankCard> getByUserId(Long id);
 }

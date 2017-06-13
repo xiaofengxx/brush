@@ -17,6 +17,7 @@ public class CenterController extends BaseController{
      */
     @PostMapping(value = "/updatePwd")
     public AjaxResult updatePwd(){
+        
         return null;
     }
 }

@@ -16,7 +16,7 @@ public class CenterController extends BaseController{
      * 管理员修改密码
      */
     @PostMapping(value = "/updatePwd")
-    public AjaxResult updatePwd(@){
+    public AjaxResult updatePwd(){
         return null;
     }
 }

@@ -97,8 +97,13 @@ public class SubscriberController extends BaseController {
         }else if(subUser.equals(subscriberUser.getPhoneNumber())) {
             return fail(LangConstants.PHONENUMBER_REPEAT);
         }
+        //昵称不能为空
        if(StringUtils.isEmpty(userWithInfoDTO.getNickname())){
             return fail(LangConstants.USER_NICKNAME_CAN_NOT_BE_EMPTY);
+        }
+        //身份证不能为空
+        if (StringUtils.isEmpty(subscriberUser.getIDCard())){
+            return fail(LangConstants.IDCARD_CAN_NOT_BE_EMPTY);
         }
         subscriberUser.setState(0);
         subscriberService.addSubscriber(user,subscriberUser,career);

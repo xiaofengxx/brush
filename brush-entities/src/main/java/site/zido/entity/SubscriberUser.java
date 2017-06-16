@@ -98,6 +98,19 @@ public class SubscriberUser extends Model<SubscriberUser> {
 	 */
 	private Integer state;
 
+	/**
+	 * 刷手年龄
+	 * @return
+	 */
+	private Integer subAge;
+
+	public Integer getSubAge() {
+		return subAge;
+	}
+
+	public void setSubAge(Integer subAge) {
+		this.subAge = subAge;
+	}
 
 	public Long getId() {
 		return id;

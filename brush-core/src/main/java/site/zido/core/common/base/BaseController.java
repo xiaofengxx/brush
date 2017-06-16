@@ -26,6 +26,7 @@ public class BaseController {
      * @return ajax result
      */
     protected AjaxResult success() {
+
         return new AjaxResult(true);
     }
 

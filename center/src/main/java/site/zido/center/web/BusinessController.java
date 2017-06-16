@@ -2,6 +2,7 @@ package site.zido.center.web;
 
 import com.baomidou.mybatisplus.plugins.Page;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.web.bind.annotation.*;
 import site.zido.brush.utils.BankCardUtils;
 import site.zido.brush.utils.EntityUtils;
@@ -191,8 +192,13 @@ public class BusinessController extends BaseController {
         return success(LangConstants.OPERATE_SUCCESS);
     }
 
+    /**
+     * 通过关键字获取商家名称集合
+     * @param key 关键字
+     */
     @PostMapping("/introduce/list")
-    public AjaxResult getIntroduces(@RequestParam(defaultValue = "") String key) {
+    @ApiOperation("通过关键字获取商家名称集合")
+    public AjaxResult getIntroduces(@ApiParam("关键字") @RequestParam(defaultValue = "") String key) {
         List<BusinessUser> users = businessUserService.selectByKey(key, 20);
         return successData(users);
     }

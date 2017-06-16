@@ -1,6 +1,7 @@
 package site.zido.mapper.user;
 
 import com.baomidou.mybatisplus.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Param;
 import site.zido.entity.Shop;
 
 import java.util.List;
@@ -14,4 +15,6 @@ import java.util.List;
  */
 public interface ShopMapper extends BaseMapper<Shop> {
     void insertBatch(List<Shop> shops);
+
+    void deleteNotRange(@Param("shops") List<Shop> shops);
 }

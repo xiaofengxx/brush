@@ -31,6 +31,9 @@
     <sql id="Base_Column_List">
          id, userId, sort, state, createTime, contactName, qq, phoneNumber, wechat, introduceId, nickname
     </sql>
+	<update id="clearIntroduces">
+		update brush_business_user set introduce_id = null where introduce_id = #{introduceId}
+	</update>
 	<select id="selectMaxSort" resultType="java.lang.Integer">
 		  select max(sort) from brush_business_user
 	</select>

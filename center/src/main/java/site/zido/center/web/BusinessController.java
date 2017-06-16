@@ -71,12 +71,12 @@ public class BusinessController extends BaseController {
             user.setUsername("");
         }
         //校验输入商家
-        if (ValiDateUtils.isEmpty(businessUser.getIntroduceName()))
-            return fail(LangConstants.INTRODUCER_CAN_NOT_BE_EMPTY);
-        BusinessUser introducer = businessUserService.selectByNickname(businessUser.getIntroduceName());
-        if(null == introducer)
-            return fail(LangConstants.INTRODUCE_IS_INCORRECT);
-        businessUser.setIntroduceId(introducer.getUserId());
+        if (!ValiDateUtils.isEmpty(businessUser.getIntroduceName())){
+            BusinessUser introducer = businessUserService.selectByNickname(businessUser.getIntroduceName());
+            if (null == introducer)
+                return fail(LangConstants.INTRODUCE_IS_INCORRECT);
+            businessUser.setIntroduceId(introducer.getUserId());
+        }
         if (ValiDateUtils.isEmpty(businessUser.getPhoneNumber()))
             return fail(LangConstants.PHONENUMBER_CAN_NOT_BE_EMPTY);
         if (ValiDateUtils.isEmpty(businessUser.getNickname()))
@@ -146,7 +146,8 @@ public class BusinessController extends BaseController {
     public AjaxResult getBusinessUserInfoByBusinessId(String id) {
         BusinessUser businessUser = businessUserService.selectById(id);
         User user = userService.selectById(businessUser.getUserId());
-        businessUser.setIntroduceName(businessUserService.selectByUserId(businessUser.getIntroduceId()).getNickname());
+        if (businessUser.getIntroduceId() != null)
+            businessUser.setIntroduceName(businessUserService.selectByUserId(businessUser.getIntroduceId()).getNickname());
         List<BankCard> bankCards = bankCardService.getByUserId(user.getId());
         List<Shop> shops = shopService.getByUserId(user.getId());
         return successData(new BusinessUserInfoDTO()
@@ -177,32 +178,41 @@ public class BusinessController extends BaseController {
      * 审核通过自动生成商家账号和密码以及序列号
      */
     @PostMapping(value = "/pass")
-    public AjaxResult autoCreateIdAndPwd(String id,Boolean pass) {
+    public AjaxResult autoCreateIdAndPwd(String id, Boolean pass) {
         User user = userService.selectById(id);
-        if(user == null)
+        if (user == null)
             return fail(LangConstants.USER_NOT_FOUNT);
-        if(pass){
+        if (pass) {
             user.setPassword("123456");
             user.setEnabled(1);
             businessUserService.autoCreateIdAndPws(user);
-        }else
-            businessUserService.updateStateByUserId(user.getId(),2);
+        } else
+            businessUserService.updateStateByUserId(user.getId(), 2);
         return success(LangConstants.OPERATE_SUCCESS);
     }
 
     @PostMapping("/introduce/list")
-    public AjaxResult getIntroduces(@RequestParam(defaultValue = "") String key){
-        List<BusinessUser> users = businessUserService.selectByKey(key,20);
+    public AjaxResult getIntroduces(@RequestParam(defaultValue = "") String key) {
+        List<BusinessUser> users = businessUserService.selectByKey(key, 20);
         return successData(users);
     }
 
     @PostMapping("/bankCardCheck")
-    public AjaxResult check(@RequestParam String cardNumber){
-        if(!BankCardUtils.checkBankCard(cardNumber))
+    public AjaxResult check(@RequestParam String cardNumber) {
+        if (!BankCardUtils.checkBankCard(cardNumber))
             return fail(LangConstants.BANK_CARD_IS_INCORRECT);
         String name = BankCardUtils.getNameOfBank(cardNumber);
-        if(ValiDateUtils.isEmpty(name))
+        if (ValiDateUtils.isEmpty(name))
             return fail(LangConstants.BANK_CARD_IS_INCORRECT);
         return successData(name);
+    }
+
+    @PostMapping("/delete")
+    public AjaxResult deleteUser(@RequestParam Long id) {
+        if (id == null)
+            return fail(LangConstants.USER_NOT_FOUNT);
+        if (businessUserService.deleteBusinessUser(id))
+            return success(LangConstants.OPERATE_SUCCESS);
+        return fail(LangConstants.USER_NOT_FOUNT);
     }
 }

@@ -29,4 +29,6 @@ public interface BusinessUserMapper extends BaseMapper<BusinessUser> {
      * @return 仅包含用户名/sort/用户id字段
      */
     List<BusinessUser> selectByKey(@Param("key") String key, @Param("state") Integer state, @Param("max") Integer max);
+
+    void clearIntroduces(@Param("introduceId") Long introduceId);
 }

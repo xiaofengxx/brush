@@ -19,4 +19,20 @@
             #{shop.id},#{shop.shopName},#{shop.shopType},#{shop.shopUrl},#{shop.platformId},#{shop.userId}
         </foreach>
     </insert>
+    <delete id="deleteNotRange">
+        DELETE from brush_shop
+        <where>
+            <choose>
+                <when test="bankCards.size() > 0">
+                    id not IN
+                    <foreach collection="shops" separator="," item="shop" open="(" close=")">
+                        #{shop}
+                    </foreach>
+                </when>
+                <otherwise>
+                    id = '-21325435'
+                </otherwise>
+            </choose>
+        </where>
+    </delete>
 </mapper>

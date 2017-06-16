@@ -49,4 +49,6 @@ public interface BusinessUserService extends IService<BusinessUser> {
     List<BusinessUser> selectByKey(String key,Integer max);
 
     BusinessUser selectByNickname(String introduceName);
+
+    boolean deleteBusinessUser(Long id);
 }

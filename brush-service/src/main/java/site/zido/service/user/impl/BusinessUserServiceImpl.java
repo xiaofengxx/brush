@@ -18,10 +18,10 @@ import site.zido.dto.BusinessCondition;
 import site.zido.service.user.BankCardService;
 import site.zido.service.user.BusinessUserService;
 import site.zido.service.user.ShopService;
+import site.zido.service.user.UserService;
 
 import javax.annotation.Resource;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * description
@@ -46,6 +46,8 @@ public class BusinessUserServiceImpl extends ServiceImpl<BusinessUserMapper, Bus
     private BankCardService bankCardService;
     @Resource
     private ShopService shopService;
+    @Resource
+    private UserService userService;
 
     @Override
     public Integer getMaxSort() {
@@ -86,30 +88,46 @@ public class BusinessUserServiceImpl extends ServiceImpl<BusinessUserMapper, Bus
         Long aLong = Long.valueOf(maxUserName);
         aLong++;
         user.setUsername(aLong + "");
-        updateStateByUserId(user.getId(),1);
+        updateStateByUserId(user.getId(), 1);
         userMapper.updateById(user);
     }
 
     /**
      * 通过用户id更新商家审核状态
+     *
      * @param userId 用户id
-     * @param state 审核状态
+     * @param state  审核状态
      * @return 是否成功
      */
     public boolean updateStateByUserId(Long userId, Integer state) {
         return businessUserService.update(
                 new BusinessUser().setState(state),
-                new EntityWrapper<BusinessUser>().where("user_id = {0}",userId));
+                new EntityWrapper<BusinessUser>().where("user_id = {0}", userId));
     }
 
     @Override
-    public List<BusinessUser> selectByKey(String key,Integer max) {
-        return businessUserMapper.selectByKey(key,1,max);
+    public List<BusinessUser> selectByKey(String key, Integer max) {
+        return businessUserMapper.selectByKey(key, 1, max);
     }
 
     @Override
     public BusinessUser selectByNickname(String introduceName) {
-        return businessUserService.selectOne(new EntityWrapper<BusinessUser>().where("nickname = {0}",introduceName));
+        return businessUserService.selectOne(new EntityWrapper<BusinessUser>().where("nickname = {0}", introduceName));
+    }
+
+    @Override
+    @Transactional
+    public boolean deleteBusinessUser(Long id) {
+        BusinessUser businessUser = selectById(id);
+        if (businessUser == null)
+            return false;
+        Long userId = businessUser.getUserId();
+        deleteById(id);
+        businessUserMapper.clearIntroduces(userId);
+        userService.delete(new EntityWrapper<User>().where("id = {0}", userId));
+        bankCardService.delete(new EntityWrapper<BankCard>().where("user_id = {0}", userId));
+        shopService.delete(new EntityWrapper<Shop>().where("user_id = {0}", userId));
+        return true;
     }
 
     @Override
@@ -137,28 +155,11 @@ public class BusinessUserServiceImpl extends ServiceImpl<BusinessUserMapper, Bus
     public synchronized void updateBusiness(User user, BusinessUser businessUser, List<BankCard> bankCards, List<Shop> shops) {
         userMapper.updateById(user);
         businessUserMapper.updateById(businessUser);
-        bankCards.forEach(bankCard -> {
-            if(bankCard.getId() != null)
-                bankCardService.updateById(bankCard);
-            else
-                bankCardService.insert(bankCard);
-        });
-        /*if (!updateBankCards.isEmpty())
-            bankCardService.updateBatchById(updateBankCards);
-        List<BankCard> addBankCards = bankCards.stream().filter(bankCard -> bankCard.getId() == null).collect(Collectors.toList());
-        if (!addBankCards.isEmpty())
-            bankCardService.insertBatch(addBankCards);*/
-
-        shops.forEach(shop -> {
-            if(shop.getId() != null)
-                shopService.updateById(shop);
-            else
-                shopService.insert(shop);
-        });
-        /*if (!updateShops.isEmpty())
-            shopService.updateBatchById(updateShops);
-        List<Shop> addShops = shops.stream().filter(shop -> shop.getId() == null).collect(Collectors.toList());
-        if (!addShops.isEmpty())
-            shopService.insertBatch(addShops);*/
+        bankCardMapper.deleteNotRange(bankCards);
+        if (bankCards.size() > 0)
+            bankCardService.insertOrUpdateBatch(bankCards);
+        shopMapper.deleteNotRange(shops);
+        if (shops.size() > 0)
+            shopService.insertOrUpdateBatch(shops);
     }
 }

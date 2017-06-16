@@ -23,20 +23,17 @@ public class AgeUtils {
                 Calendar c = Calendar.getInstance();
                 c.setTime(sdf.parse(s1));
                 Date d = c.getTime();
-                int age = (int) ((new Date().getTime() - d.getTime()) / 1000 / 60 / 60 / 24 / 365);
-                return age;
-            } else if (leh == 15) {
+                return (int) ((new Date().getTime() - d.getTime()) / 1000 / 60 / 60 / 24 / 365);
+            } else {
                 String s1 = IDCard.substring(6, 12);
                 String s2 = "19" + s1;
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
                 Calendar c = Calendar.getInstance();
                 c.setTime(sdf.parse(s2));
                 Date d = c.getTime();
-                int age = (int) ((new Date().getTime() - d.getTime()) / 1000 / 60 / 60 / 24 / 365);
-                return age;
+                return (int) ((new Date().getTime() - d.getTime()) / 1000 / 60 / 60 / 24 / 365);
             }
 
         }
-        return null;
     }
 }

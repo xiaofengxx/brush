@@ -24,5 +24,21 @@
 			#{card.id},#{card.bankName},#{card.bankCardNumber},#{card.phoneNumber},#{card.bindName},#{card.bindCard},#{card.userId}
 		</foreach>
 	</insert>
+    <delete id="deleteNotRange">
+		DELETE from brush_bank_card
+		<where>
+			<choose>
+				<when test="bankCards.size() > 0">
+					id not IN
+					<foreach collection="bankCards" separator="," item="card" open="(" close=")">
+						#{card}
+					</foreach>
+				</when>
+				<otherwise>
+					id = '-21325435'
+				</otherwise>
+			</choose>
+		</where>
+	</delete>
 
 </mapper>

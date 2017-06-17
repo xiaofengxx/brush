@@ -88,6 +88,8 @@ public class BusinessUserServiceImpl extends ServiceImpl<BusinessUserMapper, Bus
         Long aLong = Long.valueOf(maxUserName);
         aLong++;
         user.setUsername(aLong + "");
+        user.setPassword("123456");
+        user.setEnabled(1);
         updateStateByUserId(user.getId(), 1);
         userMapper.updateById(user);
     }

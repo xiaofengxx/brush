@@ -146,6 +146,8 @@ public class BusinessController extends BaseController {
     @PostMapping("/get/info")
     public AjaxResult getBusinessUserInfoByBusinessId(String id) {
         BusinessUser businessUser = businessUserService.selectById(id);
+        if(businessUser == null)
+            return fail(LangConstants.USER_NOT_FOUNT);
         User user = userService.selectById(businessUser.getUserId());
         if (businessUser.getIntroduceId() != null)
             businessUser.setIntroduceName(businessUserService.selectByUserId(businessUser.getIntroduceId()).getNickname());
@@ -184,8 +186,6 @@ public class BusinessController extends BaseController {
         if (user == null)
             return fail(LangConstants.USER_NOT_FOUNT);
         if (pass) {
-            user.setPassword("123456");
-            user.setEnabled(1);
             businessUserService.autoCreateIdAndPws(user);
         } else
             businessUserService.updateStateByUserId(user.getId(), 2);

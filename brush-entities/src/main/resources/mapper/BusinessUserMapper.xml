@@ -38,10 +38,9 @@
 		  select max(sort) from brush_business_user
 	</select>
 	<select id="selectMaxUserName" resultType="java.lang.String">
-		select username
+		select max(username+0)
 		from brush_user
 		  INNER join brush_business_user on brush_business_user.user_id = brush_user.id
-		ORDER BY brush_business_user.sort DESC LIMIT 1
 	</select>
 	<select id="selectBusinessList" resultMap="minInfoDTO">
 		select

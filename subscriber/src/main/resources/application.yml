@@ -1,0 +1,12 @@
+spring:
+  profiles:
+    active: dev
+  http:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+    converters:
+      preferred-json-mapper: fastjson
+brush:
+  pageDefaults: 10,20,50

@@ -1,4 +1,4 @@
-package site.zido.center.config;
+package site.zido.business.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,23 +16,23 @@ import springfox.documentation.spring.web.plugins.Docket;
  * @author zido
  * @since 2017/5/24
  */
-@Configuration("center")
+@Configuration("business")
 public class SwaggerConfiguration {
     @Bean
-    public Docket createRestApi() {
+    public Docket createRestApi3() {
         return new Docket(DocumentationType.SWAGGER_2)
-                .groupName("公司接口")
+                .groupName("商家接口")
                 .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("site.zido.center"))
+                .apis(RequestHandlerSelectors.basePackage("site.zido.business.web"))
                 .paths(PathSelectors.any())
                 .build();
     }
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("center api")
-                .description("公司用后台api接口")
+                .title("business api")
+                .description("商家用后台api接口")
                 .termsOfServiceUrl("http://zido.site")
                 .contact(new Contact("zido", "http://zido.site", "wuhongxu@1208@gmail.com"))
                 .version("0.0.1")

@@ -1,4 +1,4 @@
-package site.zido;
+package site.zido.pub;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,12 +12,13 @@ import springfox.documentation.spring.web.plugins.Docket;
 /**
  * Created by FZC on 2017/6/19.
  */
-@Configuration
+@Configuration("pub")
 public class SwaggerConfiguration {
     @Bean
     public Docket createRestApi2() {
         return new Docket(DocumentationType.SWAGGER_2)
-                .apiInfo(new ApiInfoBuilder().title("center api")
+                .groupName("公共接口")
+                .apiInfo(new ApiInfoBuilder().title("pub api")
                         .description("公共接口")
                         .termsOfServiceUrl("http://zido.site")
                         .contact(new Contact("zido", "http://zido.site", "wuhongxu@1208@gmail.com"))

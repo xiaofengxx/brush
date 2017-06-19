@@ -2,8 +2,10 @@ package site.zido.service.user.impl;
 
 import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import site.zido.dto.BusinessUserInfoDTO;
 import site.zido.entity.User;
 import site.zido.mapper.user.UserMapper;
@@ -41,4 +43,44 @@ public class UserServiceImpl extends ServiceImpl<UserMapper,User> implements Use
     public void updateFail(User user) {
         userMapper.updateUser(user);
     }
+
+    @Override
+    public Long getnewusername() {
+
+        Long result = getmaxusername();
+
+        // 用户名最小值为10003
+        if(result < 1){
+            result = 10002l;
+        }
+
+        return ++result;
+    }
+
+    @Override
+    public Long getmaxusername() {
+        String strmaxnum = userMapper.selectMaxUserName();
+
+        if(StringUtils.isBlank(strmaxnum)){
+            strmaxnum = "0";
+        }
+        Integer integer = Integer.valueOf(strmaxnum);
+
+        return integer.longValue();
+    }
+
+
+    @Override
+    @Transactional
+    public synchronized void autoCreateIdAndPws(User user) {
+        //区别,商家用户名自动生成.刷手用户名为手机号
+        if(StringUtils.isBlank(user.getUsername())){
+            Long aLong = getnewusername();
+            user.setUsername(aLong + "");
+        }
+        user.setPassword("123456");
+        user.setEnabled(1);
+        userMapper.updateById(user);
+    }
+
 }

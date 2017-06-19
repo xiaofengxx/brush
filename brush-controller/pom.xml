@@ -9,25 +9,23 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>starter</artifactId>
-    <name>starter</name>
+    <artifactId>brush-controller</artifactId>
     <dependencies>
         <dependency>
             <groupId>site.zido</groupId>
-            <artifactId>business</artifactId>
+            <artifactId>brush-core</artifactId>
         </dependency>
         <dependency>
             <groupId>site.zido</groupId>
-            <artifactId>subscriber</artifactId>
+            <artifactId>brush-service</artifactId>
         </dependency>
+
+        <!-- JUnit test dependency -->
         <dependency>
-            <groupId>site.zido</groupId>
-            <artifactId>center</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>site.zido</groupId>
-            <artifactId>brush-controller</artifactId>
-            <version>0.0.2</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
+
 </project>

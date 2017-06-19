@@ -33,6 +33,7 @@
         <module>business</module>
         <module>starter</module>
         <module>brush-service</module>
+        <module>brush-controller</module>
     </modules>
     <dependencyManagement>
         <dependencies>

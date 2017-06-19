@@ -3,6 +3,8 @@ package site.zido.entity;
 import java.util.Date;
 import com.baomidou.mybatisplus.activerecord.Model;
 import com.baomidou.mybatisplus.annotations.TableName;
+
+import java.util.Date;
 import java.io.Serializable;
 
 /**
@@ -90,7 +92,7 @@ public class SubscriberUser extends Model<SubscriberUser> {
     /**
      * 对应用户id
      */
-	private String userId;
+	private long userId;
 
 	/**
 	 * 刷手审核状态
@@ -103,6 +105,22 @@ public class SubscriberUser extends Model<SubscriberUser> {
 	 * @return
 	 */
 	private Integer subAge;
+
+	/**
+	 * 创建时间
+	 */
+	private Date create_time;
+
+	private String nickname;
+
+	public String getNickname() {
+		return nickname;
+	}
+
+	public SubscriberUser setNickname(String nickname) {
+		this.nickname = nickname;
+		return this;
+	}
 
 	public Integer getSubAge() {
 		return subAge;
@@ -256,11 +274,11 @@ public class SubscriberUser extends Model<SubscriberUser> {
 		this.aliPayScreenShotUrl = aliPayScreenShotUrl;
 	}
 
-	public String getUserId() {
+	public long getUserId() {
 		return userId;
 	}
 
-	public void setUserId(String userId) {
+	public void setUserId(long userId) {
 		this.userId = userId;
 	}
 
@@ -273,7 +291,16 @@ public class SubscriberUser extends Model<SubscriberUser> {
 		return state;
 	}
 
-	public void setState(Integer state) {
+	public SubscriberUser setState(Integer state) {
 		this.state = state;
+		return this;
+	}
+
+	public Date getCreate_time() {
+		return create_time;
+	}
+
+	public void setCreate_time(Date create_time) {
+		this.create_time = create_time;
 	}
 }

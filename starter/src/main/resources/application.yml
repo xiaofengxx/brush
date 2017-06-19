@@ -5,17 +5,8 @@ spring:
     encoding:
       charset: UTF-8
       enabled: true
+      force: true
     converters:
       preferred-json-mapper: fastjson
-#mybatis
-mybatis-plus:
-  mapper-locations: classpath:/mapper/*Mapper.xml
-  global-config:
-    id-type: 2
-    field-strategy: 2
-    auto-set-db-type: true
-    db-column-underline: true
-    refresh-mapper: true
-  configuration:
-    map-underscore-to-camel-case: true
-    cache-enabled: false
+brush:
+  pageDefaults: 10,20,50

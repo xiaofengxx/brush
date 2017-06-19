@@ -22,12 +22,20 @@
             <artifactId>brush-service</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>site.zido</groupId>
+            <artifactId>brush-controller</artifactId>
+            <version>0.0.2</version>
+        </dependency>
+
         <!-- JUnit test dependency -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+
+
     </dependencies>
     <build>
         <finalName>web-business</finalName>

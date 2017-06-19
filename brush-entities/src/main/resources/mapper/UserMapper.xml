@@ -29,5 +29,11 @@
 		  select * from brush_user where username = #{s}
 	</select>
 
+	<select id="selectMaxUserName" resultType="java.lang.String">
+		select max(username+0)
+		from brush_user
+		INNER join brush_business_user on brush_business_user.user_id = brush_user.id
+	</select>
+
 
 </mapper>

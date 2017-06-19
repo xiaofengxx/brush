@@ -17,4 +17,10 @@ public interface UserMapper extends BaseMapper<User> {
     User findUserByUsername(String s);
 
     void updateUser(User user1);
+
+    /**
+     * 获取当前最大用户名
+     * @return
+     */
+    String selectMaxUserName();
 }

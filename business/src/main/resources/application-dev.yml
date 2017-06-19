@@ -41,7 +41,7 @@ debug: false
 mybatis-plus:
   mapper-locations: classpath:/mapper/*Mapper.xml
   typeAliasesPackage: site.zido.entity
-  global-config:
+  global-site.zido.center.config:
     id-type: 2
     field-strategy: 2
     auto-set-db-type: true

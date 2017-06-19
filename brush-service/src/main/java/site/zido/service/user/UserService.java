@@ -20,4 +20,24 @@ public interface UserService extends IService<User>{
     User findLoginUser(String loginname);
 
     void updateFail(User user);
+
+    /**
+     *  得到一个新的用户名
+     *  根据用户名递增取最大值
+     * @return
+     */
+    Long getnewusername();
+
+    /**
+     *  得到最大的用户名
+     * @return
+     */
+    Long getmaxusername();
+
+    /**
+     * 通过ID 为用户实例创建 用户和密码
+     * @param user
+     */
+    void autoCreateIdAndPws(User user);
+
 }

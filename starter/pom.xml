@@ -12,6 +12,7 @@
     <artifactId>starter</artifactId>
     <name>starter</name>
     <dependencies>
+
         <dependency>
             <groupId>site.zido</groupId>
             <artifactId>business</artifactId>
@@ -29,5 +30,14 @@
             <artifactId>brush-controller</artifactId>
             <version>0.0.2</version>
         </dependency>
+
+        <!-- JUnit test dependency -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+
     </dependencies>
 </project>

@@ -1,9 +1,8 @@
-package site.zido.test;
+package site.zido;
 
 import org.junit.Assert;
 import org.junit.Test;
-import site.zido.brush.utils.LangUtils;
-import site.zido.center.LangConstants;
+import site.zido.core.LangConstants;
 
 /**
  * 语言测试
@@ -17,7 +16,7 @@ public class LangTest {
     public void testGetMessage(){
         String lang = LangConstants.USER_NICKNAME_CAN_NOT_BE_EMPTY;
         System.out.println(lang);
-        Assert.assertTrue("语言测试失败","用户昵称不能为空".equals(lang));
+        Assert.assertTrue("语言测试失败","用户昵称不能为空！".equals(lang));
     }
 
     @Test

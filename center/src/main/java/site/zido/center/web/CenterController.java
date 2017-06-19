@@ -10,7 +10,7 @@ import site.zido.dto.AjaxResult;
  * Created by CDDC on 2017/6/13.
  */
 @RestController
-@RequestMapping(value = "/api/center/center")
+@RequestMapping(value = "/api/center")
 public class CenterController extends BaseController{
     /**
      * 管理员修改密码

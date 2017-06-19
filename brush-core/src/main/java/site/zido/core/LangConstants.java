@@ -1,4 +1,4 @@
-package site.zido.center;
+package site.zido.core;
 
 import site.zido.brush.utils.LangUtils;
 

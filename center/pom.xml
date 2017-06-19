@@ -19,13 +19,11 @@
         </dependency>
         <dependency>
             <groupId>site.zido</groupId>
-            <artifactId>brush-service</artifactId>
+            <artifactId>brush-utils</artifactId>
         </dependency>
-
         <dependency>
             <groupId>site.zido</groupId>
-            <artifactId>brush-controller</artifactId>
-            <version>0.0.2</version>
+            <artifactId>brush-service</artifactId>
         </dependency>
 
         <!-- JUnit test dependency -->

@@ -8,7 +8,7 @@ import site.zido.brush.utils.BankCardUtils;
 import site.zido.brush.utils.EntityUtils;
 import site.zido.brush.utils.StringUtils;
 import site.zido.brush.utils.ValiDateUtils;
-import site.zido.center.LangConstants;
+import site.zido.core.LangConstants;
 import site.zido.dto.BusinessUserInfoDTO;
 import site.zido.core.common.base.BaseController;
 import site.zido.core.constants.BrushConstants;
@@ -201,16 +201,6 @@ public class BusinessController extends BaseController {
     public AjaxResult getIntroduces(@ApiParam("关键字") @RequestParam(defaultValue = "") String key) {
         List<BusinessUser> users = businessUserService.selectByKey(key, 20);
         return successData(users);
-    }
-
-    @PostMapping("/bankCardCheck")
-    public AjaxResult check(@RequestParam String cardNumber) {
-        if (!BankCardUtils.checkBankCard(cardNumber))
-            return fail(LangConstants.BANK_CARD_IS_INCORRECT);
-        String name = BankCardUtils.getNameOfBank(cardNumber);
-        if (ValiDateUtils.isEmpty(name))
-            return fail(LangConstants.BANK_CARD_IS_INCORRECT);
-        return successData(name);
     }
 
     @PostMapping("/delete")

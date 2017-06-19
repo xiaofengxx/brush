@@ -58,6 +58,7 @@ public class DataBaseConfiguration {
             throw new ApplicationContextException(
                     "Database connection pool is not configured correctly");
         }
+
         DruidDataSource druidDataSource = new DruidDataSource();
         druidDataSource.setDriverClassName(driverClassName);
         druidDataSource.setUrl(url);

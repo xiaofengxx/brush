@@ -5,7 +5,7 @@ import io.swagger.annotations.ApiParam;
 import org.springframework.web.bind.annotation.*;
 import site.zido.brush.utils.EntityUtils;
 import site.zido.brush.utils.StringUtils;
-import site.zido.center.LangConstants;
+import site.zido.core.LangConstants;
 import site.zido.dto.SubscriberUserInfoDTO;
 import site.zido.core.common.base.BaseController;
 import site.zido.dto.AjaxResult;

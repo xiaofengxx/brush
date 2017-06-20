@@ -26,6 +26,7 @@ public interface UserService extends IService<User>{
 
     void updateFail(User user);
 
+
     /**
      *  得到一个新的用户名
      *  根据用户名递增取最大值

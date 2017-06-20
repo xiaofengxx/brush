@@ -1,9 +1,8 @@
 package site.zido.brush.utils;
 
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import jdk.internal.util.xml.impl.ReaderUTF8;
+
+import java.io.*;
 import java.util.*;
 
 /**
@@ -91,7 +90,8 @@ public class PropertiesUtils {
             Properties prop = new Properties();
             //InputStream in = Object.class.getResourceAsStream("/"+fileName);
             in = PropertiesUtils.class.getClassLoader().getResourceAsStream(fileName);
-            prop.load(in);
+            Reader reader = new ReaderUTF8(in);
+            prop.load(reader);
             return prop;
         }catch(Exception e){
             e.printStackTrace();

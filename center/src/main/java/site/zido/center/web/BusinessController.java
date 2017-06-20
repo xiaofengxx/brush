@@ -186,7 +186,8 @@ public class BusinessController extends BaseController {
         if (user == null)
             return fail(LangConstants.USER_NOT_FOUNT);
         if (pass) {
-            businessUserService.autoCreateIdAndPws(user);
+            userService.autoCreateIdAndPws(user);
+            businessUserService.updateStateByUserId(user.getId(), 1);
         } else
             businessUserService.updateStateByUserId(user.getId(), 2);
         return success(LangConstants.OPERATE_SUCCESS);

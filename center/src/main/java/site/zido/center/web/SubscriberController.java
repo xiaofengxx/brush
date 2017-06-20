@@ -72,10 +72,10 @@ public class SubscriberController extends BaseController {
         career.setId(user.getId());
         career.setName(strcareer);
 
-
-
         //查找已有的刷手登录账号
-        User subUser = userService.findLoginUser(subscriberUser.getPhoneNumber());
+        User subUser = userService.getUserByUserName(subscriberUser.getPhoneNumber());
+
+
         //支付宝不能为空
         if(StringUtils.isEmpty(subscriberUser.getAliPay())){
             return fail(LangConstants.USER_ALIPAY_CAN_NOT_BE_EMPTY);
@@ -142,6 +142,7 @@ public class SubscriberController extends BaseController {
         if(isAdd){
             subscriberUser.setId(EntityUtils.generatorId());
             subscriberUser.setState(0);
+            user.setUsername(subscriberUser.getPhoneNumber());
         }
 
         if(isAdd){
@@ -179,6 +180,23 @@ public class SubscriberController extends BaseController {
     public AjaxResult getIntroduces(@ApiParam("关键字") @RequestParam(defaultValue = "") String key){
         List<SubscriberUser> subscriberUsers = subscriberService.selectByKey(key, 20);
         return successData(subscriberUsers);
+    }
+
+    /**
+     * 判断手机号是否已注册
+     * @param phoneNumber
+     * @return
+     */
+    @PostMapping(value = "/userNameIsRegist")
+    public AjaxResult userNameIsRegist(@ApiParam("用户名") @RequestParam(defaultValue = "") String phoneNumber){
+
+        User user = userService.getUserByUserName(phoneNumber);
+
+        if(user == null){
+            return success();
+        }else{
+            return fail("");
+        }
     }
 
 }

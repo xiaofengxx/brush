@@ -28,7 +28,7 @@
 	<select id="findUserByUsername" resultType="site.zido.entity.User">
 		  select * from brush_user where username = #{s}
 	</select>
-
+	<!--除开电话号码的最大username-->
 	<select id="selectMaxUserName" resultType="java.lang.String">
 		select max(username+0)
 		from brush_user

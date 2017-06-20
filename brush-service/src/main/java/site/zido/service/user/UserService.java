@@ -17,7 +17,12 @@ import java.util.List;
 public interface UserService extends IService<User>{
     public List<User> getAllUser(String id);
 
-    User findLoginUser(String loginname);
+    /**
+     * 通过用户名得到用户, 刷手用户注册时判定重复
+     * @param username
+     * @return User
+     */
+    User getUserByUserName(String username);
 
     void updateFail(User user);
 

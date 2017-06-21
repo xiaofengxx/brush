@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import site.zido.brush.utils.AgeUtils;
+import site.zido.brush.utils.IDCardToAgeUtils;
 import site.zido.entity.*;
 import site.zido.mapper.user.BankCardMapper;
 import site.zido.mapper.user.CareerMapper;
@@ -43,7 +43,7 @@ public class SubscriberServiceImpl extends ServiceImpl<SubscriberUserMapper,Subs
     public synchronized void addSubscriber(User user, SubscriberUser subscriberUser, List<BankCard> bankCards, Career career) {
         int subAge = 0;
         try {
-            subAge = AgeUtils.getAgeByIDCard(subscriberUser.getIDCard());
+            subAge = IDCardToAgeUtils.getAgeByIDCard(subscriberUser.getIDCard());
         } catch (ParseException e) {
             e.printStackTrace();
         }

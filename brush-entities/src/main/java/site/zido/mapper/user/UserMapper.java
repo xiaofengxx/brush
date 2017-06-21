@@ -23,4 +23,7 @@ public interface UserMapper extends BaseMapper<User> {
      * @return
      */
     String selectMaxUserName();
+
+    //通过用户id修改密码
+     void updatePwdById(User user);
 }

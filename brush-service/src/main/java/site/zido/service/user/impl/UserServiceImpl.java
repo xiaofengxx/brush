@@ -81,4 +81,14 @@ public class UserServiceImpl extends ServiceImpl<UserMapper,User> implements Use
         userMapper.updateById(user);
     }
 
+    @Override
+    public void updatePwd(User user) {
+        //通过用户id修改密码
+        userMapper.updatePwdById(user);
+    }
+
+    @Override
+    public void cancelUser(User user) {
+        userMapper.updateUser(user);
+    }
 }

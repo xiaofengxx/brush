@@ -5,12 +5,18 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-/**身份证号码自动生成年龄
+/**通过身份证号生成年龄
  * Created by CDDC on 2017/6/16.
  */
 
-public class AgeUtils {
+public class IDCardToAgeUtils {
 
+    /**
+     * 通过身份证号生成年龄
+     * @param IDCard
+     * @return
+     * @throws ParseException
+     */
     public static Integer getAgeByIDCard(String IDCard) throws ParseException {
 
         int leh = IDCard.length();

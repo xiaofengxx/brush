@@ -151,13 +151,13 @@ public class SubscriberController extends BaseController {
             subscriberService.updataSubscriber(user,subscriberUser,bankCards,career);
         }
 
-        return success("操作成功");
+        return success(LangConstants.OPERATE_SUCCESS);
     }
     /**
      * 刷手通过审核自动创建登录用户名和密码
      */
     @PostMapping(value = "/pass")
-    @ApiOperation("刷手审核")
+    @ApiOperation("刷手审核通过")
     public AjaxResult autoCreateIdAndPwd(String id,Boolean pass){
         User user = userService.selectById(id);
         if(pass){
@@ -198,5 +198,4 @@ public class SubscriberController extends BaseController {
             return fail("");
         }
     }
-
 }

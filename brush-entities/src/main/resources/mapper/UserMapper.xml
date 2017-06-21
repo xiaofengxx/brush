@@ -19,9 +19,15 @@
 		UPDATE
 			brush_user
 		SET
-			username = "",
-			password = "",
 			enabled = 0
+		WHERE
+			id = #{id}
+	</update>
+	<update id="updatePwdById">
+		UPDATE
+			brush_user
+		SET
+			password = #{password}
 		WHERE
 			id = #{id}
 	</update>

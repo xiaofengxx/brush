@@ -118,7 +118,7 @@ public class BusinessController extends BaseController {
             businessUserService.save(user, businessUser, bankCards, shops);
         else
             businessUserService.updateBusiness(user, businessUser, bankCards, shops);
-        return success("操作成功");
+        return success(LangConstants.OPERATE_SUCCESS);
     }
 
     /**

@@ -46,4 +46,15 @@ public interface UserService extends IService<User>{
      */
     void autoCreateIdAndPws(User user);
 
+    /**
+     * 通过id，用户，刷手或者平台管理员修改密码
+     * @param user
+     */
+    void updatePwd(User user);
+
+    /**
+     * 作废刷手
+     * @param user
+     */
+    void cancelUser(User user);
 }

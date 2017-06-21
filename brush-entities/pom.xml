@@ -43,6 +43,14 @@
             <version>${fastjson.version}</version>
             <scope>provided</scope>
         </dependency>
+
+        <!--引入swagger 查看api接口-->
+        <dependency>
+            <scope>provided</scope>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>${swagger2.version}</version>
+        </dependency>
     </dependencies>
 
     <build>

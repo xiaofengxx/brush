@@ -34,20 +34,20 @@ public class SubscriberServiceImpl extends ServiceImpl<SubscriberUserMapper,Subs
     @Resource
     private BankCardService bankCardService;
     @Resource
-    private SubscriberService subscriberService;
-    @Resource
     private UserService userService;
 
     @Override
     @Transactional
     public synchronized void addSubscriber(User user, SubscriberUser subscriberUser, List<BankCard> bankCards, Career career) {
-        int subAge = 0;
-        try {
-            subAge = IDCardToAgeUtils.getAgeByIDCard(subscriberUser.getIDCard());
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        subscriberUser.setSubAge(subAge);
+
+//        int subAge = 0;
+//        try {
+//            subAge = IDCardToAgeUtils.getAgeByIDCard(subscriberUser.getIdCard());
+//        } catch (ParseException e) {
+//            e.printStackTrace();
+//        }
+//        //subscriberUser.setSubAge(subAge);
+
         userMapper.insert(user);
         careerMapper.insert(career);
         bankCardService.insertBatch(bankCards);
@@ -69,13 +69,12 @@ public class SubscriberServiceImpl extends ServiceImpl<SubscriberUserMapper,Subs
 
     @Override
     public SubscriberUser selectByUserId(String userId) {
-        subscriberService.selectOne(new EntityWrapper<SubscriberUser>().where("user_id = {0}",userId));
-        return null;
+        return selectOne(new EntityWrapper<SubscriberUser>().where("user_id = {0}",userId));
     }
 
     @Override
     public boolean updataStateByUserId(Long userId, Integer state) {
-        return subscriberService.update(
+        return update(
                 new SubscriberUser().setState(state),
                 new EntityWrapper<SubscriberUser>().where("user_id = {0}", userId));
     }

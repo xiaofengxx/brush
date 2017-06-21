@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="site.zido.mapper.user.BusinessTemplateMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BusinessTemplateMap" type="site.zido.entity.BusinessTemplate">
+		<result column="id" property="id" />
+		<result column="shop_id" property="shopId" />
+		<result column="user_id" property="userId" />
+		<result column="business_id" property="businessId" />
+		<result column="product_img" property="productImg" />
+		<result column="payment_type" property="paymentType" />
+		<result column="template_tags" property="templateTags" />
+		<result column="product_link" property="productLink" />
+		<result column="product_style" property="productStyle" />
+		<result column="product_original_price" property="productOriginalPrice" />
+		<result column="product_present_price" property="productPresentPrice" />
+		<result column="product_keywords" property="productKeywords" />
+		<result column="ranking_way" property="rankingWay" />
+		<result column="ranking_limit" property="rankingLimit" />
+		<result column="region_limit" property="regionLimit" />
+		<result column="price_limit" property="priceLimit" />
+		<result column="browse_time" property="browseTime" />
+		<result column="evaluation" property="evaluation" />
+		<result column="requirements" property="requirements" />
+		<result column="state" property="state" />
+	</resultMap>
+
+	<resultMap id="tempalteINFO" type="site.zido.dto.BusinessTemplateInfoDTO">
+		<association columnPrefix="bt_" property="businessTemplate" resultMap="BusinessTemplateMap"></association>
+		<association columnPrefix="bu_" property="businessUser" resultMap="BusinessTemplateMap"></association>
+		<association columnPrefix="bs_" property="shop" resultMap="site.zido.mapper.user.ShopMapper.BaseResultMap"></association>
+		<association columnPrefix="bp_" property="platforms" resultMap="site.zido.mapper.user.PlatformsMapper.BaseResultMap"></association>
+	</resultMap>
+
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, shop_id AS shopId, user_id AS userId, business_id AS businessId, product_img AS productImg, payment_type AS paymentType, template_tags AS templateTags, product_link AS productLink, product_style AS productStyle, product_original_price AS productOriginalPrice, product_present_price AS productPresentPrice, product_keywords AS productKeywords, ranking_way AS rankingWay, ranking_limit AS rankingLimit, region_limit AS regionLimit, price_limit AS priceLimit, browse_time AS browseTime, evaluation, requirements,state
+    </sql>
+
+	<!--获取id中的最大值-->
+	<select id="selectmaxid" resultType="java.lang.String">
+	  	select max(id) from brush_business_template
+	</select>
+
+	<select id="searchBusinessTemplateList" resultMap="tempalteINFO">
+		SELECT
+		bu.nickname AS bu_nickname,
+		bu.id AS bu_id,
+
+		bs.id AS bs_id,
+		bs.shop_name AS bs_shop_name,
+		bs.shop_type AS bs_shop_type,
+
+		bp.id AS bp_id,
+		bp.platform_name AS bp_platform_name,
+
+		bt.id AS bt_id,
+		bt.product_style AS bt_product_style,
+		bt.product_keywords AS bt_product_keywords,
+		bt.template_tags AS bt_template_tags,
+		bt.product_original_price AS bt_product_original_price,
+		bt.create_time AS bt_create_time,
+		bt.state AS bt_state
+
+		FROM brush_user t1
+		INNER JOIN brush_business_template bt on bt.id = t1.id
+		INNER JOIN brush_business_user bu on  bu.user_id = t1.id
+		INNER JOIN brush_shop bs on bs.user_id  = t1.id
+		INNER JOIN brush_platforms bp on bp.id = bs.platform_id
+		<where>
+			<if test="condition.keywords != null">
+				and bt.product_keywords LIKE '%${condition.keywords}%'
+			</if>
+			<if test="condition.stime != null and condition.etime != null">
+				and (bt.create_time &gt; #{condition.stime} and bt.create_time &lt; #{condition.etime})
+			</if>
+			<if test="condition.sate != null and condition.sate.length &gt; 0">
+				<trim prefixOverrides="or" prefix="and ( " suffix=" )">
+					<foreach collection="condition.sate" item="s">
+						  or bt.state = #{s}
+					</foreach>
+				</trim>
+			</if>
+		</where>
+		<if test="condition.sort != null">
+			order by ${condition.sortName}
+			<choose>
+				<when test="condition.desc == true">
+					DESC
+				</when>
+				<otherwise>
+					ASC
+				</otherwise>
+			</choose>
+		</if>
+	</select>
+
+</mapper>

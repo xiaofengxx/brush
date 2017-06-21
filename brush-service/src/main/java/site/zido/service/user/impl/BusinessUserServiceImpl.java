@@ -37,8 +37,6 @@ public class BusinessUserServiceImpl extends ServiceImpl<BusinessUserMapper, Bus
     @Resource
     private UserMapper userMapper;
     @Resource
-    private BusinessUserService businessUserService;
-    @Resource
     private BankCardMapper bankCardMapper;
     @Resource
     private ShopMapper shopMapper;
@@ -98,7 +96,7 @@ public class BusinessUserServiceImpl extends ServiceImpl<BusinessUserMapper, Bus
      * @return 是否成功
      */
     public boolean updateStateByUserId(Long userId, Integer state) {
-        return businessUserService.update(
+        return update(
                 new BusinessUser().setState(state),
                 new EntityWrapper<BusinessUser>().where("user_id = {0}", userId));
     }
@@ -110,7 +108,7 @@ public class BusinessUserServiceImpl extends ServiceImpl<BusinessUserMapper, Bus
 
     @Override
     public BusinessUser selectByNickname(String introduceName) {
-        return businessUserService.selectOne(new EntityWrapper<BusinessUser>().where("nickname = {0}", introduceName));
+        return selectOne(new EntityWrapper<BusinessUser>().where("nickname = {0}", introduceName));
     }
 
     @Override

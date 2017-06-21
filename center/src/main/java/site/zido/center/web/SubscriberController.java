@@ -1,11 +1,16 @@
 package site.zido.center.web;
 
+import com.baomidou.mybatisplus.plugins.Page;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.web.bind.annotation.*;
 import site.zido.brush.utils.EntityUtils;
 import site.zido.brush.utils.StringUtils;
+import site.zido.brush.utils.ValiDateUtils;
 import site.zido.core.LangConstants;
+import site.zido.core.constants.BrushConstants;
+import site.zido.dto.SubscriberCondition;
 import site.zido.dto.SubscriberUserInfoDTO;
 import site.zido.core.common.base.BaseController;
 import site.zido.dto.AjaxResult;
@@ -28,6 +33,8 @@ public class SubscriberController extends BaseController {
     private UserService userService;
     @Resource
     private SubscriberService subscriberService;
+    @Resource
+    private BrushConstants constants;
 
     /**
      * 添加刷手
@@ -64,10 +71,6 @@ public class SubscriberController extends BaseController {
             bankCard.setUserId(user.getId());
         }
 
-        //构造职业实例
-        Career career = dto.getCareer();
-        career.setId(user.getId());
-
         //查找已有的刷手登录账号
         User subUser = userService.getUserByUserName(subscriberUser.getPhoneNumber());
 
@@ -89,7 +92,7 @@ public class SubscriberController extends BaseController {
             return fail(LangConstants.TAOBAOSTAR_CAN_NOT_BE_EMPTY);
         }
         //职业不能为空
-        if(StringUtils.isEmpty(dto.getCareer().getName())){
+        if(StringUtils.isEmpty(subscriberUser.getCareerId()+"")){
             return fail(LangConstants.CAREER_CAN_NOT_BE_EMPTY);
         }
         //性别不能为空
@@ -120,10 +123,10 @@ public class SubscriberController extends BaseController {
         if(StringUtils.isEmpty(subscriberUser.getRealName())){
             return fail(LangConstants.USER_REALNAME_CAN_NOT_BE_EMPTY);
         }
-        //电话不能为空或者重复
-        if(StringUtils.isEmpty(subscriberUser.getPhoneNumber())){
+        //是否电话号码或者重复
+        if(ValiDateUtils.isPhone(subscriberUser.getPhoneNumber())){
             return fail(LangConstants.PHONENUMBER_CAN_NOT_BE_EMPTY);
-        }else if(subUser.equals(subscriberUser.getPhoneNumber())) {
+        }else if(subUser != null) {
             return fail(LangConstants.PHONENUMBER_REPEAT);
         }
         //昵称不能为空
@@ -142,9 +145,9 @@ public class SubscriberController extends BaseController {
         }
 
         if(isAdd){
-            subscriberService.addSubscriber(user,subscriberUser,bankCards,career);
+            subscriberService.addSubscriber(user,subscriberUser,bankCards);
         }else{
-            subscriberService.updataSubscriber(user,subscriberUser,bankCards,career);
+            subscriberService.updataSubscriber(user,subscriberUser,bankCards);
         }
 
         return success(LangConstants.OPERATE_SUCCESS);
@@ -184,14 +187,27 @@ public class SubscriberController extends BaseController {
      * @return
      */
     @PostMapping(value = "/userNameIsRegist")
+    @ApiOperation(value = "判断手机号注册,返回true/false")
     public AjaxResult userNameIsRegist(@ApiParam("用户名") @RequestParam(defaultValue = "") String phoneNumber){
 
         User user = userService.getUserByUserName(phoneNumber);
 
         if(user == null){
-            return success();
+            return successData(true);
         }else{
-            return fail("");
+            return successData(false);
         }
+    }
+
+    @PostMapping(value = "searchSubScriberList")
+    @ApiOperation(value = "多条件搜索")
+    public AjaxResult searchSubScriberList(@RequestParam(defaultValue = "1") Integer currentPage, @RequestParam(defaultValue = "0") Integer level,@RequestBody SubscriberCondition condition){
+        if(condition == null){
+            condition = new SubscriberCondition().setSort(0).setDESC(true);
+        }
+
+        Page<SubscriberUserInfoDTO> subscriberUserInfoDTOPage = subscriberService.searchSubscriberList(currentPage, constants.getPageSize(level), condition);
+
+        return successData(subscriberUserInfoDTOPage);
     }
 }

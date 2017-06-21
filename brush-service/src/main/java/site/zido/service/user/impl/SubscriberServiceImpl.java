@@ -1,10 +1,13 @@
 package site.zido.service.user.impl;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import site.zido.brush.utils.IDCardToAgeUtils;
+import site.zido.dto.SubscriberCondition;
+import site.zido.dto.SubscriberUserInfoDTO;
 import site.zido.entity.*;
 import site.zido.mapper.user.BankCardMapper;
 import site.zido.mapper.user.CareerMapper;
@@ -38,7 +41,7 @@ public class SubscriberServiceImpl extends ServiceImpl<SubscriberUserMapper,Subs
 
     @Override
     @Transactional
-    public synchronized void addSubscriber(User user, SubscriberUser subscriberUser, List<BankCard> bankCards, Career career) {
+    public synchronized void addSubscriber(User user, SubscriberUser subscriberUser, List<BankCard> bankCards) {
 
 //        int subAge = 0;
 //        try {
@@ -49,7 +52,6 @@ public class SubscriberServiceImpl extends ServiceImpl<SubscriberUserMapper,Subs
 //        //subscriberUser.setSubAge(subAge);
 
         userMapper.insert(user);
-        careerMapper.insert(career);
         bankCardService.insertBatch(bankCards);
         subscriberUserMapper.insert(subscriberUser);
     }
@@ -57,7 +59,7 @@ public class SubscriberServiceImpl extends ServiceImpl<SubscriberUserMapper,Subs
 
     @Override
     @Transactional
-    public synchronized void updataSubscriber(User user, SubscriberUser subscriberUser, List<BankCard> bankCards, Career career) {
+    public synchronized void updataSubscriber(User user, SubscriberUser subscriberUser, List<BankCard> bankCards) {
 
         userService.updateById(user);
         subscriberUserMapper.updateById(subscriberUser);
@@ -85,6 +87,13 @@ public class SubscriberServiceImpl extends ServiceImpl<SubscriberUserMapper,Subs
         List<SubscriberUser> subscriberUsers = subscriberUserMapper.selectByKey(key, 1, max);
 
         return subscriberUsers;
+    }
+
+    @Override
+    public Page<SubscriberUserInfoDTO> searchSubscriberList(Integer current, Integer pagesize, SubscriberCondition condition) {
+        Page<SubscriberUserInfoDTO> resultPage = new Page<>(current,pagesize);
+        resultPage.setRecords(subscriberUserMapper.searchSubscriberList(condition));
+        return resultPage;
     }
 
 }

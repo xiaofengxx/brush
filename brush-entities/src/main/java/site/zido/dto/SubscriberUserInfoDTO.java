@@ -15,7 +15,6 @@ public class SubscriberUserInfoDTO {
     private User user;
     private SubscriberUser subscriberUser;
     private List<BankCard> bankCards;
-
     private Career career;
 
 

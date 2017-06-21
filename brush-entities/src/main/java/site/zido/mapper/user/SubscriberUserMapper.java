@@ -2,6 +2,8 @@ package site.zido.mapper.user;
 
 import com.baomidou.mybatisplus.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Param;
+import site.zido.dto.SubscriberCondition;
+import site.zido.dto.SubscriberUserInfoDTO;
 import site.zido.entity.SubscriberUser;
 
 import java.util.List;
@@ -16,4 +18,11 @@ public interface SubscriberUserMapper extends BaseMapper<SubscriberUser> {
      * @return
      */
     List<SubscriberUser> selectByKey(@Param("key") String key, @Param("state") Integer state, @Param("max") Integer max);
+
+    /**
+     * 根据条件搜索
+     * @param condition 条件类
+     * @return
+     */
+    List<SubscriberUserInfoDTO> searchSubscriberList(@Param("condition")SubscriberCondition condition);
 }

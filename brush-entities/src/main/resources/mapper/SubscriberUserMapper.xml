@@ -27,10 +27,13 @@
 		<result column="creat_time" property="creatTime" />
 		<result column="nickname" property="nickname" />
 		<result column="introduce_id" property="introduceId" />
+		<result column="career_id" property="careerId" />
+		<result column="age" property="age" />
 	</resultMap>
 
 	<resultMap id="SubscriberINFO" type="site.zido.dto.SubscriberUserInfoDTO">
-
+		<association columnPrefix="bs_" property="subscriberUser" resultMap="site.zido.mapper.user.SubscriberUserMapper.BaseResultMap"/>
+		<association columnPrefix="ca_" property="career" resultMap="site.zido.mapper.user.CareerMapper.BaseResultMap"></association>
 	</resultMap>
 	
     <!-- 通用查询结果列 -->
@@ -45,7 +48,54 @@
 
 	<!--多条件搜索-->
 	<select id="searchSubscriberList" resultMap="SubscriberINFO">
-		
+		SELECT
+
+		ca.id AS  ca_id,
+		ca.name AS ca_name,
+
+		bs.phone_number AS bs_phone_number,
+		bs.state AS bs_state,
+		bs.real_name AS bs_real_name,
+		bs.nickname AS bs_nickname,
+		bs.age AS bs_age,
+		bs.birth_day AS bs_birth_day,
+		bs.ali_pay AS bs_ali_pay,
+		bs.ali_tm AS bs_ali_tm,
+		bs.career_id AS bs_career_id,
+		bs.creat_time AS bs_creat_time,
+		bs.introduce_id AS bs_introduce_id,
+		bs.taobao_star AS bs_taobao_star
+
+
+		FROM brush_user t1
+		INNER JOIN brush_subscriber_user bs on t1.id = bs.user_id
+		INNER JOIN brush_career ca on ca.id = bs.career_id
+		<where>
+			<if test="condition.phonenumber != null">
+				and bs.phone_number LIKE '%${condition.phonenumber}%'
+			</if>
+			<if test="condition.stime != null and condition.etime !=null">
+				and (bs.creat_time &gt; #{condition.stime} and bs.creat_time &lt; #{condition.etime})
+			</if>
+			<if test="condition.states != null and condition.states.length &gt; 0">
+				<trim prefixOverrides="or" prefix="and (" suffix=" ) ">
+					<foreach collection="condition.states" item="state">
+						or bs.states = #{state}
+					</foreach>
+				</trim>
+			</if>
+		</where>
+		<if test="condition.sortName != null ">
+			order by ${condition.sortName}
+			<choose>
+				<when test="condition.DESC == true">
+					DESC
+				</when>
+				<otherwise>
+					ASC
+				</otherwise>
+			</choose>
+		</if>
 	</select>
 
 

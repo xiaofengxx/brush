@@ -127,7 +127,25 @@ public class SubscriberUser extends Model<SubscriberUser> {
 	@TableField("introduce_id")
 	private Long introduceId;
 
+	/**
+	 * 职业id
+	 */
+	@TableField("career_id")
+	private Integer careerId;
+
+	@TableField(exist = false)
 	private int age;
+
+
+
+	public Integer getCareerId() {
+		return careerId;
+	}
+
+	public SubscriberUser setCareerId(Integer careerId) {
+		this.careerId = careerId;
+		return this;
+	}
 
 	public int getAge() {
 		return age;

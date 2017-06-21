@@ -54,7 +54,7 @@ public class SubscriberController extends BaseController {
         SubscriberUser subscriberUser = dto.getSubscriberUser();
 
         //刷手信息,填充所属人
-        subscriberUser.setCreate_time(new Date());
+        subscriberUser.setCreatTime(new Date());
         subscriberUser.setUserId(user.getId());
 
         List<BankCard> bankCards = dto.getBankCards();
@@ -65,12 +65,8 @@ public class SubscriberController extends BaseController {
         }
 
         //构造职业实例
-        String strcareer = dto.getCareer();
-
-        Career career = new Career();
-
+        Career career = dto.getCareer();
         career.setId(user.getId());
-        career.setName(strcareer);
 
         //查找已有的刷手登录账号
         User subUser = userService.getUserByUserName(subscriberUser.getPhoneNumber());
@@ -81,7 +77,7 @@ public class SubscriberController extends BaseController {
             return fail(LangConstants.USER_ALIPAY_CAN_NOT_BE_EMPTY);
         }
         //旺旺不能为空
-        if(StringUtils.isEmpty(subscriberUser.getAliTM())){
+        if(StringUtils.isEmpty(subscriberUser.getAliTm())){
             return fail(LangConstants.USER_ALITM_CAN_NOT_BE_EMPTY);
         }
         //微信号不能为空
@@ -93,7 +89,7 @@ public class SubscriberController extends BaseController {
             return fail(LangConstants.TAOBAOSTAR_CAN_NOT_BE_EMPTY);
         }
         //职业不能为空
-        if(StringUtils.isEmpty(dto.getCareer())){
+        if(StringUtils.isEmpty(dto.getCareer().getName())){
             return fail(LangConstants.CAREER_CAN_NOT_BE_EMPTY);
         }
         //性别不能为空
@@ -105,11 +101,11 @@ public class SubscriberController extends BaseController {
             return fail(LangConstants.QQ_CAN_NOT_BE_EMPTY);
         }
         //身份证正面不能为空
-        if(StringUtils.isEmpty(subscriberUser.getIDCardFrontUrl())){
+        if(StringUtils.isEmpty(subscriberUser.getIdCardFrontUrl())){
             return fail(LangConstants.IDCARDFRONTURL_CAN_NOT_BE_EMPTY);
         }
         //身份证背面不能为空
-        if(StringUtils.isEmpty(subscriberUser.getIDCardBehindUrl())){
+        if(StringUtils.isEmpty(subscriberUser.getIdCardBehindUrl())){
             return fail(LangConstants.IDCARDBEHINDURL_CAN_NOT_BE_EMPTY);
         }
         //淘宝星级图片不能为空
@@ -131,11 +127,11 @@ public class SubscriberController extends BaseController {
             return fail(LangConstants.PHONENUMBER_REPEAT);
         }
         //昵称不能为空
-       if(StringUtils.isEmpty(dto.getNickName())){
+       if(StringUtils.isEmpty(dto.getSubscriberUser().getNickname())){
             return fail(LangConstants.USER_NICKNAME_CAN_NOT_BE_EMPTY);
         }
         //身份证不能为空
-        if (StringUtils.isEmpty(subscriberUser.getIDCard())){
+        if (StringUtils.isEmpty(subscriberUser.getIdCard())){
             return fail(LangConstants.IDCARD_CAN_NOT_BE_EMPTY);
         }
 

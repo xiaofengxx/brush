@@ -29,6 +29,10 @@
 		<result column="introduce_id" property="introduceId" />
 	</resultMap>
 
+	<resultMap id="SubscriberINFO" type="site.zido.dto.SubscriberUserInfoDTO">
+
+	</resultMap>
+	
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
         id, phoneNumber, IDCardFrontUrl, IDCardBehindUrl, IDCard, realName, avatar, aliPay, aliTM, wechat, taobaoStar, sex, birthDay, Qq, brushed, recommandScreenShotUrl, starScreenShotUrl, aliPayScreenShotUrl, userId,create_time,nickname
@@ -37,6 +41,11 @@
 	<select id="selectByKey" resultMap="BaseResultMap">
 		select user_id,nickname from brush_business_user where state = #{state} and (real_name like '%${key}%' or nickname like '%${key}%')
 		order by ((case when real_name like '%${key}%' then 2 else 0 end) + (case when nickname like '%${key}%' then 1 else 0 end))  DESC ,sort DESC limit #{max}
+	</select>
+
+	<!--多条件搜索-->
+	<select id="searchSubscriberList" resultMap="SubscriberINFO">
+		
 	</select>
 
 

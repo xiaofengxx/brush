@@ -1,6 +1,7 @@
 package site.zido.dto;
 
 import site.zido.entity.BankCard;
+import site.zido.entity.Career;
 import site.zido.entity.SubscriberUser;
 import site.zido.entity.User;
 
@@ -15,8 +16,8 @@ public class SubscriberUserInfoDTO {
     private SubscriberUser subscriberUser;
     private List<BankCard> bankCards;
 
-    private String career;
-    private String nickName;
+    private Career career;
+
 
     public User getUser() {
         return user;
@@ -45,20 +46,12 @@ public class SubscriberUserInfoDTO {
         return this;
     }
 
-    public String getCareer() {
+    public Career getCareer() {
         return career;
     }
 
-    public SubscriberUserInfoDTO setCareer(String career) {
+    public SubscriberUserInfoDTO setCareer(Career career) {
         this.career = career;
         return this;
-    }
-
-    public String getNickName() {
-        return nickName;
-    }
-
-    public void setNickName(String nickName) {
-        this.nickName = nickName;
     }
 }

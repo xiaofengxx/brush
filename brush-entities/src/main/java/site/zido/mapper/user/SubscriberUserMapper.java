@@ -26,5 +26,5 @@ public interface SubscriberUserMapper extends BaseMapper<SubscriberUser> {
      */
     List<SubscriberUserInfoDTO> searchSubscriberList(@Param("condition")SubscriberCondition condition);
 
-    List<SubscriberUser> findSubUserByCondition(String introUser);
+    List<SubscriberUser> findSubUserByCondition(@Param("introUser") String introUser);
 }

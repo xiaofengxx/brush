@@ -1,10 +1,8 @@
 package site.zido.pub.controller;
 
 import io.swagger.annotations.ApiOperation;
-import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import site.zido.core.LangConstants;
 import site.zido.core.common.base.BaseController;
@@ -43,10 +41,9 @@ public class IntroUserController extends BaseController {
 
     @PostMapping(value = "/findSubUser")
     @ApiOperation(value = "模糊查询刷手")
-    public AjaxResult findSubUser(String phoneNumber,String realName){
-        if(phoneNumber != null || realName != null){
-            List<SubscriberUser> list = subscriberService.findSubUserByCondition(phoneNumber,realName);
-        }
-        return null;
+    public AjaxResult findSubUser(String paramKey){
+            List<SubscriberUser> list = subscriberService.findSubUserByCondition(paramKey);
+        return successData(list);
     }
+
 }

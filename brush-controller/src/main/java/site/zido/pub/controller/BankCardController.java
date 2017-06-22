@@ -28,6 +28,8 @@ public class BankCardController extends BaseController {
     @ApiOperation("获取银行卡信息")
     public AjaxResult check(@RequestParam String cardNumber) {
 
+        cardNumber = cardNumber.trim();
+
         if (!BankCardUtils.checkBankCard(cardNumber))
             return fail(LangConstants.BANK_CARD_IS_INCORRECT);
         String name = BankCardUtils.getNameOfBank(cardNumber);

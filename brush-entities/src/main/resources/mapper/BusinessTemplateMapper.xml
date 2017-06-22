@@ -28,9 +28,9 @@
 
 	<resultMap id="tempalteINFO" type="site.zido.dto.BusinessTemplateInfoDTO">
 		<association columnPrefix="bt_" property="businessTemplate" resultMap="BusinessTemplateMap"></association>
-		<association columnPrefix="bu_" property="businessUser" resultMap="BusinessTemplateMap"></association>
-		<association columnPrefix="bs_" property="shop" resultMap="site.zido.mapper.user.ShopMapper.BaseResultMap"></association>
+		<association columnPrefix="bu_" property="businessUser" resultMap="site.zido.mapper.user.BusinessUserMapper.BaseResultMap"></association>
 		<association columnPrefix="bp_" property="platforms" resultMap="site.zido.mapper.user.PlatformsMapper.BaseResultMap"></association>
+		<association columnPrefix="us_" property="user" resultMap="site.zido.mapper.user.UserMapper.BaseResultMap"></association>
 	</resultMap>
 
 
@@ -49,12 +49,10 @@
 		bu.nickname AS bu_nickname,
 		bu.id AS bu_id,
 
-		bs.id AS bs_id,
-		bs.shop_name AS bs_shop_name,
-		bs.shop_type AS bs_shop_type,
-
 		bp.id AS bp_id,
 		bp.platform_name AS bp_platform_name,
+
+		t1.username = AS us_username,
 
 		bt.id AS bt_id,
 		bt.product_style AS bt_product_style,
@@ -67,9 +65,11 @@
 		FROM brush_user t1
 		INNER JOIN brush_business_template bt on bt.id = t1.id
 		INNER JOIN brush_business_user bu on  bu.user_id = t1.id
-		INNER JOIN brush_shop bs on bs.user_id  = t1.id
 		INNER JOIN brush_platforms bp on bp.id = bs.platform_id
 		<where>
+			<if test="condition.userid != null">
+				AND t1.id = ${condition.userid}
+			</if>
 			<if test="condition.keywords != null">
 				and bt.product_keywords LIKE '%${condition.keywords}%'
 			</if>

@@ -1,6 +1,9 @@
 package site.zido.service.user;
 
+import com.baomidou.mybatisplus.plugins.Page;
 import site.zido.dto.BusinessTemplateCondition;
+import site.zido.dto.BusinessTemplateInfoDTO;
+import site.zido.dto.SubscriberUserInfoDTO;
 import site.zido.entity.BusinessTemplate;
 import com.baomidou.mybatisplus.service.IService;
 import site.zido.entity.User;
@@ -55,9 +58,7 @@ public interface IBusinessTemplateService extends IService<BusinessTemplate> {
      * @param condition 条件类
      * @return
      */
-    List<BusinessTemplate> getBusinessTemplateList(Integer currentPage, Integer pagesize, BusinessTemplateCondition condition);
-
-
+    Page<BusinessTemplateInfoDTO> getBusinessTemplateList(Integer currentPage, Integer pagesize, BusinessTemplateCondition condition);
 
     /**
      * 根据id删除
@@ -65,6 +66,7 @@ public interface IBusinessTemplateService extends IService<BusinessTemplate> {
      * @return
      */
     boolean deleteById(String templateid);
+
 
 
 }

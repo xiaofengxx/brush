@@ -1,9 +1,6 @@
 package site.zido.dto;
 
-import site.zido.entity.BusinessTemplate;
-import site.zido.entity.BusinessUser;
-import site.zido.entity.Platforms;
-import site.zido.entity.Shop;
+import site.zido.entity.*;
 
 /**
  * 展示模板信息类
@@ -11,9 +8,9 @@ import site.zido.entity.Shop;
  */
 public class BusinessTemplateInfoDTO {
 
-    private BusinessTemplate businessTemplate;
+    private User user;
 
-    private Shop shop;
+    private BusinessTemplate businessTemplate;
 
     private BusinessUser businessUser;
 
@@ -37,12 +34,12 @@ public class BusinessTemplateInfoDTO {
         return this;
     }
 
-    public Shop getShop() {
-        return shop;
+    public User getUser() {
+        return user;
     }
 
-    public BusinessTemplateInfoDTO setShop(Shop shop) {
-        this.shop = shop;
+    public BusinessTemplateInfoDTO setUser(User user) {
+        this.user = user;
         return this;
     }
 

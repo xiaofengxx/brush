@@ -67,4 +67,6 @@ public class LangConstants {
     public static final String NO_IDCARD = LangUtils.lang("NO_IDCARD");
 
     public static final String IDCARD_CAN_NOT_BE_EMPTY = LangUtils.lang("IDCARD_CAN_NOT_BE_EMPTY");
+
+    public static final String PLATFORM_IS_EXIST = LangUtils.lang("PLATFORM_IS_EXIST");
 }

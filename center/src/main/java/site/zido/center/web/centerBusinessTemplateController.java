@@ -41,15 +41,18 @@ public class centerBusinessTemplateController extends BaseController {
         return successData(businessTemplateList);
     }
 
-    @PostMapping(value = "pass")
+    @PostMapping(value = "/pass")
     @ApiOperation(value = "审核模板")
     public AjaxResult Examine(@RequestParam boolean pass,@RequestParam String templateid){
-
 
         BusinessTemplate businessTemplate = businessTemplateService.selectById(templateid);
 
         if(businessTemplate == null){
             return fail(LangConstants.TMEPLATE_IS_NOT_EXIST);
+        }
+
+        if(businessTemplate.getState() != 2){
+            return fail(LangConstants.TMEPLATE_CAN_NOT_OPERATE);
         }
 
         Long state = 2L;
@@ -60,8 +63,10 @@ public class centerBusinessTemplateController extends BaseController {
         }
 
         boolean b = businessTemplateService.updateStateById(templateid, state);
+        if(b)
+            return success(LangConstants.OPERATE_SUCCESS);
 
-        return null;
+        return fail(LangConstants.OPERATE_FAIL);
     }
 
 }

@@ -43,13 +43,18 @@ public class BusinessTemplateServiceImpl extends ServiceImpl<BusinessTemplateMap
 
     @Override
     public boolean updateStateById(String templateid, Long sate) {
+        return updateStateById(null,templateid,sate);
+    }
+
+    @Override
+    public boolean updateStateById(User user, String templateid, Long sate) {
         return  update(new BusinessTemplate().setState(sate),
-                        new EntityWrapper<BusinessTemplate>().where("id={0}",templateid));
+                new EntityWrapper<BusinessTemplate>().where("id={0}",templateid));
     }
 
     @Override
     public List<BusinessTemplate> getListByUserid(String userid) {
-        return selectList(new EntityWrapper<BusinessTemplate>().where("id={0}",userid));
+        return selectList(new EntityWrapper<BusinessTemplate>().where("user_id={0}",userid));
     }
 
     @Override
@@ -61,7 +66,12 @@ public class BusinessTemplateServiceImpl extends ServiceImpl<BusinessTemplateMap
 
     @Override
     public boolean deleteById(String templateid) {
-        return false;
+        return deleteById(null,templateid);
+    }
+
+    @Override
+    public boolean deleteById(User user, String templateid) {
+        return delete(new EntityWrapper<BusinessTemplate>().where("id = {0}",templateid));
     }
 
 }

@@ -43,6 +43,33 @@ public interface IBusinessTemplateService extends IService<BusinessTemplate> {
      */
     boolean updateStateById(String templateid,Long sate);
 
+
+
+    /**
+     * 指定用户修改模板的状态
+     * @param user 用户
+     * @param templateid 模板id
+     * @param sate 模板状态: 1.未提交审批，2.提交审批，3.审批通过，4.审批未通过（提示修改）
+     */
+    boolean updateStateById(User user,String templateid,Long sate);
+
+
+    /**
+     * 根据id删除
+     * @param templateid
+     * @return
+     */
+    boolean deleteById(String templateid);
+
+    /**
+     * 指定用户根据id删除
+     * @param user
+     * @param templateid
+     * @return
+     */
+    boolean deleteById(User user,String templateid);
+
+
     /**
      * 通过userid得到列表
      * @param userid
@@ -59,13 +86,6 @@ public interface IBusinessTemplateService extends IService<BusinessTemplate> {
      * @return
      */
     Page<BusinessTemplateInfoDTO> getBusinessTemplateList(Integer currentPage, Integer pagesize, BusinessTemplateCondition condition);
-
-    /**
-     * 根据id删除
-     * @param templateid
-     * @return
-     */
-    boolean deleteById(String templateid);
 
 
 

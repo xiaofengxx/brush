@@ -1,5 +1,6 @@
 package site.zido.core;
 
+import org.aspectj.util.LangUtil;
 import site.zido.brush.utils.LangUtils;
 
 /**
@@ -69,4 +70,8 @@ public class LangConstants {
     public static final String IDCARD_CAN_NOT_BE_EMPTY = LangUtils.lang("IDCARD_CAN_NOT_BE_EMPTY");
 
     public static final String PLATFORM_IS_EXIST = LangUtils.lang("PLATFORM_IS_EXIST");
+
+    public static final String TMEPLATE_IS_NOT_EXIST = LangUtils.lang("TMEPLATE_IS_NOT_EXIST");
+
+    public static final String OPERATE_IS_NOT_EXIST = LangUtils.lang("OPERATE_IS_NOT_EXIST");
 }

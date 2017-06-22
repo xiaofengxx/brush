@@ -61,6 +61,8 @@ public class LangConstants {
 
     public static final String OPERATE_SUCCESS = LangUtils.lang("OPERATE_SUCCESS");
 
+    public static final String OPERATE_FAIL = LangUtils.lang("OPERATE_FAIL");
+
     public static final String USER_NOT_FOUNT = LangUtils.lang("USER_NOT_FOUNT");
 
     public static final String INTRODUCE_IS_INCORRECT = LangUtils.lang("INTRODUCE_IS_INCORRECT");
@@ -74,4 +76,6 @@ public class LangConstants {
     public static final String TMEPLATE_IS_NOT_EXIST = LangUtils.lang("TMEPLATE_IS_NOT_EXIST");
 
     public static final String OPERATE_IS_NOT_EXIST = LangUtils.lang("OPERATE_IS_NOT_EXIST");
+
+    public static final String TMEPLATE_CAN_NOT_OPERATE = LangUtils.lang("TMEPLATE_CAN_NOT_OPERATE");
 }

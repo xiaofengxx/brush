@@ -75,6 +75,7 @@ public class CenterController extends BaseController{
             return fail(LangConstants.OPERATE_FAIL);
         }
         String p1 = businessUserService.findAllBusinessNumber(admin.getAdPhonenumber());
+        String p2 = subscriberService.findSubUserByNumber(admin.getAdPhonenumber());
 
         //真实姓名不能为空
         if(admin.getAdName().isEmpty()){

@@ -99,4 +99,9 @@ public class SubscriberServiceImpl extends ServiceImpl<SubscriberUserMapper,Subs
         return subscriberUserMapper.findSubUserByCondition(introUser);
     }
 
+    @Override
+    public String findSubUserByNumber(String adPhonenumber) {
+        return subscriberUserMapper.findSubUserByNumber(adPhonenumber);
+    }
+
 }

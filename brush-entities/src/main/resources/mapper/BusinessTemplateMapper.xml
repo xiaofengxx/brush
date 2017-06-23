@@ -24,6 +24,7 @@
 		<result column="evaluation" property="evaluation" />
 		<result column="requirements" property="requirements" />
 		<result column="state" property="state" />
+		<result column="sort" property="sort" />
 	</resultMap>
 
 	<resultMap id="tempalteINFO" type="site.zido.dto.BusinessTemplateInfoDTO">
@@ -31,17 +32,18 @@
 		<association columnPrefix="bu_" property="businessUser" resultMap="site.zido.mapper.user.BusinessUserMapper.BaseResultMap"></association>
 		<association columnPrefix="bp_" property="platforms" resultMap="site.zido.mapper.user.PlatformsMapper.BaseResultMap"></association>
 		<association columnPrefix="us_" property="user" resultMap="site.zido.mapper.user.UserMapper.BaseResultMap"></association>
+		<association columnPrefix="bs_" property="shop" resultMap="site.zido.mapper.user.ShopMapper.BaseResultMap"></association>
 	</resultMap>
 
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, shop_id AS shopId, user_id AS userId, business_id AS businessId, product_img AS productImg, payment_type AS paymentType, template_tags AS templateTags, product_link AS productLink, product_style AS productStyle, product_original_price AS productOriginalPrice, product_present_price AS productPresentPrice, product_keywords AS productKeywords, ranking_way AS rankingWay, ranking_limit AS rankingLimit, region_limit AS regionLimit, price_limit AS priceLimit, browse_time AS browseTime, evaluation, requirements,state
+        id, shop_id AS shopId, user_id AS userId, business_id AS businessId, product_img AS productImg, payment_type AS paymentType, template_tags AS templateTags, product_link AS productLink, product_style AS productStyle, product_original_price AS productOriginalPrice, product_present_price AS productPresentPrice, product_keywords AS productKeywords, ranking_way AS rankingWay, ranking_limit AS rankingLimit, region_limit AS regionLimit, price_limit AS priceLimit, browse_time AS browseTime, evaluation, requirements,state,sort
     </sql>
 
 	<!--获取id中的最大值-->
-	<select id="selectmaxid" resultType="java.lang.String">
-	  	select max(id) from brush_business_template
+	<select id="selectmaxsort" resultType="java.lang.Long">
+	  	select max(sort) from brush_business_template
 	</select>
 
 	<select id="searchBusinessTemplateList" resultMap="tempalteINFO">
@@ -54,7 +56,12 @@
 
 		t1.username = AS us_username,
 
+		bs.shop_type AS bs_shop_type,
+		bs.id AS bs_id,
+		bs.shop_name AS bs_shop_name,
+
 		bt.id AS bt_id,
+		bt.sort AS bt_sort,
 		bt.product_style AS bt_product_style,
 		bt.product_keywords AS bt_product_keywords,
 		bt.template_tags AS bt_template_tags,
@@ -62,11 +69,16 @@
 		bt.create_time AS bt_create_time,
 		bt.state AS bt_state
 
+
 		FROM brush_user t1
 		INNER JOIN brush_business_template bt on bt.id = t1.id
 		INNER JOIN brush_business_user bu on  bu.user_id = t1.id
+		INNER JOIN brush_shop bs on bs.id = bt.shop_id
 		INNER JOIN brush_platforms bp on bp.id = bs.platform_id
 		<where>
+			<if test="condition.templateid != null">
+				AND bt.id = ${condition.templateid}
+			</if>
 			<if test="condition.userid != null">
 				AND t1.id = ${condition.userid}
 			</if>

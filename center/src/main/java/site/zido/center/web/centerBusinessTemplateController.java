@@ -70,4 +70,21 @@ public class centerBusinessTemplateController extends BaseController {
         return fail(LangConstants.OPERATE_FAIL);
     }
 
+    @PostMapping(value = "/selectone")
+    @ApiOperation(value = "得到一个模板详细信息")
+    public AjaxResult selectone(@RequestParam(value = "-1") Long templateid){
+
+        BusinessTemplateInfoDTO InfoDTOone = businessTemplateService.getBusinessTemplateInfoDTOone(templateid);
+
+        if(InfoDTOone == null){
+            return fail(LangConstants.TMEPLATE_IS_NOT_EXIST);
+        }else{
+            return successData(InfoDTOone);
+        }
+    }
+
+
+
+
+
 }

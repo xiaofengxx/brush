@@ -3,12 +3,17 @@ package site.zido.service.user.impl;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import org.apache.commons.collections.CollectionUtils;
+import org.springframework.transaction.annotation.Transactional;
+import site.zido.brush.utils.EntityUtils;
 import site.zido.dto.BusinessTemplateCondition;
 import site.zido.dto.BusinessTemplateInfoDTO;
 import site.zido.entity.BusinessTemplate;
 import org.springframework.stereotype.Service;
+import site.zido.entity.BusinessUser;
 import site.zido.entity.User;
 import site.zido.mapper.user.BusinessTemplateMapper;
+import site.zido.service.user.BusinessUserService;
 import site.zido.service.user.IBusinessTemplateService;
 
 import javax.annotation.Resource;
@@ -28,11 +33,34 @@ public class BusinessTemplateServiceImpl extends ServiceImpl<BusinessTemplateMap
     @Resource
     private BusinessTemplateMapper businessTemplateMapper;
 
+    @Resource
+    BusinessUserService businessUserService;
+
 
     @Override
-    public boolean userAddTemplate(User user, BusinessTemplate businessTemplate) {
-        if(user != null)
+    @Transactional
+    public synchronized boolean userAddTemplate(User user, BusinessTemplate businessTemplate) {
+        if(user != null){
             businessTemplate.setUserId(user.getId());
+        }else{
+            //设置用户id
+            businessTemplate.setUserId(user.getId());
+            //设置商家id
+            BusinessUser businessUser = businessUserService.selectByUserId(user.getId());
+            businessTemplate.setBusinessId(businessUser.getId());
+        }
+
+        //生成id
+        businessTemplate.setId(EntityUtils.generatorId());
+
+        // 生成 sort编号
+        Long selectmaxsort = businessTemplateMapper.selectmaxsort();
+        if(selectmaxsort ==null || selectmaxsort < 1000){
+            selectmaxsort = 10003L;
+        }
+        selectmaxsort++;
+        businessTemplate.setSort(selectmaxsort);
+
         return insert(businessTemplate);
     }
 
@@ -65,6 +93,32 @@ public class BusinessTemplateServiceImpl extends ServiceImpl<BusinessTemplateMap
     }
 
     @Override
+    public boolean updata(User user, BusinessTemplate template) {
+        //关键信息赋值,防止被修改
+        template.setSort(null);
+        template.setUserId(null);
+        template.setBusinessId(null);
+
+        boolean update = update(template, new EntityWrapper<BusinessTemplate>().where("id = {0}", template.getId()));
+
+        return update;
+    }
+
+    @Override
+    public BusinessTemplateInfoDTO getBusinessTemplateInfoDTOone(Long templateid) {
+
+        Page<BusinessTemplateInfoDTO> businessTemplateList = getBusinessTemplateList(1,
+                1,new BusinessTemplateCondition().setTemplateid(templateid));
+
+        //判断结果集
+        if(CollectionUtils.isEmpty(businessTemplateList.getRecords())){
+            return null;
+        }
+
+        return businessTemplateList.getRecords().get(0);
+    }
+
+    @Override
     public boolean deleteById(String templateid) {
         return deleteById(null,templateid);
     }
@@ -73,5 +127,6 @@ public class BusinessTemplateServiceImpl extends ServiceImpl<BusinessTemplateMap
     public boolean deleteById(User user, String templateid) {
         return delete(new EntityWrapper<BusinessTemplate>().where("id = {0}",templateid));
     }
+
 
 }

@@ -23,7 +23,7 @@ public interface BusinessTemplateMapper extends BaseMapper<BusinessTemplate> {
      * 获取最大的id
      * @return
      */
-    String selectmaxid();
+    Long selectmaxsort();
 
     /**
      * 那条件搜索结果

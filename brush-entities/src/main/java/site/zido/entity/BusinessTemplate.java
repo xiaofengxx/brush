@@ -110,6 +110,20 @@ public class BusinessTemplate extends Model<BusinessTemplate> {
 	 */
 	private Long state;
 
+	/**
+	 * 编号
+	 */
+	private Long sort;
+
+
+	public Long getSort() {
+		return sort;
+	}
+
+	public BusinessTemplate setSort(Long sort) {
+		this.sort = sort;
+		return this;
+	}
 
 	public Long getState() {
 		return state;

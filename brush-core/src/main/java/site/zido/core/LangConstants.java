@@ -82,4 +82,8 @@ public class LangConstants {
     public static final String USERORPWD_IS_WRONG = LangUtils.lang("USERORPWD_IS_WRONG");
 
     public static final String PNAME_CAN_NOT_BE_EMPTY = LangUtils.lang("PNAME_CAN_NOT_BE_EMPTY");
+
+    public static final String TEMPLATE_MSG_IS_NULL = LangUtils.lang("TEMPLATE_MSG_IS_NULL");
+
+    public static final String SHOP_IS_EXIST = LangUtils.lang("SHOP_IS_EXIST");
 }

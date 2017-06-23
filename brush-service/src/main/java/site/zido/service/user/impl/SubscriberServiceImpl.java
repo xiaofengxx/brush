@@ -100,8 +100,8 @@ public class SubscriberServiceImpl extends ServiceImpl<SubscriberUserMapper,Subs
     }
 
     @Override
-    public String findSubUserByNumber(String adPhonenumber) {
-        return subscriberUserMapper.findSubUserByNumber(adPhonenumber);
+    public String findSubUserByNumber(String adPhoneNumber) {
+        return subscriberUserMapper.findSubUserByNumber(adPhoneNumber);
     }
 
 }

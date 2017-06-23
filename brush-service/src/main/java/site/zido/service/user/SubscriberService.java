@@ -66,5 +66,5 @@ public interface SubscriberService extends IService<SubscriberUser> {
 
     List<SubscriberUser> findSubUserByCondition(String paramKey);
 
-    String findSubUserByNumber(String adPhonenumber);
+    String findSubUserByNumber(String adPhoneNumber);
 }

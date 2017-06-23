@@ -26,13 +26,18 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
     private AdminMapper adminMapper;
 
     @Override
-    public List<Admin> findAdminById(String id) {
-        return adminMapper.selectList(new EntityWrapper<Admin>().where("id = {0}", id));
+    public Admin findAdminById(String id) {
+        return adminMapper.findAdminById(id);
     }
 
     @Override
     @Transactional
     public void insertAdmin(Admin admin) {
         adminMapper.insert(admin);
+    }
+
+    @Override
+    public List<Admin> findAllAdminById(String id) {
+        return adminMapper.selectList(new EntityWrapper<Admin>().where("id = {0}", id));
     }
 }

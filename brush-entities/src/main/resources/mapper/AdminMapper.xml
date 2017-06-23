@@ -20,5 +20,8 @@
     <sql id="Base_Column_List">
         id, ad_name AS adName, ad_pname AS adPname, ad_age AS adAge, ad_sex AS adSex, ad_phone_number AS adPhoneNumber, ad_card AS adIdCard, ad_card_front_url AS adCardFrontUrl, ad_card_behind_url AS adCardBehindUrl, ad_state AS adState
     </sql>
+	<select id="findAdminById" resultType="site.zido.entity.Admin">
+		SELECT id FROM brush_admin WHERE id = #{id}
+	</select>
 
 </mapper>

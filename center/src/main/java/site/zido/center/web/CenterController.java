@@ -58,7 +58,7 @@ public class CenterController extends BaseController{
     @PostMapping(value = "/adminDetail")
     @ApiOperation("管理员信息")
     public AjaxResult detail(String id){
-        List<Admin> list = adminService.findAdminById(id);
+        List<Admin> list = adminService.findAllAdminById(id);
         if (list == null){
             return fail(LangConstants.USER_NOT_FOUNT);
         }
@@ -77,30 +77,24 @@ public class CenterController extends BaseController{
         String p1 = businessUserService.findBusinessNumber(admin.getAdPhoneNumber());
         String p2 = subscriberService.findSubUserByNumber(admin.getAdPhoneNumber());
 
-        //真实姓名不能为空
         if(admin.getAdName().isEmpty()){
             return fail(LangConstants.USER_REALNAME_CAN_NOT_BE_EMPTY);
         }
-        //姓名的拼音不能为空
         if(admin.getAdPname().isEmpty()){
             return fail(LangConstants.PNAME_CAN_NOT_BE_EMPTY);
         }
-        //身份证不能为空
         if(admin.getAdIdCard().isEmpty()){
             return fail(LangConstants.IDCARD_CAN_NOT_BE_EMPTY);
         }
-        //身份证正面不能为空
         if(admin.getAdCardFrontUrl().isEmpty()){
             return fail(LangConstants.IDCARDFRONTURL_CAN_NOT_BE_EMPTY);
         }
-        //身份证背面不能为空
         if(admin.getAdCardBehindUrl().isEmpty()){
             return fail(LangConstants.IDCARDBEHINDURL_CAN_NOT_BE_EMPTY);
         }
-        //电话不能为空不能重复
         if (admin.getAdPhoneNumber().isEmpty()){
             return fail(LangConstants.PHONENUMBER_CAN_NOT_BE_EMPTY);
-        }else if (p1 == admin.getAdPhoneNumber() || p2 == admin.getAdPhoneNumber()){
+        }else if (p1.equals(admin.getAdPhoneNumber()) || p2.equals(admin.getAdPhoneNumber())){
             return fail(LangConstants.PHONENUMBER_REPEAT);
         }
         if (admin.getAdSex() == null){
@@ -109,5 +103,12 @@ public class CenterController extends BaseController{
         admin.setAdState(0);
         adminService.insertAdmin(admin);
         return successData(admin);
+    }
+
+    @PostMapping(value = "/adminPass")
+    @ApiOperation("管理员信息通过")
+    public AjaxResult adminPass(String id){
+        Admin admin = adminService.findAdminById(id);
+        return null;
     }
 }

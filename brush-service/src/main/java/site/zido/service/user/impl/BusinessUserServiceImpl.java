@@ -127,8 +127,8 @@ public class BusinessUserServiceImpl extends ServiceImpl<BusinessUserMapper, Bus
     }
 
     @Override
-    public String findBusinessNumber(String adPhonenumber) {
-        return businessUserMapper.findBusinessNumber(adPhonenumber);
+    public String findBusinessNumber(String adPhoneNumber) {
+        return businessUserMapper.findBusinessNumber(adPhoneNumber);
     }
 
     @Override

@@ -51,4 +51,6 @@ public interface BusinessUserService extends IService<BusinessUser> {
     BusinessUser selectByNickname(String introduceName);
 
     boolean deleteBusinessUser(Long id);
+
+    String findAllBusinessNumber(String adPhonenumber);
 }

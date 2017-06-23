@@ -127,6 +127,12 @@ public class BusinessUserServiceImpl extends ServiceImpl<BusinessUserMapper, Bus
     }
 
     @Override
+    public String findAllBusinessNumber(String adPhonenumber) {
+        return businessUserMapper.findAllBusinessNumber(adPhonenumber);
+    }
+
+
+    @Override
     public BusinessUser selectByUserId(Long id) {
         return selectOne(new EntityWrapper<BusinessUser>().where("user_id = {0}", id));
     }

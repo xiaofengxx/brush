@@ -43,6 +43,14 @@
 	<select id="selectBySubUsername" resultType="site.zido.entity.User">
 		SELECT username FROM brush_user WHERE username = #{username}
 	</select>
+	<select id="findLonuserBynameAndPwd" resultType="site.zido.entity.User">
+		SELECT
+			username,password
+		FROM
+			brush_user
+		WHERE
+			username = #{username} and password = #{password}
+	</select>
 
 
 </mapper>

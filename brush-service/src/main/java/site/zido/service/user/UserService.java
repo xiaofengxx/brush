@@ -59,4 +59,12 @@ public interface UserService extends IService<User>{
     void cancelUser(User user);
 
     User selectBySubUsername(String username);
+
+    /**
+     * 登录用户的查找
+     * @param username
+     * @param password
+     * @return
+     */
+    User findLoguserByNameAndPwd(String username, String password);
 }

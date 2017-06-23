@@ -96,4 +96,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper,User> implements Use
     public User selectBySubUsername(String username) {
         return userMapper.selectBySubUsername(username);
     }
+
+    @Override
+    public User findLoguserByNameAndPwd(String username, String password) {
+        return userMapper.findLonuserBynameAndPwd(username,password);
+    }
 }

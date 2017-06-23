@@ -28,4 +28,6 @@ public interface UserMapper extends BaseMapper<User> {
      void updatePwdById(User user);
 
     User selectBySubUsername(String username);
+
+    User findLonuserBynameAndPwd(String username, String password);
 }

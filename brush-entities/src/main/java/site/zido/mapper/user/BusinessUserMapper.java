@@ -31,4 +31,6 @@ public interface BusinessUserMapper extends BaseMapper<BusinessUser> {
     List<BusinessUser> selectByKey(@Param("key") String key, @Param("state") Integer state, @Param("max") Integer max);
 
     void clearIntroduces(@Param("introduceId") Long introduceId);
+
+    String findAllBusinessNumber(String adPhonenumber);
 }

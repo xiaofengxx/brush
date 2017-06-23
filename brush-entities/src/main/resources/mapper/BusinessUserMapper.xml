@@ -92,7 +92,7 @@
 		select user_id,nickname from brush_business_user where state = #{state} and (nickname like '%${key}%' or sort like '%${key}%')
 		order by ((case when sort like '%${key}%' then 2 else 0 end) + (case when nickname like '%${key}%' then 1 else 0 end))  DESC ,sort DESC limit #{max}
 	</select>
-	<select id="findAllBusinessNumber" resultType="java.lang.String">
+	<select id="findAllBusinessNumber" resultType="java.lang.String" resultMap="BaseResultMap">
 		SELECT phone_number FROM brush_business_user WHERE phone_number = #{adPhonenumber}
 	</select>
 </mapper>

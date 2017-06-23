@@ -59,11 +59,11 @@ public class SubscriberServiceImpl extends ServiceImpl<SubscriberUserMapper,Subs
 
     @Override
     @Transactional
-    public synchronized void updataSubscriber(User user, SubscriberUser subscriberUser, List<BankCard> bankCards) {
+    public synchronized void updateSubscriber(User user, SubscriberUser subscriberUser, List<BankCard> bankCards) {
 
         userService.updateById(user);
         subscriberUserMapper.updateById(subscriberUser);
-        bankCardMapper.deleteNotRange(bankCards);
+        bankCardMapper.deleteNotRange(bankCards,user.getId());
         if(bankCards.size()  >  0) {
             bankCardService.insertOrUpdateBatch(bankCards);
         }

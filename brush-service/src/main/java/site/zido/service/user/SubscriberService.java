@@ -30,7 +30,7 @@ public interface SubscriberService extends IService<SubscriberUser> {
      * @param subscriberUser 刷手信息
      * @param bankCards 银行卡列表
      */
-    void updataSubscriber(User user, SubscriberUser subscriberUser,List<BankCard> bankCards);
+    void updateSubscriber(User user, SubscriberUser subscriberUser, List<BankCard> bankCards);
 
     /**
      * 通过userid查询

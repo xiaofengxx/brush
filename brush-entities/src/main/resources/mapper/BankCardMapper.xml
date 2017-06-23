@@ -29,7 +29,7 @@
 		<where>
 			<choose>
 				<when test="bankCards.size() > 0">
-					id not IN
+					and id not IN
 					<foreach collection="bankCards" separator="," item="card" open="(" close=")">
 						#{card}
 					</foreach>
@@ -38,6 +38,7 @@
 					id = '-21325435'
 				</otherwise>
 			</choose>
+			and user_id = #{userId}
 		</where>
 	</delete>
 

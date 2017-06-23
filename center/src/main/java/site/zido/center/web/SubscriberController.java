@@ -1,7 +1,6 @@
 package site.zido.center.web;
 
 import com.baomidou.mybatisplus.plugins.Page;
-import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.web.bind.annotation.*;
@@ -147,7 +146,7 @@ public class SubscriberController extends BaseController {
         if(isAdd){
             subscriberService.addSubscriber(user,subscriberUser,bankCards);
         }else{
-            subscriberService.updataSubscriber(user,subscriberUser,bankCards);
+            subscriberService.updateSubscriber(user,subscriberUser,bankCards);
         }
 
         return success(LangConstants.OPERATE_SUCCESS);

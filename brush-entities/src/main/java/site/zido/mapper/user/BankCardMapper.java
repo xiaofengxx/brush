@@ -16,5 +16,5 @@ import java.util.List;
 public interface BankCardMapper extends BaseMapper<BankCard> {
     Integer insertBatch(@Param("bankCards") List<BankCard> bankCards);
 
-    void deleteNotRange(@Param("bankCards") List<BankCard> bankCards);
+    void deleteNotRange(@Param("bankCards") List<BankCard> bankCards, @Param("userId") Long userId);
 }

@@ -157,7 +157,7 @@ public class BusinessUserServiceImpl extends ServiceImpl<BusinessUserMapper, Bus
     public synchronized void updateBusiness(User user, BusinessUser businessUser, List<BankCard> bankCards, List<Shop> shops) {
         userMapper.updateById(user);
         businessUserMapper.updateById(businessUser);
-        bankCardMapper.deleteNotRange(bankCards);
+        bankCardMapper.deleteNotRange(bankCards,user.getId());
         if (bankCards.size() > 0)
             bankCardService.insertOrUpdateBatch(bankCards);
         shopMapper.deleteNotRange(shops);

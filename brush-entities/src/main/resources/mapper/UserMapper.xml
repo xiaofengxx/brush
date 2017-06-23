@@ -40,6 +40,9 @@
 		from brush_user
 		INNER join brush_business_user on brush_business_user.user_id = brush_user.id
 	</select>
+	<select id="selectBySubUsername" resultType="site.zido.entity.User">
+		SELECT username FROM brush_user WHERE username = #{username}
+	</select>
 
 
 </mapper>

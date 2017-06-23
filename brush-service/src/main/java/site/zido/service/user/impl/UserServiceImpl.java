@@ -91,4 +91,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper,User> implements Use
     public void cancelUser(User user) {
         userMapper.updateUser(user);
     }
+
+    @Override
+    public User selectBySubUsername(String username) {
+        return userMapper.selectBySubUsername(username);
+    }
 }

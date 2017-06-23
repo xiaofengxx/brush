@@ -57,4 +57,6 @@ public interface UserService extends IService<User>{
      * @param user
      */
     void cancelUser(User user);
+
+    User selectBySubUsername(String username);
 }

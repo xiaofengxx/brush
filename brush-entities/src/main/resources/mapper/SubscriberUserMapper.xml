@@ -29,6 +29,7 @@
 		<result column="introduce_id" property="introduceId" />
 		<result column="career_id" property="careerId" />
 		<result column="age" property="age" />
+
 	</resultMap>
 
 	<resultMap id="SubscriberINFO" type="site.zido.dto.SubscriberUserInfoDTO">
@@ -96,6 +97,9 @@
 				</otherwise>
 			</choose>
 		</if>
+	</select>
+	<select id="findSubUserByCondition" parameterType="java.lang.String" resultMap="BaseResultMap">
+		SELECT phone_number,real_name FROM brush_subscriber_user WHERE phone_number LIKE '%${introUser}%' or real_name like '%${introUser}%'
 	</select>
 
 

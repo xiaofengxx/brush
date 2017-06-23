@@ -96,4 +96,9 @@ public class SubscriberServiceImpl extends ServiceImpl<SubscriberUserMapper,Subs
         return resultPage;
     }
 
+    @Override
+    public List<SubscriberUser> findSubUserByCondition(String introUser) {
+        return subscriberUserMapper.findSubUserByCondition(introUser);
+    }
+
 }

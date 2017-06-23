@@ -100,7 +100,14 @@ public class CenterController extends BaseController{
         //电话不能为空不能重复
         if (admin.getAdPhonenumber().isEmpty()){
             return fail(LangConstants.PHONENUMBER_CAN_NOT_BE_EMPTY);
+        }else if (p1 == admin.getAdPhonenumber() || p2 == admin.getAdPhonenumber()){
+            return fail(LangConstants.PHONENUMBER_REPEAT);
         }
-        return null;
+        if (admin.getAdSex() == null){
+            return fail(LangConstants.SEX_CAN_NOT_BE_EMPTY);
+        }
+        admin.setAdState(0);
+        adminService.insertAdmin(admin);
+        return successData(admin);
     }
 }

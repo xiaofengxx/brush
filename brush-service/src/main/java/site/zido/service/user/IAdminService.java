@@ -16,4 +16,6 @@ import java.util.List;
 public interface IAdminService extends IService<Admin> {
 
     List<Admin> findAdminById(String id);
+
+    void insertAdmin(Admin admin);
 }

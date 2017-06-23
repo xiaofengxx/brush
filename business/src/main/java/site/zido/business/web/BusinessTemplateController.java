@@ -1,16 +1,13 @@
 package site.zido.business.web;
 
-import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 import site.zido.core.LangConstants;
 import site.zido.core.common.base.BaseController;
 import site.zido.dto.AjaxResult;
 import site.zido.entity.BusinessTemplate;
-import site.zido.entity.BusinessUser;
 import site.zido.entity.Shop;
 import site.zido.entity.User;
-import site.zido.service.user.BusinessUserService;
 import site.zido.service.user.IBusinessTemplateService;
 import site.zido.service.user.ShopService;
 
@@ -26,9 +23,6 @@ public class BusinessTemplateController extends BaseController{
 
     @Resource
     private IBusinessTemplateService businessTemplateService;
-
-    @Resource
-    private BusinessUserService businessUserService;
 
     @Resource
     private ShopService shopService;
@@ -73,7 +67,7 @@ public class BusinessTemplateController extends BaseController{
         //数据正确验证
 
         /**
-         * 待完成
+         * 待完成 待确定必要参数
          */
 
         //判断店铺id是否正确 店铺所属人是否正确
@@ -81,10 +75,7 @@ public class BusinessTemplateController extends BaseController{
         if(byUserIdShopId == null){
             return fail(LangConstants.SHOP_IS_EXIST);
         }
-
-
-
-
+        
         //验证完毕
 
         //设置状态为未审核
@@ -125,6 +116,37 @@ public class BusinessTemplateController extends BaseController{
 
 
         if(b){
+            return success(LangConstants.OPERATE_SUCCESS);
+        }else{
+            return fail(LangConstants.OPERATE_FAIL);
+        }
+    }
+
+    @PostMapping(value = "/submittemplate")
+    @ApiOperation(value = "模板提交审核")
+    public AjaxResult SubmitTemplate(@RequestParam(defaultValue = "-1") String templateId){
+
+        User currentUser = getCurrentUser();
+
+        BusinessTemplate businessTemplate = businessTemplateService.selectById(templateId);
+
+        //判断模板存在 所属人
+
+        if(businessTemplate == null || !currentUser.getId().equals(businessTemplate.getUserId() )){
+            fail(LangConstants.TMEPLATE_IS_NOT_EXIST);
+        }
+
+        //判断模板当前状态是否能够提交审核
+
+        //模板状态: 1.未提交审批，2.提交审批，3.审批通过，4.审批未通过（提示修改）
+        if(!"1".equals(businessTemplate.getState())){
+            fail(LangConstants.TMEPLATE_CAN_NOT_OPERATE);
+        }
+
+        //提交审核(修改模板状态)
+        boolean b = businessTemplateService.updateStateById(templateId, 2L);
+
+        if(b) {
             return success(LangConstants.OPERATE_SUCCESS);
         }else{
             return fail(LangConstants.OPERATE_FAIL);

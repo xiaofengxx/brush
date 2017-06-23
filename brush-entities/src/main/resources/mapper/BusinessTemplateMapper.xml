@@ -69,6 +69,9 @@
 		INNER JOIN brush_business_user bu on  bu.user_id = t1.id
 		INNER JOIN brush_platforms bp on bp.id = bs.platform_id
 		<where>
+			<if test="condition.templateid != null">
+				AND bt.id = ${condition.templateid}
+			</if>
 			<if test="condition.userid != null">
 				AND t1.id = ${condition.userid}
 			</if>

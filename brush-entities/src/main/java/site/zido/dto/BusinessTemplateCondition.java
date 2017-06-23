@@ -1,6 +1,8 @@
 package site.zido.dto;
 
 import io.swagger.annotations.ApiModelProperty;
+import io.swagger.annotations.ApiOperation;
+import sun.invoke.util.VerifyAccess;
 
 import javax.xml.crypto.Data;
 import java.util.Date;
@@ -35,10 +37,32 @@ public class BusinessTemplateCondition {
 
     private Integer[] state;
 
+    @ApiModelProperty(value = "模板id")
+    private Long templateid;
+
     /**
      * 排序名
      */
     private String sortName = SORTS[0];
+
+
+    public String getSortName() {
+        return sortName;
+    }
+
+    public BusinessTemplateCondition setSortName(String sortName) {
+        this.sortName = sortName;
+        return this;
+    }
+
+    public Long getTemplateid() {
+        return templateid;
+    }
+
+    public BusinessTemplateCondition setTemplateid(Long templateid) {
+        this.templateid = templateid;
+        return this;
+    }
 
     public int getSort() {
         return sort;

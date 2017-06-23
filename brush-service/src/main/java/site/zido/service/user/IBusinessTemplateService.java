@@ -96,6 +96,13 @@ public interface IBusinessTemplateService extends IService<BusinessTemplate> {
      */
     boolean updata(User user,BusinessTemplate template);
 
+    /**
+     * 通过模板id得到模板的详细信息
+     * @param template
+     * @return
+     */
+    BusinessTemplateInfoDTO getBusinessTemplateInfoDTOone(Long template);
+
 
 
 }

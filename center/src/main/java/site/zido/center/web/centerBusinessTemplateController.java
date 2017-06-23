@@ -70,4 +70,7 @@ public class centerBusinessTemplateController extends BaseController {
         return fail(LangConstants.OPERATE_FAIL);
     }
 
+
+
+
 }

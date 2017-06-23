@@ -3,6 +3,7 @@ package site.zido.service.user.impl;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.transaction.annotation.Transactional;
 import site.zido.brush.utils.EntityUtils;
 import site.zido.dto.BusinessTemplateCondition;
@@ -34,8 +35,6 @@ public class BusinessTemplateServiceImpl extends ServiceImpl<BusinessTemplateMap
 
     @Resource
     BusinessUserService businessUserService;
-
-
 
 
     @Override
@@ -106,6 +105,20 @@ public class BusinessTemplateServiceImpl extends ServiceImpl<BusinessTemplateMap
     }
 
     @Override
+    public BusinessTemplateInfoDTO getBusinessTemplateInfoDTOone(Long templateid) {
+
+        Page<BusinessTemplateInfoDTO> businessTemplateList = getBusinessTemplateList(1,
+                1,new BusinessTemplateCondition().setTemplateid(templateid));
+
+        //判断结果集
+        if(CollectionUtils.isEmpty(businessTemplateList.getRecords())){
+            return null;
+        }
+
+        return businessTemplateList.getRecords().get(0);
+    }
+
+    @Override
     public boolean deleteById(String templateid) {
         return deleteById(null,templateid);
     }
@@ -114,5 +127,6 @@ public class BusinessTemplateServiceImpl extends ServiceImpl<BusinessTemplateMap
     public boolean deleteById(User user, String templateid) {
         return delete(new EntityWrapper<BusinessTemplate>().where("id = {0}",templateid));
     }
+
 
 }

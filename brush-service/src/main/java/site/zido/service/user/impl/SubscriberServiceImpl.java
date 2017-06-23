@@ -84,9 +84,7 @@ public class SubscriberServiceImpl extends ServiceImpl<SubscriberUserMapper,Subs
     @Override
     public List<SubscriberUser> selectByKey(String key, Integer max) {
 
-        List<SubscriberUser> subscriberUsers = subscriberUserMapper.selectByKey(key, 1, max);
-
-        return subscriberUsers;
+        return subscriberUserMapper.selectByKey(key, 1, max);
     }
 
     @Override

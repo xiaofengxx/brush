@@ -72,12 +72,11 @@ public class BusinessController extends BaseController {
             user.setUsername("");
         }
         //校验输入商家
-        if (!ValiDateUtils.isEmpty(businessUser.getIntroduceName())){
-            BusinessUser introducer = businessUserService.selectByUserId(businessUser.getId());
-            if (null == introducer)
+        if (!ValiDateUtils.isEmpty(businessUser.getIntroduceId())){
+            if (null == businessUserService.selectByUserId(businessUser.getIntroduceId()))
                 return fail(LangConstants.INTRODUCE_IS_INCORRECT);
-            businessUser.setIntroduceId(introducer.getUserId());
         }
+
 
         if (ValiDateUtils.isEmpty(businessUser.getPhoneNumber()))
             return fail(LangConstants.PHONENUMBER_CAN_NOT_BE_EMPTY);

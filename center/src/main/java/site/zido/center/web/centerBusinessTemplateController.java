@@ -33,7 +33,8 @@ public class centerBusinessTemplateController extends BaseController {
     @PostMapping(value = "/searchList")
     @ApiOperation(value = "多条件搜索")
     public AjaxResult searchTemplateList(@RequestParam(defaultValue = "1") Integer currentPage,
-                                         @RequestParam(defaultValue = "0") Integer level,@RequestBody BusinessTemplateCondition condition){
+                                         @RequestParam(defaultValue = "0") Integer level,
+                                         @RequestBody BusinessTemplateCondition condition){
 
         Page<BusinessTemplateInfoDTO> businessTemplateList = businessTemplateService.
                 getBusinessTemplateList(currentPage, constants.getPageSize(level), condition);

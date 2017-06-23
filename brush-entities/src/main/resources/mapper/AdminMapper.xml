@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="site.zido.mapper.user.AdminMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="site.zido.entity.Admin">
+		<id column="id" property="id" />
+		<result column="ad_name" property="adName" />
+		<result column="ad_pname" property="adPname" />
+		<result column="ad_age" property="adAge" />
+		<result column="ad_sex" property="adSex" />
+		<result column="ad_phonenumber" property="adPhonenumber" />
+		<result column="ad_idcard" property="adIdcard" />
+		<result column="ad_card_front_url" property="adCardFrontUrl" />
+		<result column="ad_card_behind_url" property="adCardBehindUrl" />
+		<result column="ad_state" property="adState" />
+	</resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, ad_name AS adName, ad_pname AS adPname, ad_age AS adAge, ad_sex AS adSex, ad_phonenumber AS adPhonenumber, ad_idcard AS adIdcard, ad_card_front_url AS adCardFrontUrl, ad_card_behind_url AS adCardBehindUrl, ad_state AS adState
+    </sql>
+
+</mapper>

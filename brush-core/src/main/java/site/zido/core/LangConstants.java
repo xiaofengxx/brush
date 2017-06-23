@@ -78,4 +78,6 @@ public class LangConstants {
     public static final String OPERATE_IS_NOT_EXIST = LangUtils.lang("OPERATE_IS_NOT_EXIST");
 
     public static final String TMEPLATE_CAN_NOT_OPERATE = LangUtils.lang("TMEPLATE_CAN_NOT_OPERATE");
+
+    public static final String USERORPWD_IS_WRONG = LangUtils.lang("USERORPWD_IS_WRONG");
 }

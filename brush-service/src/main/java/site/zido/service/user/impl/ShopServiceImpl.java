@@ -24,4 +24,10 @@ public class ShopServiceImpl extends ServiceImpl<ShopMapper,Shop> implements Sho
     public List<Shop> getByUserId(Long id) {
         return shopMapper.selectList(new EntityWrapper<Shop>().where("user_id = {0}",id));
     }
+
+
+    @Override
+    public Shop getByUserIdShopId(Long userid, Long shopid) {
+        return shopMapper.selectOne(new Shop().setId(shopid).setUserId(userid));
+    }
 }

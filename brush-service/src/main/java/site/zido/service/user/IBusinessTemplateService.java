@@ -88,5 +88,14 @@ public interface IBusinessTemplateService extends IService<BusinessTemplate> {
     Page<BusinessTemplateInfoDTO> getBusinessTemplateList(Integer currentPage, Integer pagesize, BusinessTemplateCondition condition);
 
 
+    /**
+     * 根据用户信息更新
+     * @param user
+     * @param template
+     * @return
+     */
+    boolean updata(User user,BusinessTemplate template);
+
+
 
 }

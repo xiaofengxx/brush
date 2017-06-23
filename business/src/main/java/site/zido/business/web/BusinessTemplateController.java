@@ -1,13 +1,18 @@
 package site.zido.business.web;
 
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 import site.zido.core.LangConstants;
 import site.zido.core.common.base.BaseController;
 import site.zido.dto.AjaxResult;
 import site.zido.entity.BusinessTemplate;
+import site.zido.entity.BusinessUser;
+import site.zido.entity.Shop;
 import site.zido.entity.User;
+import site.zido.service.user.BusinessUserService;
 import site.zido.service.user.IBusinessTemplateService;
+import site.zido.service.user.ShopService;
 
 import javax.annotation.Resource;
 
@@ -22,40 +27,76 @@ public class BusinessTemplateController extends BaseController{
     @Resource
     private IBusinessTemplateService businessTemplateService;
 
-    @PostMapping(value = "/insert")
-    @ApiOperation(value = "添加模板")
-    public AjaxResult insert(@RequestBody BusinessTemplate template){
+    @Resource
+    private BusinessUserService businessUserService;
+
+    @Resource
+    private ShopService shopService;
+
+    @PostMapping(value = "/addedit")
+    @ApiOperation(value = "添加/修改-自己的-模板")
+    public AjaxResult addedit(@RequestBody BusinessTemplate template){
+
+
         User currentUser = getCurrentUser();
 
 
-        template.setUserId(currentUser.getId());
-        template.setState(0L);
+        if(template == null){
+            fail(LangConstants.TEMPLATE_MSG_IS_NULL);
+        }
+
+        boolean isadd = false;
+
+        Long templateid = template.getId();
+
+        //根据有无id判断是否为新增
+        if(templateid == null){
+            isadd = true;
+        }else{
+            //关键数据使用数据库中的数据 如 state ,userid ,businessid ,sort
+            BusinessTemplate businessTemplate = businessTemplateService.selectById(templateid);
+
+            //判断模板的所属人
+            if(businessTemplate.getUserId() != currentUser.getId()){
+                fail(LangConstants.TMEPLATE_IS_NOT_EXIST);
+            }
+
+            //判断模板所处的状态能否修改
+            Long state = businessTemplate.getState();
+
+            //模板状态: 1.未提交审批，2.提交审批，3.审批通过，4.审批未通过（提示修改）
+            if(state == 2 || state == 3){
+                return fail(LangConstants.TMEPLATE_CAN_NOT_OPERATE);
+            }
+        }
+
         //数据正确验证
 
+        /**
+         * 待完成
+         */
 
-
-
-
-
-
-
-
-
-
-
+        //判断店铺id是否正确 店铺所属人是否正确
+        Shop byUserIdShopId = shopService.getByUserIdShopId(currentUser.getId(), template.getShopId());
+        if(byUserIdShopId == null){
+            return fail(LangConstants.SHOP_IS_EXIST);
+        }
 
 
 
 
         //验证完毕
 
+        //设置状态为未审核
+        template.setState(0L);
 
-        boolean insert = businessTemplateService.insert(template);
-        if(insert){
-            return success(LangConstants.OPERATE_SUCCESS);
+        if(isadd){
+            businessTemplateService.userAddTemplate(currentUser,template);
         }else{
-            return fail(LangConstants.OPERATE_FAIL);
+            businessTemplateService.updata(currentUser,template);
         }
+
+        return success(LangConstants.OPERATE_SUCCESS);
     }
 
     @PostMapping(value = "/delete")

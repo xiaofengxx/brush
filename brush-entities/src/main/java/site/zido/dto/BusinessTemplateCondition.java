@@ -13,7 +13,7 @@ public class BusinessTemplateCondition {
     /**
      * 排序条件
      */
-    public static String[] SORTS = {"id","create_time","payment_type","product_original_price","product_present_price"};
+    public static String[] SORTS = {"bt.sort","bt.create_time","payment_type","product_original_price","product_present_price"};
 
     @ApiModelProperty(value = "排序条件: 0:编号,1:创建时间,2:付款条件,3:原价,4:改价")
     private int sort;

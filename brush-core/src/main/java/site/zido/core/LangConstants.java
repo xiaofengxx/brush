@@ -78,4 +78,8 @@ public class LangConstants {
     public static final String OPERATE_IS_NOT_EXIST = LangUtils.lang("OPERATE_IS_NOT_EXIST");
 
     public static final String TMEPLATE_CAN_NOT_OPERATE = LangUtils.lang("TMEPLATE_CAN_NOT_OPERATE");
+
+    public static final String TEMPLATE_MSG_IS_NULL = LangUtils.lang("TEMPLATE_MSG_IS_NULL");
+
+    public static final String SHOP_IS_EXIST = LangUtils.lang("SHOP_IS_EXIST");
 }

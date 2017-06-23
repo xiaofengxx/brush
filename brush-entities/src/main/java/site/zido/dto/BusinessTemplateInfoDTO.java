@@ -16,6 +16,17 @@ public class BusinessTemplateInfoDTO {
 
     private Platforms platforms;
 
+    private Shop shop;
+
+    public Shop getShop() {
+        return shop;
+    }
+
+    public BusinessTemplateInfoDTO setShop(Shop shop) {
+        this.shop = shop;
+        return this;
+    }
+
     public Platforms getPlatforms() {
         return platforms;
     }

@@ -32,6 +32,7 @@
 		<association columnPrefix="bu_" property="businessUser" resultMap="site.zido.mapper.user.BusinessUserMapper.BaseResultMap"></association>
 		<association columnPrefix="bp_" property="platforms" resultMap="site.zido.mapper.user.PlatformsMapper.BaseResultMap"></association>
 		<association columnPrefix="us_" property="user" resultMap="site.zido.mapper.user.UserMapper.BaseResultMap"></association>
+		<association columnPrefix="bs_" property="shop" resultMap="site.zido.mapper.user.ShopMapper.BaseResultMap"></association>
 	</resultMap>
 
 
@@ -55,6 +56,10 @@
 
 		t1.username = AS us_username,
 
+		bs.shop_type AS bs_shop_type,
+		bs.id AS bs_id,
+		bs.shop_name AS bs_shop_name,
+
 		bt.id AS bt_id,
 		bt.sort AS bt_sort,
 		bt.product_style AS bt_product_style,
@@ -64,9 +69,11 @@
 		bt.create_time AS bt_create_time,
 		bt.state AS bt_state
 
+
 		FROM brush_user t1
 		INNER JOIN brush_business_template bt on bt.id = t1.id
 		INNER JOIN brush_business_user bu on  bu.user_id = t1.id
+		INNER JOIN brush_shop bs on bs.id = bt.shop_id
 		INNER JOIN brush_platforms bp on bp.id = bs.platform_id
 		<where>
 			<if test="condition.templateid != null">

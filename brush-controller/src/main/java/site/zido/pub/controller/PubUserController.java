@@ -12,13 +12,14 @@ import site.zido.entity.User;
 import site.zido.service.user.UserService;
 
 import javax.annotation.Resource;
+import javax.servlet.ServletRequest;
 
 /**
  * Created by CDDC on 2017/6/23.
  */
 @RestController
 @RequestMapping(value = "/pubbase")
-public class PubBaseController extends BaseController {
+public class PubUserController extends BaseController {
 
     @Resource
     private UserService userService;

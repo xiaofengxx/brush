@@ -74,8 +74,8 @@ public class CenterController extends BaseController{
         if (admin == null){
             return fail(LangConstants.OPERATE_FAIL);
         }
-        String p1 = businessUserService.findAllBusinessNumber(admin.getAdPhonenumber());
-        String p2 = subscriberService.findSubUserByNumber(admin.getAdPhonenumber());
+        String p1 = businessUserService.findBusinessNumber(admin.getAdPhoneNumber());
+        String p2 = subscriberService.findSubUserByNumber(admin.getAdPhoneNumber());
 
         //真实姓名不能为空
         if(admin.getAdName().isEmpty()){
@@ -86,7 +86,7 @@ public class CenterController extends BaseController{
             return fail(LangConstants.PNAME_CAN_NOT_BE_EMPTY);
         }
         //身份证不能为空
-        if(admin.getAdIdcard().isEmpty()){
+        if(admin.getAdIdCard().isEmpty()){
             return fail(LangConstants.IDCARD_CAN_NOT_BE_EMPTY);
         }
         //身份证正面不能为空
@@ -98,9 +98,9 @@ public class CenterController extends BaseController{
             return fail(LangConstants.IDCARDBEHINDURL_CAN_NOT_BE_EMPTY);
         }
         //电话不能为空不能重复
-        if (admin.getAdPhonenumber().isEmpty()){
+        if (admin.getAdPhoneNumber().isEmpty()){
             return fail(LangConstants.PHONENUMBER_CAN_NOT_BE_EMPTY);
-        }else if (p1 == admin.getAdPhonenumber() || p2 == admin.getAdPhonenumber()){
+        }else if (p1 == admin.getAdPhoneNumber() || p2 == admin.getAdPhoneNumber()){
             return fail(LangConstants.PHONENUMBER_REPEAT);
         }
         if (admin.getAdSex() == null){

@@ -32,5 +32,5 @@ public interface BusinessUserMapper extends BaseMapper<BusinessUser> {
 
     void clearIntroduces(@Param("introduceId") Long introduceId);
 
-    String findAllBusinessNumber(String adPhonenumber);
+    String findBusinessNumber(@Param("adPhoneNumber")String adPhoneNumber);
 }

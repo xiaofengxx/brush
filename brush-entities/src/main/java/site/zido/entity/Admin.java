@@ -45,13 +45,13 @@ public class Admin extends Model<Admin> {
     /**
      * 管理员电话
      */
-	@TableField("ad_phonenumber")
-	private String adPhonenumber;
+	@TableField("ad_phone_number")
+	private String adPhoneNumber;
     /**
      * 管理员身份证
      */
-	@TableField("ad_idcard")
-	private String adIdcard;
+	@TableField("ad_card")
+	private String adIdCard;
 	@TableField("ad_card_front_url")
 	private String adCardFrontUrl;
 	@TableField("ad_card_behind_url")
@@ -100,20 +100,20 @@ public class Admin extends Model<Admin> {
 		this.adSex = adSex;
 	}
 
-	public String getAdPhonenumber() {
-		return adPhonenumber;
+	public String getAdPhoneNumber() {
+		return adPhoneNumber;
 	}
 
-	public void setAdPhonenumber(String adPhonenumber) {
-		this.adPhonenumber = adPhonenumber;
+	public void setAdPhoneNumber(String adPhoneNumber) {
+		this.adPhoneNumber = adPhoneNumber;
 	}
 
-	public String getAdIdcard() {
-		return adIdcard;
+	public String getAdIdCard() {
+		return adIdCard;
 	}
 
-	public void setAdIdcard(String adIdcard) {
-		this.adIdcard = adIdcard;
+	public void setAdIdCard(String adIdcard) {
+		this.adIdCard = adIdCard;
 	}
 
 	public String getAdCardFrontUrl() {

@@ -28,5 +28,5 @@ public interface SubscriberUserMapper extends BaseMapper<SubscriberUser> {
 
     List<SubscriberUser> findSubUserByCondition(@Param("introUser") String introUser);
 
-    String findSubUserByNumber(String adPhonenumber);
+    String findSubUserByNumber(@Param("adPhoneNumber") String adPhoneNumber);
 }

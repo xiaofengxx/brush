@@ -20,4 +20,6 @@ public interface IAdminService extends IService<Admin> {
     void insertAdmin(Admin admin);
 
     List<Admin> findAllAdminById(String id);
+
+    void updateState(String id);
 }

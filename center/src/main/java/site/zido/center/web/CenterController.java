@@ -10,8 +10,6 @@ import site.zido.core.common.base.BaseController;
 import site.zido.dto.AdminWithInfoDTO;
 import site.zido.dto.AjaxResult;
 import site.zido.entity.Admin;
-import site.zido.entity.BusinessUser;
-import site.zido.entity.SubscriberUser;
 import site.zido.entity.User;
 import site.zido.service.user.BusinessUserService;
 import site.zido.service.user.IAdminService;
@@ -20,7 +18,6 @@ import site.zido.service.user.UserService;
 
 import javax.annotation.Resource;
 import java.util.List;
-import java.util.ListIterator;
 
 /**
  * Created by CDDC on 2017/6/13.
@@ -109,6 +106,9 @@ public class CenterController extends BaseController{
     @ApiOperation("管理员信息通过")
     public AjaxResult adminPass(String id){
         Admin admin = adminService.findAdminById(id);
-        return null;
+        if(admin != null){
+            adminService.updateState(id);
+        }
+        return fail(LangConstants.USER_NOT_FOUNT);
     }
 }

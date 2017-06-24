@@ -23,16 +23,17 @@
         DELETE from brush_shop
         <where>
             <choose>
-                <when test="bankCards.size() > 0">
-                    id not IN
+                <when test="shops.size() > 0">
+                    and id not IN
                     <foreach collection="shops" separator="," item="shop" open="(" close=")">
-                        #{shop}
+                        #{shop.id}
                     </foreach>
                 </when>
                 <otherwise>
                     id = '-21325435'
                 </otherwise>
             </choose>
+            and user_id = #{userId}
         </where>
     </delete>
 </mapper>

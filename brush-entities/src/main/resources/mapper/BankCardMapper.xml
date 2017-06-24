@@ -31,7 +31,7 @@
 				<when test="bankCards.size() > 0">
 					and id not IN
 					<foreach collection="bankCards" separator="," item="card" open="(" close=")">
-						#{card}
+						#{card.id}
 					</foreach>
 				</when>
 				<otherwise>

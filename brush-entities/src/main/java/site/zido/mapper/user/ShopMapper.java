@@ -16,5 +16,5 @@ import java.util.List;
 public interface ShopMapper extends BaseMapper<Shop> {
     void insertBatch(List<Shop> shops);
 
-    void deleteNotRange(@Param("shops") List<Shop> shops);
+    void deleteNotRange(@Param("shops") List<Shop> shops, @Param("userId") Long userId);
 }

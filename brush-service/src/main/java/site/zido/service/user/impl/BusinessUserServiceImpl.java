@@ -159,7 +159,7 @@ public class BusinessUserServiceImpl extends ServiceImpl<BusinessUserMapper, Bus
         bankCardMapper.deleteNotRange(bankCards,user.getId());
         if (bankCards.size() > 0)
             bankCardService.insertOrUpdateBatch(bankCards);
-        shopMapper.deleteNotRange(shops);
+        shopMapper.deleteNotRange(shops,user.getId());
         if (shops.size() > 0)
             shopService.insertOrUpdateBatch(shops);
     }

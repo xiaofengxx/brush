@@ -97,8 +97,8 @@
 			<if test="condition.keywords != null">
 				and (bs.nickname LIKE '%${condition.keywords}%' or bs.real_name like '%${condition.keywords}%')
 			</if>
-			<if test="condition.phonenumber != null">
-				and bs.phone_number LIKE '%${condition.phonenumber}%'
+			<if test="condition.phoneNumber != null">
+				and bs.phone_number LIKE '%${condition.phoneNumber}%'
 			</if>
 			<if test="condition.stime != null and condition.etime !=null">
 				and (bs.creat_time &gt; #{condition.stime} and bs.creat_time &lt; #{condition.etime})

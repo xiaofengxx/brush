@@ -20,7 +20,7 @@ public class SubscriberCondition {
     private Integer sort;
 
     @ApiModelProperty(value = "电话号码")
-    private String phonenumber;
+    private String phoneNumber;
 
     @ApiModelProperty(value = "关键字")
     private String keywords;
@@ -75,12 +75,12 @@ public class SubscriberCondition {
         return this;
     }
 
-    public String getPhonenumber() {
-        return phonenumber;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public SubscriberCondition setPhonenumber(String phonenumber) {
-        this.phonenumber = phonenumber;
+    public SubscriberCondition setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
         return this;
     }
 
@@ -99,6 +99,15 @@ public class SubscriberCondition {
 
     public SubscriberCondition setSortName(String sortName) {
         this.sortName = sortName;
+        return this;
+    }
+
+    public String getKeywords() {
+        return keywords;
+    }
+
+    public SubscriberCondition setKeywords(String keywords) {
+        this.keywords = keywords;
         return this;
     }
 }

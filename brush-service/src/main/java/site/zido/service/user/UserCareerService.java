@@ -18,4 +18,10 @@ public interface UserCareerService extends IService<UserCareer> {
      */
     void deleteNotRange(String userid,List<UserCareer> careers);
 
+    /**
+     * 通过用户ID查询
+     * @param userid
+     * @return
+     */
+    List<UserCareer> selectByUserId(Long userid);
 }

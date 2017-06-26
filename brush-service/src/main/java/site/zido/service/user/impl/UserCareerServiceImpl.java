@@ -1,5 +1,6 @@
 package site.zido.service.user.impl;
 
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
@@ -27,5 +28,12 @@ public class UserCareerServiceImpl extends ServiceImpl<UserCareerMapper,UserCare
             return ;
         }
         userCareerMapper.deleteNotRange(userid,careers);
+    }
+
+    @Override
+    public List<UserCareer> selectByUserId(Long userid) {
+
+        List<UserCareer> userCareers = selectList(new EntityWrapper<UserCareer>().where("user_id", userid));
+        return userCareers;
     }
 }

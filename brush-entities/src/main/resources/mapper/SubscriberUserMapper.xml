@@ -87,7 +87,8 @@
 		bs.delivery_address AS bs_delivery_address,
 		bs.taobao_screen_shot_url AS bs_taobao_screen_shot_url,
 		bs.wechat_QR_code AS bs_wechat_QR_code,
-		bs.remarks AS bs_remarks
+		bs.remarks AS bs_remarks,
+		bs.user_id AS bs_user_id
 
 		FROM brush_user t1
 		INNER JOIN brush_subscriber_user bs on t1.id = bs.user_id

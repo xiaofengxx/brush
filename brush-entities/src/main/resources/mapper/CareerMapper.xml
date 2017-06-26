@@ -12,5 +12,12 @@
     <sql id="Base_Column_List">
         id, name
     </sql>
+	
+	<select id="selectByUserId" resultMap="BaseResultMap">
+		SELECT bc.*
+		from brush_career bc
+		INNER JOIN brush_user_career buc on buc.career_id = bc.id
+		WHERE buc.user_id = #{userid}
+	</select>
 
 </mapper>

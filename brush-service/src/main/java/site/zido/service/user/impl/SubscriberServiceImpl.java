@@ -13,10 +13,7 @@ import site.zido.mapper.user.BankCardMapper;
 import site.zido.mapper.user.CareerMapper;
 import site.zido.mapper.user.SubscriberUserMapper;
 import site.zido.mapper.user.UserMapper;
-import site.zido.service.user.BankCardService;
-import site.zido.service.user.SubscriberService;
-import site.zido.service.user.UserCareerService;
-import site.zido.service.user.UserService;
+import site.zido.service.user.*;
 
 import javax.annotation.Resource;
 import java.text.ParseException;
@@ -32,15 +29,16 @@ public class SubscriberServiceImpl extends ServiceImpl<SubscriberUserMapper,Subs
     @Resource
     private UserMapper userMapper;
     @Resource
-    private CareerMapper careerMapper;
-    @Resource
     private BankCardMapper bankCardMapper;
-    @Resource
-    private BankCardService bankCardService;
     @Resource
     private UserService userService;
     @Resource
+    private BankCardService bankCardService;
+    @Resource
     private UserCareerService userCareerService;
+
+    @Resource
+    private ICareerService careerService;
 
     @Override
     @Transactional
@@ -91,6 +89,28 @@ public class SubscriberServiceImpl extends ServiceImpl<SubscriberUserMapper,Subs
     public Page<SubscriberUserInfoDTO> searchSubscriberList(Integer current, Integer pagesize, SubscriberCondition condition) {
         Page<SubscriberUserInfoDTO> resultPage = new Page<>(current,pagesize);
         resultPage.setRecords(subscriberUserMapper.searchSubscriberList(condition));
+
+        List<SubscriberUserInfoDTO> records = resultPage.getRecords();
+
+
+        for(SubscriberUserInfoDTO infoDTO : records){
+
+            Long userId = infoDTO.getSubscriberUser().getUserId();
+
+            //查询银行卡
+            List<BankCard> bankCards = bankCardService.getByUserId(userId);
+
+            infoDTO.setBankCards(bankCards);
+
+            //获取职业列表
+            List<Career> careers = careerService.selectByUserId(userId);
+            infoDTO.getSubscriberUser().setCareer(careers);
+
+        }
+
+
+
+
         return resultPage;
     }
 

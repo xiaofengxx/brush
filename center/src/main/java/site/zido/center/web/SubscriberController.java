@@ -15,8 +15,7 @@ import site.zido.dto.SubscriberUserInfoDTO;
 import site.zido.core.common.base.BaseController;
 import site.zido.dto.AjaxResult;
 import site.zido.entity.*;
-import site.zido.service.user.SubscriberService;
-import site.zido.service.user.UserService;
+import site.zido.service.user.*;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -36,6 +35,8 @@ public class SubscriberController extends BaseController {
     private SubscriberService subscriberService;
     @Resource
     private BrushConstants constants;
+
+
 
     /**
      * 添加刷手
@@ -226,6 +227,7 @@ public class SubscriberController extends BaseController {
         }
 
         Page<SubscriberUserInfoDTO> subscriberUserInfoDTOPage = subscriberService.searchSubscriberList(currentPage, constants.getPageSize(level), condition);
+
 
         return successData(subscriberUserInfoDTOPage);
     }

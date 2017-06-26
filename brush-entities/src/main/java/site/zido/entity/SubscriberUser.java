@@ -136,7 +136,21 @@ public class SubscriberUser extends Model<SubscriberUser> {
 	@TableField(exist = false)
 	private int age;
 
+	/**
+	 * 介绍人姓名
+	 */
+	@TableField(exist = false)
+	private String introduceName;
 
+
+	public String getIntroduceName() {
+		return introduceName;
+	}
+
+	public SubscriberUser setIntroduceName(String introduceName) {
+		this.introduceName = introduceName;
+		return this;
+	}
 
 	public Integer getCareerId() {
 		return careerId;

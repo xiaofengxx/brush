@@ -65,12 +65,13 @@
 		bs.career_id AS bs_career_id,
 		bs.creat_time AS bs_creat_time,
 		bs.introduce_id AS bs_introduce_id,
-		bs.taobao_star AS bs_taobao_star
-
+		bs.taobao_star AS bs_taobao_star,
+		bs1.nickname AS bs_nickname
 
 		FROM brush_user t1
 		INNER JOIN brush_subscriber_user bs on t1.id = bs.user_id
 		INNER JOIN brush_career ca on ca.id = bs.career_id
+		INNER JOIN brush_subscriber_user bs1 on bs.introduce_id = bs1.user_id
 		<where>
 			<if test="condition.phonenumber != null">
 				and bs.phone_number LIKE '%${condition.phonenumber}%'

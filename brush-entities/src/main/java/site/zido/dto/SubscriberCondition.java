@@ -22,6 +22,9 @@ public class SubscriberCondition {
     @ApiModelProperty(value = "电话号码")
     private String phonenumber;
 
+    @ApiModelProperty(value = "关键字")
+    private String keywords;
+
     @ApiModelProperty(value = "开始时间")
     private Date stime;
 

@@ -94,6 +94,9 @@
 		INNER JOIN brush_subscriber_user bs on t1.id = bs.user_id
 		INNER JOIN brush_subscriber_user bs1 on bs.introduce_id = bs1.user_id
 		<where>
+			<if test="condition.keywords != null">
+				and (bs.nickname LIKE '%${condition.keywords}%' or bs.real_name like '%${condition.keywords}%')
+			</if>
 			<if test="condition.phonenumber != null">
 				and bs.phone_number LIKE '%${condition.phonenumber}%'
 			</if>

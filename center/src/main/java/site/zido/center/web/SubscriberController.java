@@ -164,9 +164,9 @@ public class SubscriberController extends BaseController {
         }
 
         if(isAdd){
-            subscriberService.addSubscriber(user,subscriberUser,bankCards);
+            subscriberService.addSubscriber(user,subscriberUser,bankCards,userCareers);
         }else{
-            subscriberService.updateSubscriber(user,subscriberUser,bankCards);
+            subscriberService.updateSubscriber(user,subscriberUser,bankCards,userCareers);
         }
 
         return success(LangConstants.OPERATE_SUCCESS);

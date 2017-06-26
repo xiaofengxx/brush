@@ -29,6 +29,12 @@
 		<result column="introduce_id" property="introduceId" />
 		<result column="career_id" property="careerId" />
 		<result column="age" property="age" />
+		<result column="consumption_level" property="consumptionLevel" />
+		<result column="delivery_address" property="deliveryAddress" />
+		<result column="taobao_screen_shot_url" property="taobaoScreenShotUrl" />
+		<result column="wechat_qr_code" property="wechatQRCode" />
+		<result column="remarks" property="remarks" />
+		<!--表中没有的字段-->
 		<result column="introduceName" property="introduceName" />
 	</resultMap>
 
@@ -55,23 +61,39 @@
 		ca.id AS  ca_id,
 		ca.name AS ca_name,
 
+
 		t1.id AS bu_id,
 		t1.enabled AS bu_enabled,
 
 		bs.id AS bs_id,
 		bs.phone_number AS bs_phone_number,
-		bs.state AS bs_state,
+		bs.id_card_front_url AS bs_id_card_front_url,
+		bs.id_card_behind_url AS bs_id_card_behind_url,
+		bs.id_card AS bs_id_card,
 		bs.real_name AS bs_real_name,
-		bs.nickname AS bs_nickname,
-		bs.age AS bs_age,
-		bs.birth_day AS bs_birth_day,
+		bs.avatar AS bs_avatar,
 		bs.ali_pay AS bs_ali_pay,
 		bs.ali_tm AS bs_ali_tm,
-		bs.career_id AS bs_career_id,
-		bs.creat_time AS bs_creat_time,
-		bs.introduce_id AS bs_introduce_id,
+		bs.wechat AS bs_wechat,
 		bs.taobao_star AS bs_taobao_star,
-		bs1.nickname AS bs_introduceName
+		bs.sex AS bs_sex,
+		bs.birth_day AS bs_birth_day,
+		bs.qq AS bs_qq,
+		bs.brushed AS bs_brushed,
+		bs.recommand_screen_shot_url AS bs_recommand_screen_shot_url,
+		bs.star_screen_shot_url AS bs_star_screen_shot_url,
+		bs.ali_pay_screen_shot_url AS bs_ali_pay_screen_shot_url,
+		bs.state AS bs_state,
+		bs.creat_time AS bs_creat_time,
+		bs.nickname AS bs_nickname,
+		bs.introduce_id AS bs_introduce_id,
+		bs1.nickname AS bs_introduceName,
+		bs.age AS bs_age,
+		bs.consumption_level AS bs_consumption_level,
+		bs.delivery_address AS bs_delivery_address,
+		bs.taobao_screen_shot_url AS bs_taobao_screen_shot_url,
+		bs.wechat_QR_code AS bs_wechat_QR_code,
+		bs.remarks AS bs_remarks
 
 		FROM brush_user t1
 		INNER JOIN brush_subscriber_user bs on t1.id = bs.user_id

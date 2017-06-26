@@ -133,8 +133,34 @@ public class SubscriberUser extends Model<SubscriberUser> {
 	@TableField("career_id")
 	private Integer careerId;
 
-	@TableField(exist = false)
-	private int age;
+	/**
+	 * 年龄
+	 */
+	private Long age;
+	/**
+	 * 消费水平
+	 */
+	@TableField("consumption_level")
+	private String consumptionLevel;
+	/**
+	 * 收货地址
+	 */
+	@TableField("delivery_address")
+	private String deliveryAddress;
+	/**
+	 * 淘宝截图
+	 */
+	@TableField("taobao_screen_shot_url")
+	private String taobaoScreenShotUrl;
+	/**
+	 * 微信二维码
+	 */
+	@TableField("wechat_qr_code")
+	private String wechatQRCode;
+	/**
+	 * 备注
+	 */
+	private String remarks;
 
 	/**
 	 * 介绍人姓名
@@ -142,6 +168,55 @@ public class SubscriberUser extends Model<SubscriberUser> {
 	@TableField(exist = false)
 	private String introduceName;
 
+	public SubscriberUser setAge(Long age) {
+		this.age = age;
+		return this;
+	}
+
+	public String getConsumptionLevel() {
+		return consumptionLevel;
+	}
+
+	public SubscriberUser setConsumptionLevel(String consumptionLevel) {
+		this.consumptionLevel = consumptionLevel;
+		return this;
+	}
+
+	public String getDeliveryAddress() {
+		return deliveryAddress;
+	}
+
+	public SubscriberUser setDeliveryAddress(String deliveryAddress) {
+		this.deliveryAddress = deliveryAddress;
+		return this;
+	}
+
+	public String getTaobaoScreenShotUrl() {
+		return taobaoScreenShotUrl;
+	}
+
+	public SubscriberUser setTaobaoScreenShotUrl(String taobaoScreenShotUrl) {
+		this.taobaoScreenShotUrl = taobaoScreenShotUrl;
+		return this;
+	}
+
+	public String getWechatQRCode() {
+		return wechatQRCode;
+	}
+
+	public SubscriberUser setWechatQRCode(String wechatQRCode) {
+		this.wechatQRCode = wechatQRCode;
+		return this;
+	}
+
+	public String getRemarks() {
+		return remarks;
+	}
+
+	public SubscriberUser setRemarks(String remarks) {
+		this.remarks = remarks;
+		return this;
+	}
 
 	public String getIntroduceName() {
 		return introduceName;
@@ -161,13 +236,8 @@ public class SubscriberUser extends Model<SubscriberUser> {
 		return this;
 	}
 
-	public int getAge() {
+	public Long getAge() {
 		return age;
-	}
-
-	public SubscriberUser setAge(int age) {
-		this.age = age;
-		return this;
 	}
 
 	public Long getId() {
@@ -209,7 +279,7 @@ public class SubscriberUser extends Model<SubscriberUser> {
 	public void setIdCard(String idCard) {
 		try {
 			Integer ageByIDCard = IDCardToAgeUtils.getAgeByIDCard(idCard);
-			setAge(ageByIDCard);
+			setAge(ageByIDCard.longValue());
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}

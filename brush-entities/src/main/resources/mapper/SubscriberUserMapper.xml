@@ -29,12 +29,13 @@
 		<result column="introduce_id" property="introduceId" />
 		<result column="career_id" property="careerId" />
 		<result column="age" property="age" />
-
+		<result column="introduceName" property="introduceName" />
 	</resultMap>
 
 	<resultMap id="SubscriberINFO" type="site.zido.dto.SubscriberUserInfoDTO">
 		<association columnPrefix="bs_" property="subscriberUser" resultMap="site.zido.mapper.user.SubscriberUserMapper.BaseResultMap"/>
 		<association columnPrefix="ca_" property="career" resultMap="site.zido.mapper.user.CareerMapper.BaseResultMap"></association>
+		<association columnPrefix="bu_" property="user" resultMap="site.zido.mapper.user.UserMapper.BaseResultMap"></association>
 	</resultMap>
 	
     <!-- 通用查询结果列 -->
@@ -54,6 +55,10 @@
 		ca.id AS  ca_id,
 		ca.name AS ca_name,
 
+		t1.id AS bu_id,
+		t1.enabled AS bu_enabled,
+
+		bs.id AS bs_id,
 		bs.phone_number AS bs_phone_number,
 		bs.state AS bs_state,
 		bs.real_name AS bs_real_name,
@@ -66,7 +71,7 @@
 		bs.creat_time AS bs_creat_time,
 		bs.introduce_id AS bs_introduce_id,
 		bs.taobao_star AS bs_taobao_star,
-		bs1.nickname AS bs_nickname
+		bs1.nickname AS bs_introduceName
 
 		FROM brush_user t1
 		INNER JOIN brush_subscriber_user bs on t1.id = bs.user_id

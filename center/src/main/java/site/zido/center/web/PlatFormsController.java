@@ -13,6 +13,7 @@ import javax.annotation.Resource;
 import java.util.List;
 
 /**
+ *
  * Created by FZC on 2017/6/22.
  */
 @RestController
@@ -27,9 +28,13 @@ public class PlatFormsController extends BaseController{
     @ApiOperation(value = "通过id删除平台")
     public AjaxResult deletePlat(@RequestParam String id){
 
-        platformsService.delete(new EntityWrapper<Platforms>().where("id"));
+        boolean id1 = platformsService.delete(new EntityWrapper<Platforms>().where("id"));
 
-        return null;
+        if(id1){
+            return success(LangConstants.OPERATE_SUCCESS);
+        }else{
+            return fail(LangConstants.OPERATE_FAIL);
+        }
     }
 
     @PostMapping(value = "/insert")
@@ -44,7 +49,7 @@ public class PlatFormsController extends BaseController{
 
         platformsService.insert(platforms);
 
-        return success();
+        return success(LangConstants.OPERATE_SUCCESS);
     }
 
 

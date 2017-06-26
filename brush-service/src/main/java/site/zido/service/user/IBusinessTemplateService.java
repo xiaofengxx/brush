@@ -30,7 +30,7 @@ public interface IBusinessTemplateService extends IService<BusinessTemplate> {
 
 
     /**
-     * 添加模板
+     * 添加模板,(完整信息)
      * @param businessTemplate
      * @return
      */

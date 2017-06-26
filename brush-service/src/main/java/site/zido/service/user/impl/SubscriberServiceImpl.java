@@ -49,7 +49,7 @@ public class SubscriberServiceImpl extends ServiceImpl<SubscriberUserMapper,Subs
 //        } catch (ParseException e) {
 //            e.printStackTrace();
 //        }
-//        //subscriberUser.setSubAge(subAge);
+//        subscriberUser.setAge(subAge);
 
         userMapper.insert(user);
         bankCardService.insertBatch(bankCards);

@@ -80,7 +80,12 @@ public class BusinessUserServiceImpl extends ServiceImpl<BusinessUserMapper, Bus
     @Override
     @Transactional
     public synchronized void autoCreateIdAndPws(User user) {
-        Long aLong = userService.getnewusername();
+
+        String maxUserName = getMaxUserName();
+        if (maxUserName == null)
+            maxUserName = "10003";
+        Long aLong = Long.valueOf(maxUserName);
+        aLong++;
         user.setUsername(aLong + "");
         user.setPassword("123456");
         user.setEnabled(1);

@@ -9,6 +9,7 @@ import site.zido.brush.utils.DateUtils;
 import site.zido.brush.utils.IDCardToAgeUtils;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * <p>
@@ -174,6 +175,19 @@ public class SubscriberUser extends Model<SubscriberUser> {
 	 */
 	@TableField(exist = false)
 	private String createTimeLabel;
+
+	@TableField(exist = false)
+	private List<Career> career;
+
+
+	public List<Career> getCareer() {
+		return career;
+	}
+
+	public SubscriberUser setCareer(List<Career> career) {
+		this.career = career;
+		return this;
+	}
 
 	public String getCreateTimeLabel() {
 		return createTimeLabel;

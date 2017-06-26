@@ -51,7 +51,8 @@ public class SubscriberUserInfoDTO {
     }
 
     public SubscriberUserInfoDTO setCareer(List<Career> career) {
-        this.career = career;
+        //this.career = career;
+        subscriberUser.setCareer(career);
         return this;
     }
 }

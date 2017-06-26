@@ -3,6 +3,7 @@ package site.zido.center.web;
 import com.baomidou.mybatisplus.plugins.Page;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 import site.zido.brush.utils.EntityUtils;
 import site.zido.brush.utils.StringUtils;
@@ -18,6 +19,7 @@ import site.zido.service.user.SubscriberService;
 import site.zido.service.user.UserService;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -65,10 +67,28 @@ public class SubscriberController extends BaseController {
 
         List<BankCard> bankCards = dto.getBankCards();
 
-        // 赋值银行卡 所属人
-        for(BankCard bankCard : bankCards){
-            bankCard.setUserId(user.getId());
+        //银行卡处理
+        if(!CollectionUtils.isEmpty(bankCards)){
+            // 赋值银行卡 所属人
+            for(BankCard bankCard : bankCards){
+                bankCard.setUserId(user.getId());
+            }
         }
+
+
+        //职业处理
+        List<Career> careers = dto.getCareer();
+
+        List<UserCareer> userCareers = new ArrayList<>();
+
+        //职业处理
+        if(!CollectionUtils.isEmpty(careers)){
+            //处理
+            for(Career career : careers){
+                userCareers.add(new UserCareer().setUserId(user.getId()).setCareerId(career.getId()));
+            }
+        }
+
 
         //查找已有的刷手登录账号
         User subUser = userService.getUserByUserName(subscriberUser.getPhoneNumber());

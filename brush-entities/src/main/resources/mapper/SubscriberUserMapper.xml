@@ -27,7 +27,6 @@
 		<result column="creat_time" property="creatTime" />
 		<result column="nickname" property="nickname" />
 		<result column="introduce_id" property="introduceId" />
-		<result column="career_id" property="careerId" />
 		<result column="age" property="age" />
 		<result column="consumption_level" property="consumptionLevel" />
 		<result column="delivery_address" property="deliveryAddress" />
@@ -40,7 +39,6 @@
 
 	<resultMap id="SubscriberINFO" type="site.zido.dto.SubscriberUserInfoDTO">
 		<association columnPrefix="bs_" property="subscriberUser" resultMap="site.zido.mapper.user.SubscriberUserMapper.BaseResultMap"/>
-		<association columnPrefix="ca_" property="career" resultMap="site.zido.mapper.user.CareerMapper.BaseResultMap"></association>
 		<association columnPrefix="bu_" property="user" resultMap="site.zido.mapper.user.UserMapper.BaseResultMap"></association>
 	</resultMap>
 	
@@ -57,10 +55,6 @@
 	<!--多条件搜索-->
 	<select id="searchSubscriberList" resultMap="SubscriberINFO">
 		SELECT
-
-		ca.id AS  ca_id,
-		ca.name AS ca_name,
-
 
 		t1.id AS bu_id,
 		t1.enabled AS bu_enabled,
@@ -97,7 +91,6 @@
 
 		FROM brush_user t1
 		INNER JOIN brush_subscriber_user bs on t1.id = bs.user_id
-		INNER JOIN brush_career ca on ca.id = bs.career_id
 		INNER JOIN brush_subscriber_user bs1 on bs.introduce_id = bs1.user_id
 		<where>
 			<if test="condition.phonenumber != null">

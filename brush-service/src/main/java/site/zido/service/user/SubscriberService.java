@@ -4,10 +4,7 @@ import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.IService;
 import site.zido.dto.SubscriberCondition;
 import site.zido.dto.SubscriberUserInfoDTO;
-import site.zido.entity.BankCard;
-import site.zido.entity.Career;
-import site.zido.entity.SubscriberUser;
-import site.zido.entity.User;
+import site.zido.entity.*;
 
 import java.util.List;
 
@@ -22,7 +19,7 @@ public interface SubscriberService extends IService<SubscriberUser> {
      * @param subscriberUser 刷手信息
      * @param bankCards 银行卡列表
      */
-    void addSubscriber(User user, SubscriberUser subscriberUser,List<BankCard> bankCards);
+    void addSubscriber(User user, SubscriberUser subscriberUser, List<BankCard> bankCards, List<UserCareer> careers);
 
     /**
      * 修改刷手
@@ -30,7 +27,7 @@ public interface SubscriberService extends IService<SubscriberUser> {
      * @param subscriberUser 刷手信息
      * @param bankCards 银行卡列表
      */
-    void updateSubscriber(User user, SubscriberUser subscriberUser, List<BankCard> bankCards);
+    void updateSubscriber(User user, SubscriberUser subscriberUser, List<BankCard> bankCards,List<UserCareer> careers);
 
     /**
      * 通过userid查询

@@ -15,6 +15,7 @@ import site.zido.mapper.user.SubscriberUserMapper;
 import site.zido.mapper.user.UserMapper;
 import site.zido.service.user.BankCardService;
 import site.zido.service.user.SubscriberService;
+import site.zido.service.user.UserCareerService;
 import site.zido.service.user.UserService;
 
 import javax.annotation.Resource;
@@ -38,19 +39,14 @@ public class SubscriberServiceImpl extends ServiceImpl<SubscriberUserMapper,Subs
     private BankCardService bankCardService;
     @Resource
     private UserService userService;
+    @Resource
+    private UserCareerService userCareerService;
 
     @Override
     @Transactional
-    public synchronized void addSubscriber(User user, SubscriberUser subscriberUser, List<BankCard> bankCards) {
+    public synchronized void addSubscriber(User user, SubscriberUser subscriberUser, List<BankCard> bankCards, List<UserCareer> careers) {
 
-//        int subAge = 0;
-//        try {
-//            subAge = IDCardToAgeUtils.getAgeByIDCard(subscriberUser.getIdCard());
-//        } catch (ParseException e) {
-//            e.printStackTrace();
-//        }
-//        subscriberUser.setAge(subAge);
-
+        userCareerService.insertBatch(careers);
         userMapper.insert(user);
         bankCardService.insertBatch(bankCards);
         subscriberUserMapper.insert(subscriberUser);
@@ -59,13 +55,17 @@ public class SubscriberServiceImpl extends ServiceImpl<SubscriberUserMapper,Subs
 
     @Override
     @Transactional
-    public synchronized void updateSubscriber(User user, SubscriberUser subscriberUser, List<BankCard> bankCards) {
+    public synchronized void updateSubscriber(User user, SubscriberUser subscriberUser, List<BankCard> bankCards, List<UserCareer> careers) {
 
         userService.updateById(user);
         subscriberUserMapper.updateById(subscriberUser);
         bankCardMapper.deleteNotRange(bankCards,user.getId());
         if(bankCards.size()  >  0) {
             bankCardService.insertOrUpdateBatch(bankCards);
+        }
+        userCareerService.deleteNotRange(user.getId()+"",careers);
+        if(careers.size() > 0){
+            userCareerService.insertOrUpdateBatch(careers);
         }
     }
 

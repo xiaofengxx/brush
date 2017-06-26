@@ -15,7 +15,7 @@ public class SubscriberUserInfoDTO {
     private User user;
     private SubscriberUser subscriberUser;
     private List<BankCard> bankCards;
-    private Career career;
+    private List<Career> career;
 
 
     public User getUser() {
@@ -45,11 +45,12 @@ public class SubscriberUserInfoDTO {
         return this;
     }
 
-    public Career getCareer() {
+
+    public List<Career> getCareer() {
         return career;
     }
 
-    public SubscriberUserInfoDTO setCareer(Career career) {
+    public SubscriberUserInfoDTO setCareer(List<Career> career) {
         this.career = career;
         return this;
     }

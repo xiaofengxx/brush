@@ -24,7 +24,7 @@
 		<result column="ali_pay_screen_shot_url" property="aliPayScreenShotUrl" />
 		<result column="user_id" property="userId" />
 		<result column="state" property="state" />
-		<result column="creat_time" property="creatTime" />
+		<result column="create_time" property="createTime" />
 		<result column="nickname" property="nickname" />
 		<result column="introduce_id" property="introduceId" />
 		<result column="age" property="age" />
@@ -78,7 +78,7 @@
 		bs.star_screen_shot_url AS bs_star_screen_shot_url,
 		bs.ali_pay_screen_shot_url AS bs_ali_pay_screen_shot_url,
 		bs.state AS bs_state,
-		bs.creat_time AS bs_creat_time,
+		bs.create_time AS bs_creat_time,
 		bs.nickname AS bs_nickname,
 		bs.introduce_id AS bs_introduce_id,
 		bs1.nickname AS bs_introduceName,
@@ -106,7 +106,7 @@
 			<if test="condition.states != null and condition.states.length &gt; 0">
 				<trim prefixOverrides="or" prefix="and (" suffix=" ) ">
 					<foreach collection="condition.states" item="state">
-						or bs.states = #{state}
+						or bs.state = #{state}
 					</foreach>
 				</trim>
 			</if>
@@ -114,7 +114,7 @@
 		<if test="condition.sortName != null ">
 			order by ${condition.sortName}
 			<choose>
-				<when test="condition.DESC == true">
+				<when test="condition.desc == true">
 					DESC
 				</when>
 				<otherwise>

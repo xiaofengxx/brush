@@ -117,8 +117,8 @@ public class SubscriberUser extends Model<SubscriberUser> {
 	/**
 	 * 创建时间
 	 */
-	@TableField("creat_time")
-	private Date creatTime;
+	@TableField("create_time")
+	private Date createTime;
 	/**
 	 * 昵称
 	 */
@@ -438,12 +438,12 @@ public class SubscriberUser extends Model<SubscriberUser> {
 	}
 
 	public Date getCreatTime() {
-		return creatTime;
+		return createTime;
 	}
 
-	public SubscriberUser setCreatTime(Date creatTime) {
-		this.setCreateTimeLabel(DateUtils.formatDateTime(creatTime));
-		this.creatTime = creatTime;
+	public SubscriberUser setCreatTime(Date createTime) {
+		this.setCreateTimeLabel(DateUtils.formatDateTime(createTime));
+		this.createTime = createTime;
 		return this;
 	}
 

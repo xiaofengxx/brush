@@ -223,7 +223,7 @@ public class SubscriberController extends BaseController {
     @ApiOperation(value = "多条件搜索")
     public AjaxResult searchSubScriberList(@RequestParam(defaultValue = "1") Integer currentPage, @RequestParam(defaultValue = "0") Integer level,@RequestBody SubscriberCondition condition){
         if(condition == null){
-            condition = new SubscriberCondition().setSort(0).setDESC(true);
+            condition = new SubscriberCondition().setSort(0).setDesc(true);
         }
 
         Page<SubscriberUserInfoDTO> subscriberUserInfoDTOPage = subscriberService.searchSubscriberList(currentPage, constants.getPageSize(level), condition);

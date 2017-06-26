@@ -9,12 +9,12 @@ import java.util.Date;
  */
 public class SubscriberCondition {
 
-    public static String[] SORTS = {"bs.id","bs.creat_time","bs.birth_day"};
+    public static String[] SORTS = {"bs.id","bs.create_time","bs.birth_day"};
 
     private String sortName = SORTS[0];
 
     @ApiModelProperty(value = "倒叙/正序")
-    private boolean DESC = true;
+    private Boolean desc = true;
 
     @ApiModelProperty(value = "排序方式")
     private Integer sort;
@@ -36,9 +36,7 @@ public class SubscriberCondition {
 
 
 
-    public boolean isDESC() {
-        return DESC;
-    }
+
 
     public Date getStime() {
         return stime;
@@ -58,8 +56,12 @@ public class SubscriberCondition {
         return this;
     }
 
-    public SubscriberCondition setDESC(boolean DESC) {
-        this.DESC = DESC;
+    public Boolean getDesc() {
+        return desc;
+    }
+
+    public SubscriberCondition setDesc(Boolean desc) {
+        this.desc = desc;
         return this;
     }
 

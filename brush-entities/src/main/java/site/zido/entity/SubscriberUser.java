@@ -5,6 +5,7 @@ import java.util.Date;
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.activerecord.Model;
 import com.baomidou.mybatisplus.annotations.TableName;
+import site.zido.brush.utils.DateUtils;
 import site.zido.brush.utils.IDCardToAgeUtils;
 
 import java.io.Serializable;
@@ -167,6 +168,21 @@ public class SubscriberUser extends Model<SubscriberUser> {
 	 */
 	@TableField(exist = false)
 	private String introduceName;
+
+	/**
+	 * 显示格式化时间
+	 */
+	@TableField(exist = false)
+	private String createTimeLabel;
+
+	public String getCreateTimeLabel() {
+		return createTimeLabel;
+	}
+
+	public SubscriberUser setCreateTimeLabel(String createTimeLabel) {
+		this.createTimeLabel = createTimeLabel;
+		return this;
+	}
 
 	public SubscriberUser setAge(Long age) {
 		this.age = age;
@@ -411,8 +427,10 @@ public class SubscriberUser extends Model<SubscriberUser> {
 		return creatTime;
 	}
 
-	public void setCreatTime(Date creatTime) {
+	public SubscriberUser setCreatTime(Date creatTime) {
+		this.setCreateTimeLabel(DateUtils.formatDateTime(creatTime));
 		this.creatTime = creatTime;
+		return this;
 	}
 
 	public String getNickname() {

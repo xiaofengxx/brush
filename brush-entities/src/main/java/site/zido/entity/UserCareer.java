@@ -1,7 +1,10 @@
 package site.zido.entity;
 
 import com.baomidou.mybatisplus.activerecord.Model;
+import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
+import com.baomidou.mybatisplus.enums.IdType;
+
 import java.io.Serializable;
 
 /**
@@ -20,6 +23,7 @@ public class UserCareer extends Model<UserCareer> {
     /**
      * 用户id
      */
+    @TableId(value = "user_id",type = IdType.NONE)
 	private Long userId;
     /**
      * 职业id

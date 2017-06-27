@@ -2,6 +2,7 @@ package site.zido.business.web;
 
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
+import site.zido.brush.utils.EntityUtils;
 import site.zido.core.LangConstants;
 import site.zido.core.common.base.BaseController;
 import site.zido.dto.AjaxResult;
@@ -35,6 +36,16 @@ public class BusinessTemplateController extends BaseController{
         User currentUser = getCurrentUser();
 
 
+        /***
+         * 测试
+         */
+        currentUser = new User();
+
+        currentUser.setId(878130826922024960L);
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
         if(template == null){
             fail(LangConstants.TEMPLATE_MSG_IS_NULL);
         }
@@ -51,7 +62,7 @@ public class BusinessTemplateController extends BaseController{
             BusinessTemplate businessTemplate = businessTemplateService.selectById(templateid);
 
             //判断模板的所属人
-            if(businessTemplate.getUserId() != currentUser.getId()){
+            if(businessTemplate== null || !currentUser.getId().equals(businessTemplate.getUserId())){
                 fail(LangConstants.TMEPLATE_IS_NOT_EXIST);
             }
 
@@ -69,6 +80,11 @@ public class BusinessTemplateController extends BaseController{
         /**
          * 待完成 待确定必要参数
          */
+
+
+
+
+
 
         //判断店铺id是否正确 店铺所属人是否正确
         Shop byUserIdShopId = shopService.getByUserIdShopId(currentUser.getId(), template.getShopId());

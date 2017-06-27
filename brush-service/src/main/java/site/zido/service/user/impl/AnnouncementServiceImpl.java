@@ -37,4 +37,9 @@ public class AnnouncementServiceImpl extends ServiceImpl<AnnouncementMapper, Ann
     public List<Announcement> findAllAnnouncement() {
         return announcementMapper.selectList(new EntityWrapper<Announcement>());
     }
+
+    @Override
+    public List<Announcement> selectAnnouncementByType(int i) {
+        return announcementMapper.selectList(new EntityWrapper<Announcement>().where("pub_type = {0}",i));
+    }
 }

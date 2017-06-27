@@ -30,6 +30,10 @@
             <artifactId>brush-controller</artifactId>
             <version>0.0.2</version>
         </dependency>
+        <dependency>
+            <groupId>site.zido</groupId>
+            <artifactId>other-service</artifactId>
+        </dependency>
 
         <!-- JUnit test dependency -->
         <dependency>

@@ -34,6 +34,7 @@
         <module>starter</module>
         <module>brush-service</module>
         <module>brush-controller</module>
+        <module>other-service</module>
     </modules>
     <dependencyManagement>
         <dependencies>
@@ -64,6 +65,11 @@
             <dependency>
                 <groupId>site.zido</groupId>
                 <artifactId>brush-entities</artifactId>
+                <version>${brush.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>site.zido</groupId>
+                <artifactId>other-service</artifactId>
                 <version>${brush.version}</version>
             </dependency>
             <dependency>

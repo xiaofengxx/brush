@@ -26,5 +26,8 @@
 	<select id="findAdminById" resultType="site.zido.entity.Admin" resultMap="BaseResultMap">
 		SELECT id FROM brush_admin WHERE id = #{id}
 	</select>
+    <select id="findAllAdmin" resultType="site.zido.entity.Admin">
+		SELECT * FROM brush_admin;
+	</select>
 
 </mapper>

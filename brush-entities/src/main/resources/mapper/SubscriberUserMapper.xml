@@ -101,7 +101,7 @@
 				and bs.phone_number LIKE '%${condition.phoneNumber}%'
 			</if>
 			<if test="condition.stime != null and condition.etime !=null">
-				and (bs.creat_time &gt; #{condition.stime} and bs.creat_time &lt; #{condition.etime})
+				and (bs.create_time &gt; #{condition.stime} and bs.create_time &lt; #{condition.etime})
 			</if>
 			<if test="condition.states != null and condition.states.length &gt; 0">
 				<trim prefixOverrides="or" prefix="and (" suffix=" ) ">

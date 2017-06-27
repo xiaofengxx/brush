@@ -28,8 +28,9 @@ public class Career extends Model<Career> {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public Career setId(Long id) {
 		this.id = id;
+		return this;
 	}
 
 	public String getName() {

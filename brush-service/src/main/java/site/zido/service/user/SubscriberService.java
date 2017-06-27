@@ -61,6 +61,11 @@ public interface SubscriberService extends IService<SubscriberUser> {
      */
     Page<SubscriberUserInfoDTO> searchSubscriberList(Integer current, Integer pagesize, SubscriberCondition condition);
 
+    /**
+     * 通过关键字模糊查找刷手
+     * @param paramKey
+     * @return
+     */
     List<SubscriberUser> findSubUserByCondition(String paramKey);
 
     String findSubUserByNumber(String adPhoneNumber);

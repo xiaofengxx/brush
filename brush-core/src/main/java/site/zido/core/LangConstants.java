@@ -90,4 +90,6 @@ public class LangConstants {
     public static final String ANNOUNCEMENT_FAIL = LangUtils.lang("ANNOUNCEMENT_FAIL");
 
     public static final String ANNOUNCEMENT_CAN_NOT_BE_FIND = LangUtils.lang("ANNOUNCEMENT_CAN_NOT_BE_FIND");
+
+    public static final String PLEASE_CHOICE_RIGHT_TIME = LangUtils.lang("PLEASE_CHOICE_RIGHT_TIME");
 }

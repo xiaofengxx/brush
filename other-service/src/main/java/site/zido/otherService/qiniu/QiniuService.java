@@ -6,6 +6,7 @@ import com.qiniu.util.Auth;
 import com.qiniu.util.StringMap;
 import org.springframework.stereotype.Service;
 import site.zido.brush.utils.FileUtils;
+import site.zido.otherService.qiniu.DTO.UploadDTO;
 
 /**
  * 七牛云凭证构造器
@@ -20,7 +21,7 @@ public class QiniuService {
      * @param filename 上传文件名
      * @return 上传凭证token
      */
-    public String createUpload(String filename){
+    public UploadDTO createUpload(String filename){
         Auth auth = Auth.create(QiniuProperties.ACCESS_KEY, QiniuProperties.SECRET_KEY);
         StringMap putPolicy = new StringMap();
 
@@ -32,8 +33,9 @@ public class QiniuService {
         putPolicy.put("insertOnly",1);
         //最大上传大小为4mb
         putPolicy.put("fsizeLimit",4194304);
-        long expireSeconds = 3600;
-        return auth.uploadToken(QiniuProperties.BUCKET, FileUtils.confuseFileName(filename),expireSeconds,putPolicy);
+        long expireSeconds = 360000;
+        String key = FileUtils.confuseFileName(filename);
+        return new UploadDTO().setKey(key).setToken(auth.uploadToken(QiniuProperties.BUCKET, key,expireSeconds,putPolicy));
     }
 
 

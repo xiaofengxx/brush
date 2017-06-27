@@ -1,8 +1,10 @@
 package site.zido.service.user;
 
+import site.zido.dto.AnnouncementDTO;
 import site.zido.entity.Announcement;
 import com.baomidou.mybatisplus.service.IService;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -32,4 +34,10 @@ public interface IAnnouncementService extends IService<Announcement> {
      * @return
      */
     List<Announcement> selectAnnouncementByType(int i);
+
+    /**
+     * 根据开始时间和结束时间查找公告
+     * @return
+     */
+    List<Announcement> selectAnounceByTime(AnnouncementDTO adto);
 }

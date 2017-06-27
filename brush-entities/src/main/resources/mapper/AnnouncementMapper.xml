@@ -15,5 +15,9 @@
     <sql id="Base_Column_List">
         id, pub_type AS pubType, pub_title AS pubTitle, announcement_time AS announcementTime, announcement_text AS announcementText
     </sql>
+	<select id="selectAnounceByTime" resultType="site.zido.entity.Announcement" resultMap="BaseResultMap">
+		SELECT * FROM brush_announcement WHERE
+		announcement_time &gt; #{adto.startTime} and announcement_time  &lt;  #{adto.endTime}
+	</select>
 
 </mapper>

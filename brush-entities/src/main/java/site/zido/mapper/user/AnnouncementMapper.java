@@ -1,7 +1,12 @@
 package site.zido.mapper.user;
 
+import org.apache.ibatis.annotations.Param;
+import site.zido.dto.AnnouncementDTO;
 import site.zido.entity.Announcement;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
+
+import java.util.Date;
+import java.util.List;
 
 /**
  * <p>
@@ -13,6 +18,5 @@ import com.baomidou.mybatisplus.mapper.BaseMapper;
  */
 public interface AnnouncementMapper extends BaseMapper<Announcement> {
 
-
-
+    List<Announcement> selectAnounceByTime(@Param(value = "adto") AnnouncementDTO adto);
 }

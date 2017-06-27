@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import site.zido.core.LangConstants;
 import site.zido.core.common.base.BaseController;
 import site.zido.dto.AjaxResult;
+import site.zido.dto.AnnouncementDTO;
 import site.zido.entity.Announcement;
 import site.zido.service.user.IAnnouncementService;
 
@@ -21,7 +22,7 @@ public class AnnouncementController extends BaseController {
     @Resource
     private IAnnouncementService announcementService;
 
-    @PostMapping(value = "/addSub")
+    @PostMapping(value = "/addAnnouncement")
     @ApiOperation(value = "添加商家或刷手公告")
     public AjaxResult addSub(@RequestBody Announcement announcement) {
         if (announcement == null){
@@ -43,7 +44,7 @@ public class AnnouncementController extends BaseController {
 
     @PostMapping(value = "/selectSubOrBusi")
     @ApiOperation(value = "根据类型查找商家或者刷手公告")
-    public AjaxResult selectAnnouncementByType(@RequestParam(value = "i") int i) {
+    public AjaxResult selectAnnouncementByType(Integer i) {
         if (i == 1){
             List<Announcement> list = announcementService.selectAnnouncementByType(i);
             return successData(list);
@@ -55,10 +56,13 @@ public class AnnouncementController extends BaseController {
         }
     }
 
-    @PostMapping(value = "/selectAnounceByTime")
+    @PostMapping(value = "/selectAnnouncementByTime")
     @ApiOperation(value = "通过时间查找公告")
-    public AjaxResult selectAnounceByTiem(@RequestParam(defaultValue = "0") Integer currentPage,@RequestParam(defaultValue = "0") Integer level,@RequestBody Announcement announcement) {
-
-        return null;
+    public AjaxResult selectAnnounceByTime(@RequestBody AnnouncementDTO adto) {
+        if (adto.getStartTime() == null && adto.getEndTime() == null){
+            return fail(LangConstants.PLEASE_CHOICE_RIGHT_TIME);
+        }
+        List<Announcement> list = announcementService.selectAnounceByTime(adto);
+        return successData(list);
     }
 }

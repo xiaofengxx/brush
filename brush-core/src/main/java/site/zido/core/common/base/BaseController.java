@@ -47,7 +47,7 @@ public class BaseController {
      * @return ajax result
      */
     protected AjaxResult successData(final Object data) {
-        return success("", data);
+        return success(null, data);
     }
 
     /**

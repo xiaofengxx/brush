@@ -32,10 +32,10 @@ public class BusinessTemplateCondition {
     @ApiModelProperty("开始时间")
     private Date stime;
 
-    @ApiModelProperty(value = "结束时间")
-    private Data etime;
+    @ApiModelProperty("结束时间")
+    private Date etime;
 
-    private Integer[] state;
+    private Integer[] states;
 
     @ApiModelProperty(value = "模板id")
     private Long templateid;
@@ -45,6 +45,14 @@ public class BusinessTemplateCondition {
      */
     private String sortName = SORTS[0];
 
+    public Integer[] getStates() {
+        return states;
+    }
+
+    public BusinessTemplateCondition setStates(Integer[] states) {
+        this.states = states;
+        return this;
+    }
 
     public String getSortName() {
         return sortName;
@@ -112,13 +120,13 @@ public class BusinessTemplateCondition {
         return this;
     }
 
-    public Data getEtime() {
+
+    public Date getEtime() {
         return etime;
     }
 
-    public BusinessTemplateCondition setEtime(Data etime) {
+    public BusinessTemplateCondition setEtime(Date etime) {
         this.etime = etime;
         return this;
     }
-
 }

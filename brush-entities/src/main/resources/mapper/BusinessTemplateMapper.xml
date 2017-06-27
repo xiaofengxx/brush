@@ -54,7 +54,7 @@
 		bp.id AS bp_id,
 		bp.platform_name AS bp_platform_name,
 
-		t1.username = AS us_username,
+		t1.username AS us_username,
 
 		bs.shop_type AS bs_shop_type,
 		bs.id AS bs_id,
@@ -71,7 +71,7 @@
 
 
 		FROM brush_user t1
-		INNER JOIN brush_business_template bt on bt.id = t1.id
+		INNER JOIN brush_business_template bt on bt.user_id = t1.id
 		INNER JOIN brush_business_user bu on  bu.user_id = t1.id
 		INNER JOIN brush_shop bs on bs.id = bt.shop_id
 		INNER JOIN brush_platforms bp on bp.id = bs.platform_id
@@ -88,9 +88,9 @@
 			<if test="condition.stime != null and condition.etime != null">
 				and (bt.create_time &gt; #{condition.stime} and bt.create_time &lt; #{condition.etime})
 			</if>
-			<if test="condition.sate != null and condition.sate.length &gt; 0">
+			<if test="condition.states != null and condition.states.length &gt; 0">
 				<trim prefixOverrides="or" prefix="and ( " suffix=" )">
-					<foreach collection="condition.sate" item="s">
+					<foreach collection="condition.states" item="s">
 						  or bt.state = #{s}
 					</foreach>
 				</trim>

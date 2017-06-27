@@ -97,10 +97,10 @@ public class SubscriberServiceImpl extends ServiceImpl<SubscriberUserMapper,Subs
 
             Long userId = infoDTO.getSubscriberUser().getUserId();
 
-            //查询银行卡
-            List<BankCard> bankCards = bankCardService.getByUserId(userId);
-
-            infoDTO.setBankCards(bankCards);
+//            //查询银行卡
+//            List<BankCard> bankCards = bankCardService.getByUserId(userId);
+//
+//            infoDTO.setBankCards(bankCards);
 
             //获取职业列表
             List<Career> careers = careerService.selectByUserId(userId);

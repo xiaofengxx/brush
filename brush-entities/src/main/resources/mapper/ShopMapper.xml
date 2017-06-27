@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="site.zido.mapper.user.ShopMapper">
     <resultMap id="BaseResultMap" type="site.zido.entity.Shop">
-        <id property="id" column="id" javaType="String" jdbcType="VARCHAR"/>
+        <id property="id" column="id" javaType="Long" jdbcType="VARCHAR"/>
         <result property="platformId" column="platform_id" jdbcType="VARCHAR" javaType="String"/>
         <result property="shopName" column="shop_name" javaType="String" jdbcType="VARCHAR"/>
         <result property="shopType" column="shop_type" javaType="String" jdbcType="VARCHAR"/>

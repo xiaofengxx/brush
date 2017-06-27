@@ -14,6 +14,7 @@ import site.zido.service.user.UserService;
 import javax.annotation.Resource;
 import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**商家,刷手,管理员的登录情况
  * Created by CDDC on 2017/6/23.
@@ -29,12 +30,14 @@ public class PubUserController extends BaseController {
      */
     @PostMapping(value = "/login")
     @ApiOperation("用户登录")
-    public AjaxResult login(@RequestBody User user, HttpServletRequest request){
+    public AjaxResult login(@RequestBody User user, HttpServletRequest request, HttpServletResponse response){
         String username = user.getUsername();
         String password = user.getPassword();
         if (username == null || password == null){
             return fail(LangConstants.USERORPWD_IS_WRONG);
         }
+
+        //通过用户名和密码找该用户
         User loguser = userService.findLoguserByNameAndPwd(username,password);
         if (loguser == null){
             return fail(LangConstants.USER_NOT_FOUNT);

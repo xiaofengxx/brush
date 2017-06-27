@@ -41,10 +41,13 @@ public class CenterController extends BaseController{
     @PostMapping(value = "/cancelUser")
     @ApiOperation("人员作废")
     public AjaxResult cancelAdmin(String id){
+        //通过ID查找用户
         User user = userService.selectById(id);
         if (user == null){
             return fail(LangConstants.USER_NOT_FOUNT);
         }
+
+        //默认不可用
         user.setEnabled(0);
         userService.cancelUser(user);
         return successData(LangConstants.OPERATE_SUCCESS);
@@ -53,9 +56,10 @@ public class CenterController extends BaseController{
      * 管理员信息（只有超级管理员能看到）
      */
     @PostMapping(value = "/adminDetail")
-    @ApiOperation("管理员信息")
-    public AjaxResult detail(String id){
-        List<Admin> list = adminService.findAllAdminById(id);
+    @ApiOperation("查看管理员信息")
+    public AjaxResult detail(){
+        //通过ID查找用户
+        List<Admin> list = adminService.findAllAdmin();
         if (list == null){
             return fail(LangConstants.USER_NOT_FOUNT);
         }
@@ -71,7 +75,9 @@ public class CenterController extends BaseController{
         if (admin == null){
             return fail(LangConstants.OPERATE_FAIL);
         }
+        //通过管理员电话查找商家电话
         String p1 = businessUserService.findBusinessNumber(admin.getAdPhoneNumber());
+        //通过管理员电话查找刷手电话
         String p2 = subscriberService.findSubUserByNumber(admin.getAdPhoneNumber());
 
         if(admin.getAdName().isEmpty()){
@@ -97,6 +103,7 @@ public class CenterController extends BaseController{
         if (admin.getAdSex() == null){
             return fail(LangConstants.SEX_CAN_NOT_BE_EMPTY);
         }
+        //默认为禁用状态
         admin.setAdState(0);
         adminService.insertAdmin(admin);
         return successData(admin);

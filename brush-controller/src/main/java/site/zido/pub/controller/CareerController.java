@@ -22,7 +22,7 @@ public class CareerController extends BaseController {
     private ICareerService careerService;
 
 
-    @PostMapping("/getcareerlist")
+    @PostMapping("/career/list")
     public AjaxResult getCareerList(){
         List<Career> allList = careerService.getAllList();
         return successData(allList);

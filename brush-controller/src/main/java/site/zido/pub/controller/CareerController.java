@@ -3,6 +3,7 @@ package site.zido.pub.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import site.zido.core.common.base.BaseController;
 import site.zido.dto.AjaxResult;
 import site.zido.entity.Career;
@@ -14,7 +15,7 @@ import java.util.List;
 /**
  * Created by FZC on 2017/6/27.
  */
-@Controller
+@RestController
 @RequestMapping("/api/pub")
 public class CareerController extends BaseController {
 

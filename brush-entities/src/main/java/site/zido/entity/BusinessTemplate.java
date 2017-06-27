@@ -104,6 +104,10 @@ public class BusinessTemplate extends Model<BusinessTemplate> {
      * 其他要求
      */
 	private String requirements;
+	/**
+	 * 是否收藏
+	 */
+	private String collection;
 
 	/**
 	 * 模板状态: 1.未提交审批，2.提交审批，3.审批通过，4.审批未通过（提示修改）
@@ -115,6 +119,15 @@ public class BusinessTemplate extends Model<BusinessTemplate> {
 	 */
 	private Long sort;
 
+
+	public String getCollection() {
+		return collection;
+	}
+
+	public BusinessTemplate setCollection(String collection) {
+		this.collection = collection;
+		return this;
+	}
 
 	public Long getSort() {
 		return sort;

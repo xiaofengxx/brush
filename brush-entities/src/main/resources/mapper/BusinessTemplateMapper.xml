@@ -25,6 +25,7 @@
 		<result column="requirements" property="requirements" />
 		<result column="state" property="state" />
 		<result column="sort" property="sort" />
+		<result column="collection" property="collection" />
 	</resultMap>
 
 	<resultMap id="tempalteINFO" type="site.zido.dto.BusinessTemplateInfoDTO">

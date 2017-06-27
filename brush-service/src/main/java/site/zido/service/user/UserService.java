@@ -41,7 +41,7 @@ public interface UserService extends IService<User>{
     Long getmaxusername();
 
     /**
-     * 通过ID 为用户实例创建 用户和密码
+     * 通过ID 为用户实例创建 密码
      * @param user
      */
     void autoCreateIdAndPws(User user);

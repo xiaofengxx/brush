@@ -9,18 +9,21 @@ import java.util.Date;
  */
 public class SubscriberCondition {
 
-    public static String[] SORTS = {"bs.id","bs.creat_time","bs.birth_day"};
+    public static String[] SORTS = {"bs.id","bs.create_time","bs.birth_day"};
 
     private String sortName = SORTS[0];
 
     @ApiModelProperty(value = "倒叙/正序")
-    private boolean DESC = true;
+    private Boolean desc = true;
 
     @ApiModelProperty(value = "排序方式")
     private Integer sort;
 
     @ApiModelProperty(value = "电话号码")
-    private String phonenumber;
+    private String phoneNumber;
+
+    @ApiModelProperty(value = "关键字")
+    private String keywords;
 
     @ApiModelProperty(value = "开始时间")
     private Date stime;
@@ -33,9 +36,7 @@ public class SubscriberCondition {
 
 
 
-    public boolean isDESC() {
-        return DESC;
-    }
+
 
     public Date getStime() {
         return stime;
@@ -55,8 +56,12 @@ public class SubscriberCondition {
         return this;
     }
 
-    public SubscriberCondition setDESC(boolean DESC) {
-        this.DESC = DESC;
+    public Boolean getDesc() {
+        return desc;
+    }
+
+    public SubscriberCondition setDesc(Boolean desc) {
+        this.desc = desc;
         return this;
     }
 
@@ -72,12 +77,12 @@ public class SubscriberCondition {
         return this;
     }
 
-    public String getPhonenumber() {
-        return phonenumber;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public SubscriberCondition setPhonenumber(String phonenumber) {
-        this.phonenumber = phonenumber;
+    public SubscriberCondition setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
         return this;
     }
 
@@ -96,6 +101,15 @@ public class SubscriberCondition {
 
     public SubscriberCondition setSortName(String sortName) {
         this.sortName = sortName;
+        return this;
+    }
+
+    public String getKeywords() {
+        return keywords;
+    }
+
+    public SubscriberCondition setKeywords(String keywords) {
+        this.keywords = keywords;
         return this;
     }
 }

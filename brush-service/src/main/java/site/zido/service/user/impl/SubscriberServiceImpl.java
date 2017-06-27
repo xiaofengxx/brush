@@ -13,9 +13,7 @@ import site.zido.mapper.user.BankCardMapper;
 import site.zido.mapper.user.CareerMapper;
 import site.zido.mapper.user.SubscriberUserMapper;
 import site.zido.mapper.user.UserMapper;
-import site.zido.service.user.BankCardService;
-import site.zido.service.user.SubscriberService;
-import site.zido.service.user.UserService;
+import site.zido.service.user.*;
 
 import javax.annotation.Resource;
 import java.text.ParseException;
@@ -31,26 +29,22 @@ public class SubscriberServiceImpl extends ServiceImpl<SubscriberUserMapper,Subs
     @Resource
     private UserMapper userMapper;
     @Resource
-    private CareerMapper careerMapper;
-    @Resource
     private BankCardMapper bankCardMapper;
+    @Resource
+    private UserService userService;
     @Resource
     private BankCardService bankCardService;
     @Resource
-    private UserService userService;
+    private UserCareerService userCareerService;
+
+    @Resource
+    private ICareerService careerService;
 
     @Override
     @Transactional
-    public synchronized void addSubscriber(User user, SubscriberUser subscriberUser, List<BankCard> bankCards) {
+    public synchronized void addSubscriber(User user, SubscriberUser subscriberUser, List<BankCard> bankCards, List<UserCareer> careers) {
 
-//        int subAge = 0;
-//        try {
-//            subAge = IDCardToAgeUtils.getAgeByIDCard(subscriberUser.getIdCard());
-//        } catch (ParseException e) {
-//            e.printStackTrace();
-//        }
-//        //subscriberUser.setSubAge(subAge);
-
+        userCareerService.insertBatch(careers);
         userMapper.insert(user);
         bankCardService.insertBatch(bankCards);
         subscriberUserMapper.insert(subscriberUser);
@@ -59,13 +53,17 @@ public class SubscriberServiceImpl extends ServiceImpl<SubscriberUserMapper,Subs
 
     @Override
     @Transactional
-    public synchronized void updateSubscriber(User user, SubscriberUser subscriberUser, List<BankCard> bankCards) {
+    public synchronized void updateSubscriber(User user, SubscriberUser subscriberUser, List<BankCard> bankCards, List<UserCareer> careers) {
 
         userService.updateById(user);
         subscriberUserMapper.updateById(subscriberUser);
         bankCardMapper.deleteNotRange(bankCards,user.getId());
         if(bankCards.size()  >  0) {
             bankCardService.insertOrUpdateBatch(bankCards);
+        }
+        userCareerService.deleteNotRange(user.getId()+"",careers);
+        if(careers.size() > 0){
+            userCareerService.insertOrUpdateBatch(careers);
         }
     }
 
@@ -91,6 +89,28 @@ public class SubscriberServiceImpl extends ServiceImpl<SubscriberUserMapper,Subs
     public Page<SubscriberUserInfoDTO> searchSubscriberList(Integer current, Integer pagesize, SubscriberCondition condition) {
         Page<SubscriberUserInfoDTO> resultPage = new Page<>(current,pagesize);
         resultPage.setRecords(subscriberUserMapper.searchSubscriberList(condition));
+
+        List<SubscriberUserInfoDTO> records = resultPage.getRecords();
+
+
+        for(SubscriberUserInfoDTO infoDTO : records){
+
+            Long userId = infoDTO.getSubscriberUser().getUserId();
+
+            //查询银行卡
+            List<BankCard> bankCards = bankCardService.getByUserId(userId);
+
+            infoDTO.setBankCards(bankCards);
+
+            //获取职业列表
+            List<Career> careers = careerService.selectByUserId(userId);
+            infoDTO.getSubscriberUser().setCareer(careers);
+
+        }
+
+
+
+
         return resultPage;
     }
 

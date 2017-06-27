@@ -72,10 +72,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper,User> implements Use
     @Transactional
     public synchronized void autoCreateIdAndPws(User user) {
         //区别,商家用户名自动生成.刷手用户名为手机号
-        if(StringUtils.isBlank(user.getUsername())){
-            Long aLong = getnewusername();
-            user.setUsername(aLong + "");
-        }
+//        if(StringUtils.isBlank(user.getUsername())){
+//            Long aLong = getnewusername();
+//            user.setUsername(aLong + "");
+//        }
         user.setPassword("123456");
         user.setEnabled(1);
         userMapper.updateById(user);

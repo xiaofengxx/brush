@@ -40,9 +40,9 @@ public class BusinessTemplateServiceImpl extends ServiceImpl<BusinessTemplateMap
     @Override
     @Transactional
     public synchronized boolean userAddTemplate(User user, BusinessTemplate businessTemplate) {
+
+        //user 为空则已经设置相关值
         if(user != null){
-            businessTemplate.setUserId(user.getId());
-        }else{
             //设置用户id
             businessTemplate.setUserId(user.getId());
             //设置商家id
@@ -117,6 +117,7 @@ public class BusinessTemplateServiceImpl extends ServiceImpl<BusinessTemplateMap
 
         return businessTemplateList.getRecords().get(0);
     }
+
 
     @Override
     public boolean deleteById(String templateid) {

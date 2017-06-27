@@ -3,6 +3,7 @@ package site.zido.center.web;
 import com.baomidou.mybatisplus.plugins.Page;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 import site.zido.brush.utils.EntityUtils;
 import site.zido.brush.utils.StringUtils;
@@ -14,10 +15,10 @@ import site.zido.dto.SubscriberUserInfoDTO;
 import site.zido.core.common.base.BaseController;
 import site.zido.dto.AjaxResult;
 import site.zido.entity.*;
-import site.zido.service.user.SubscriberService;
-import site.zido.service.user.UserService;
+import site.zido.service.user.*;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -34,6 +35,8 @@ public class SubscriberController extends BaseController {
     private SubscriberService subscriberService;
     @Resource
     private BrushConstants constants;
+
+
 
     /**
      * 添加刷手
@@ -60,15 +63,33 @@ public class SubscriberController extends BaseController {
         SubscriberUser subscriberUser = dto.getSubscriberUser();
 
         //刷手信息,填充所属人
-        subscriberUser.setCreatTime(new Date());
+        subscriberUser.setCreateTime(new Date());
         subscriberUser.setUserId(user.getId());
 
         List<BankCard> bankCards = dto.getBankCards();
 
-        // 赋值银行卡 所属人
-        for(BankCard bankCard : bankCards){
-            bankCard.setUserId(user.getId());
+        //银行卡处理
+        if(!CollectionUtils.isEmpty(bankCards)){
+            // 赋值银行卡 所属人
+            for(BankCard bankCard : bankCards){
+                bankCard.setUserId(user.getId());
+            }
         }
+
+
+        //职业处理
+        List<Career> careers = dto.getCareer();
+
+        List<UserCareer> userCareers = new ArrayList<>();
+
+        //职业处理phone_number
+        if(!CollectionUtils.isEmpty(careers)){
+            //处理
+            for(Career career : careers){
+                userCareers.add(new UserCareer().setUserId(user.getId()).setCareerId(career.getId()));
+            }
+        }
+
 
         //查找已有的刷手登录账号
         User subUser = userService.getUserByUserName(subscriberUser.getPhoneNumber());
@@ -144,9 +165,9 @@ public class SubscriberController extends BaseController {
         }
 
         if(isAdd){
-            subscriberService.addSubscriber(user,subscriberUser,bankCards);
+            subscriberService.addSubscriber(user,subscriberUser,bankCards,userCareers);
         }else{
-            subscriberService.updateSubscriber(user,subscriberUser,bankCards);
+            subscriberService.updateSubscriber(user,subscriberUser,bankCards,userCareers);
         }
 
         return success(LangConstants.OPERATE_SUCCESS);
@@ -202,10 +223,11 @@ public class SubscriberController extends BaseController {
     @ApiOperation(value = "多条件搜索")
     public AjaxResult searchSubScriberList(@RequestParam(defaultValue = "1") Integer currentPage, @RequestParam(defaultValue = "0") Integer level,@RequestBody SubscriberCondition condition){
         if(condition == null){
-            condition = new SubscriberCondition().setSort(0).setDESC(true);
+            condition = new SubscriberCondition().setSort(0).setDesc(true);
         }
 
         Page<SubscriberUserInfoDTO> subscriberUserInfoDTOPage = subscriberService.searchSubscriberList(currentPage, constants.getPageSize(level), condition);
+
 
         return successData(subscriberUserInfoDTOPage);
     }

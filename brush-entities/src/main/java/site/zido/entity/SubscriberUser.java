@@ -5,9 +5,11 @@ import java.util.Date;
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.activerecord.Model;
 import com.baomidou.mybatisplus.annotations.TableName;
+import site.zido.brush.utils.DateUtils;
 import site.zido.brush.utils.IDCardToAgeUtils;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * <p>
@@ -115,8 +117,8 @@ public class SubscriberUser extends Model<SubscriberUser> {
 	/**
 	 * 创建时间
 	 */
-	@TableField("creat_time")
-	private Date creatTime;
+	@TableField("create_time")
+	private Date createTime;
 	/**
 	 * 昵称
 	 */
@@ -133,10 +135,127 @@ public class SubscriberUser extends Model<SubscriberUser> {
 	@TableField("career_id")
 	private Integer careerId;
 
+	/**
+	 * 年龄
+	 */
+	private Long age;
+	/**
+	 * 消费水平
+	 */
+	@TableField("consumption_level")
+	private String consumptionLevel;
+	/**
+	 * 收货地址
+	 */
+	@TableField("delivery_address")
+	private String deliveryAddress;
+	/**
+	 * 淘宝截图
+	 */
+	@TableField("taobao_screen_shot_url")
+	private String taobaoScreenShotUrl;
+	/**
+	 * 微信二维码
+	 */
+	@TableField("wechat_qr_code")
+	private String wechatQRCode;
+	/**
+	 * 备注
+	 */
+	private String remarks;
+
+	/**
+	 * 介绍人姓名
+	 */
 	@TableField(exist = false)
-	private int age;
+	private String introduceName;
+
+	/**
+	 * 显示格式化时间
+	 */
+	@TableField(exist = false)
+	private String createTimeLabel;
+
+	@TableField(exist = false)
+	private List<Career> career;
 
 
+	public List<Career> getCareer() {
+		return career;
+	}
+
+	public SubscriberUser setCareer(List<Career> career) {
+		this.career = career;
+		return this;
+	}
+
+	public String getCreateTimeLabel() {
+		return createTimeLabel;
+	}
+
+	public SubscriberUser setCreateTimeLabel(String createTimeLabel) {
+		this.createTimeLabel = createTimeLabel;
+		return this;
+	}
+
+	public SubscriberUser setAge(Long age) {
+		this.age = age;
+		return this;
+	}
+
+	public String getConsumptionLevel() {
+		return consumptionLevel;
+	}
+
+	public SubscriberUser setConsumptionLevel(String consumptionLevel) {
+		this.consumptionLevel = consumptionLevel;
+		return this;
+	}
+
+	public String getDeliveryAddress() {
+		return deliveryAddress;
+	}
+
+	public SubscriberUser setDeliveryAddress(String deliveryAddress) {
+		this.deliveryAddress = deliveryAddress;
+		return this;
+	}
+
+	public String getTaobaoScreenShotUrl() {
+		return taobaoScreenShotUrl;
+	}
+
+	public SubscriberUser setTaobaoScreenShotUrl(String taobaoScreenShotUrl) {
+		this.taobaoScreenShotUrl = taobaoScreenShotUrl;
+		return this;
+	}
+
+	public String getWechatQRCode() {
+		return wechatQRCode;
+	}
+
+	public SubscriberUser setWechatQRCode(String wechatQRCode) {
+		this.wechatQRCode = wechatQRCode;
+		return this;
+	}
+
+	public String getRemarks() {
+		return remarks;
+	}
+
+	public SubscriberUser setRemarks(String remarks) {
+		this.remarks = remarks;
+		return this;
+	}
+
+	public String getIntroduceName() {
+		return introduceName;
+	}
+
+	public SubscriberUser setIntroduceName(String introduceName) {
+		this.introduceName = introduceName;
+		return this;
+	}
 
 	public Integer getCareerId() {
 		return careerId;
@@ -147,13 +266,8 @@ public class SubscriberUser extends Model<SubscriberUser> {
 		return this;
 	}
 
-	public int getAge() {
+	public Long getAge() {
 		return age;
-	}
-
-	public SubscriberUser setAge(int age) {
-		this.age = age;
-		return this;
 	}
 
 	public Long getId() {
@@ -195,7 +309,7 @@ public class SubscriberUser extends Model<SubscriberUser> {
 	public void setIdCard(String idCard) {
 		try {
 			Integer ageByIDCard = IDCardToAgeUtils.getAgeByIDCard(idCard);
-			setAge(ageByIDCard);
+			setAge(ageByIDCard.longValue());
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
@@ -323,12 +437,14 @@ public class SubscriberUser extends Model<SubscriberUser> {
 		return this;
 	}
 
-	public Date getCreatTime() {
-		return creatTime;
+	public Date getCreateTime() {
+		return createTime;
 	}
 
-	public void setCreatTime(Date creatTime) {
-		this.creatTime = creatTime;
+	public SubscriberUser setCreateTime(Date createTime) {
+		this.setCreateTimeLabel(DateUtils.formatDateTime(createTime));
+		this.createTime = createTime;
+		return this;
 	}
 
 	public String getNickname() {

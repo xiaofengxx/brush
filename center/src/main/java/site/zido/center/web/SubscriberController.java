@@ -63,7 +63,7 @@ public class SubscriberController extends BaseController {
         SubscriberUser subscriberUser = dto.getSubscriberUser();
 
         //刷手信息,填充所属人
-        subscriberUser.setCreatTime(new Date());
+        subscriberUser.setCreateTime(new Date());
         subscriberUser.setUserId(user.getId());
 
         List<BankCard> bankCards = dto.getBankCards();
@@ -82,7 +82,7 @@ public class SubscriberController extends BaseController {
 
         List<UserCareer> userCareers = new ArrayList<>();
 
-        //职业处理
+        //职业处理phone_number
         if(!CollectionUtils.isEmpty(careers)){
             //处理
             for(Career career : careers){

@@ -78,7 +78,7 @@
 		bs.star_screen_shot_url AS bs_star_screen_shot_url,
 		bs.ali_pay_screen_shot_url AS bs_ali_pay_screen_shot_url,
 		bs.state AS bs_state,
-		bs.create_time AS bs_creat_time,
+		bs.create_time AS bs_create_time,
 		bs.nickname AS bs_nickname,
 		bs.introduce_id AS bs_introduce_id,
 		bs1.nickname AS bs_introduceName,

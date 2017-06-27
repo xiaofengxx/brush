@@ -437,11 +437,11 @@ public class SubscriberUser extends Model<SubscriberUser> {
 		return this;
 	}
 
-	public Date getCreatTime() {
+	public Date getCreateTime() {
 		return createTime;
 	}
 
-	public SubscriberUser setCreatTime(Date createTime) {
+	public SubscriberUser setCreateTime(Date createTime) {
 		this.setCreateTimeLabel(DateUtils.formatDateTime(createTime));
 		this.createTime = createTime;
 		return this;

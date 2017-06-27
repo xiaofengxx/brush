@@ -15,15 +15,21 @@ import java.util.List;
  */
 public interface IAnnouncementService extends IService<Announcement> {
     /**
-     * 添加商家广告
+     * 添加商家公告
      * @param announcement
      */
     void insertBusiness(Announcement announcement);
 
     /**
-     * 查看所有广告
+     * 查看所有公告
      * @return
      */
     List<Announcement> findAllAnnouncement();
 
+    /**
+     * 根据类型查找公告
+     * @param i
+     * @return
+     */
+    List<Announcement> selectAnnouncementByType(int i);
 }

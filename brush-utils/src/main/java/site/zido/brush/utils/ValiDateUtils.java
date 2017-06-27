@@ -312,4 +312,27 @@ public class ValiDateUtils {
         return matcher.matches();
     }
 
+    /**
+     * 后缀是否能匹配上
+     * @param contentType 待验证后缀字符串
+     * @param allowTypes 允许后缀字符串
+     * @return 是/否
+     */
+    public static boolean mapPrefix(String contentType, String... allowTypes) {
+        if (null == contentType || "".equals(contentType)) {
+            return false;
+        }
+        for (String type : allowTypes) {
+            if (contentType.endsWith(type)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static boolean isPicture(String filename){
+        String[] pictruePrefixs = new String[]{".jpg", ".png", ".gif", ".bmp"};
+        return mapPrefix(filename,pictruePrefixs);
+    }
+
 }

@@ -55,7 +55,7 @@ public class BusinessTemplateServiceImpl extends ServiceImpl<BusinessTemplateMap
 
         // 生成 sort编号
         Long selectmaxsort = businessTemplateMapper.selectmaxsort();
-        if(selectmaxsort ==null || selectmaxsort < 1000){
+        if(selectmaxsort == null || selectmaxsort < 1000){
             selectmaxsort = 10003L;
         }
         selectmaxsort++;

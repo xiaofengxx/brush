@@ -86,4 +86,8 @@ public class LangConstants {
     public static final String TEMPLATE_MSG_IS_NULL = LangUtils.lang("TEMPLATE_MSG_IS_NULL");
 
     public static final String SHOP_IS_EXIST = LangUtils.lang("SHOP_IS_EXIST");
+
+    public static final String ANNOUNCEMENT_FAIL = LangUtils.lang("ANNOUNCEMENT_FAIL");
+
+    public static final String ANNOUNCEMENT_CAN_NOT_BE_FIND = LangUtils.lang("ANNOUNCEMENT_CAN_NOT_BE_FIND");
 }

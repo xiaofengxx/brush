@@ -18,8 +18,8 @@ import springfox.documentation.spring.web.plugins.Docket;
  */
 @Configuration("center")
 public class SwaggerConfiguration {
-    @Bean
-    public Docket createRestApi() {
+    @Bean("center api")
+    public Docket createRestApi1() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .groupName("公司接口")
                 .apiInfo(apiInfo())

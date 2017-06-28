@@ -25,6 +25,9 @@
 		<result column="requirements" property="requirements" />
 		<result column="state" property="state" />
 		<result column="sort" property="sort" />
+		<result column="collection" property="collection" />
+		<result column="shop_name" property="shopName" />
+		<result column="create_time" property="createTime" />
 	</resultMap>
 
 	<resultMap id="tempalteINFO" type="site.zido.dto.BusinessTemplateInfoDTO">
@@ -54,6 +57,7 @@
 		bp.id AS bp_id,
 		bp.platform_name AS bp_platform_name,
 
+		t1.id AS us_id,
 		t1.username AS us_username,
 
 		bs.shop_type AS bs_shop_type,
@@ -64,10 +68,12 @@
 		bt.sort AS bt_sort,
 		bt.product_style AS bt_product_style,
 		bt.product_keywords AS bt_product_keywords,
+		bt.product_present_price AS bt_product_present_price,
+		bs.shop_name AS bt_shop_name,
 		bt.template_tags AS bt_template_tags,
-		bt.product_original_price AS bt_product_original_price,
 		bt.create_time AS bt_create_time,
-		bt.state AS bt_state
+		bt.state AS bt_state,
+		bt.create_time AS bt_create_time
 
 
 		FROM brush_user t1

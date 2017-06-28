@@ -14,7 +14,7 @@ import springfox.documentation.spring.web.plugins.Docket;
  */
 @Configuration("pub")
 public class SwaggerConfiguration {
-    @Bean
+    @Bean("brush api")
     public Docket createRestApi2() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .groupName("公共接口")

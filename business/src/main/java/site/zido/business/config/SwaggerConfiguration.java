@@ -18,7 +18,7 @@ import springfox.documentation.spring.web.plugins.Docket;
  */
 @Configuration("business")
 public class SwaggerConfiguration {
-    @Bean
+    @Bean("business api")
     public Docket createRestApi3() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .groupName("商家接口")

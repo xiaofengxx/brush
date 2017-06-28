@@ -19,7 +19,7 @@ import springfox.documentation.spring.web.plugins.Docket;
  */
 @Configuration("otherService")
 public class SwaggerConfiguration {
-    @Bean
+    @Bean("other api")
     public Docket createRestApi() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .groupName("第三方服务接口")

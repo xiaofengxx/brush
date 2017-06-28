@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="site.zido.mapper.user.BusinessRechargeMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="site.zido.entity.BusinessRecharge">
+		<id column="id" property="id" />
+		<result column="recharge_money" property="rechargeMoney" />
+		<result column="recharge_chinese" property="rechargeChinese" />
+		<result column="recharge_name" property="rechargeName" />
+		<result column="recharge_url" property="rechargeUrl" />
+		<result column="terrace_words" property="terraceWords" />
+	</resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        recharge_money AS rechargeMoney, recharge_chinese AS rechargeChinese, recharge_name AS rechargeName, recharge_url AS rechargeUrl, terrace_words AS terraceWords, id
+    </sql>
+
+</mapper>

@@ -45,11 +45,6 @@ public class BusinessTemplate extends Model<BusinessTemplate> {
 	@TableField("payment_type")
 	private String paymentType;
     /**
-     * 模板标签
-     */
-	@TableField("template_tags")
-	private String templateTags;
-    /**
      * 产品链接
      */
 	@TableField("product_link")
@@ -242,15 +237,6 @@ public class BusinessTemplate extends Model<BusinessTemplate> {
 
 	public BusinessTemplate setPaymentType(String paymentType) {
 		this.paymentType = paymentType;
-		return this;
-	}
-
-	public String getTemplateTags() {
-		return templateTags;
-	}
-
-	public BusinessTemplate setTemplateTags(String templateTags) {
-		this.templateTags = templateTags;
 		return this;
 	}
 

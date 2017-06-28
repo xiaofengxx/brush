@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="site.zido.mapper.user.TaskmsgMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="site.zido.entity.Taskmsg">
+		<result column="id" property="id" />
+		<result column="sort" property="sort" />
+		<result column="task_price" property="taskPrice" />
+		<result column="task_num" property="taskNum" />
+		<result column="shop_id" property="shopId" />
+		<result column="user_id" property="userId" />
+		<result column="business_id" property="businessId" />
+		<result column="product_img" property="productImg" />
+		<result column="payment_type" property="paymentType" />
+		<result column="produck_link" property="produckLink" />
+		<result column="product_style" property="productStyle" />
+		<result column="product_original_price" property="productOriginalPrice" />
+		<result column="product_present_price" property="productPresentPrice" />
+		<result column="product_keywords" property="productKeywords" />
+		<result column="ranking_way" property="rankingWay" />
+		<result column="ranking_limit" property="rankingLimit" />
+		<result column="region_limit" property="regionLimit" />
+		<result column="price_limit" property="priceLimit" />
+		<result column="browse_time" property="browseTime" />
+		<result column="evaluation" property="evaluation" />
+		<result column="requirements" property="requirements" />
+		<result column="state" property="state" />
+		<result column="create_time" property="createTime" />
+		<result column="release_time" property="releaseTime" />
+		<result column="interval_time" property="intervalTime" />
+		<result column="task_price_count" property="taskPriceCount" />
+		<result column="product_price_count" property="productPriceCount" />
+		<result column="task_complete_num" property="taskCompleteNum" />
+		<result column="state_reject_msg" property="stateRejectMsg" />
+		<result column="task_duration" property="taskDuration" />
+		<result column="collection" property="collection" />
+		<result column="task_sort" property="taskSrot" />
+	</resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, sort, task_price AS taskPrice, task_num AS taskNum, shop_id AS shopId, user_id AS userId, business_id AS businessId, product_img AS productImg, payment_type AS paymentType, template_tags AS templateTags, produck_link AS produckLink, product_style AS productStyle, product_original_price AS productOriginalPrice, product_present_price AS productPresentPrice, product_keywords AS productKeywords, ranking_way AS rankingWay, ranking_limit AS rankingLimit, region_limit AS regionLimit, price_limit AS priceLimit, browse_time AS browseTime, evaluation, requirements, state, create_time AS createTime, release_time AS releaseTime, interval_time AS intervalTime, task_price_count AS taskPriceCount, product_price_count AS productPriceCount, task_complete_num AS taskCompleteNum, state_reject_msg AS stateRejectMsg, task_duration AS taskDuration, collection
+    </sql>
+
+
+	<select id="getMaxTaskSort"  resultType="java.lang.Long">
+		select max(task_sort)
+		from brush_taskmsg;
+	</select>
+
+</mapper>

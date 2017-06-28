@@ -143,7 +143,7 @@ public class SubscriberUser extends Model<SubscriberUser> {
 	 * 消费水平
 	 */
 	@TableField("consumption_level")
-	private String consumptionLevel;
+	private Integer consumptionLevel;
 	/**
 	 * 收货地址
 	 */
@@ -203,11 +203,11 @@ public class SubscriberUser extends Model<SubscriberUser> {
 		return this;
 	}
 
-	public String getConsumptionLevel() {
+	public Integer getConsumptionLevel() {
 		return consumptionLevel;
 	}
 
-	public SubscriberUser setConsumptionLevel(String consumptionLevel) {
+	public SubscriberUser setConsumptionLevel(Integer consumptionLevel) {
 		this.consumptionLevel = consumptionLevel;
 		return this;
 	}

@@ -10,7 +10,6 @@
 		<result column="business_id" property="businessId" />
 		<result column="product_img" property="productImg" />
 		<result column="payment_type" property="paymentType" />
-		<result column="template_tags" property="templateTags" />
 		<result column="product_link" property="productLink" />
 		<result column="product_style" property="productStyle" />
 		<result column="product_original_price" property="productOriginalPrice" />
@@ -70,7 +69,6 @@
 		bt.product_keywords AS bt_product_keywords,
 		bt.product_present_price AS bt_product_present_price,
 		bs.shop_name AS bt_shop_name,
-		bt.template_tags AS bt_template_tags,
 		bt.create_time AS bt_create_time,
 		bt.state AS bt_state,
 		bt.create_time AS bt_create_time

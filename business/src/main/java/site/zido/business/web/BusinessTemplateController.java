@@ -86,6 +86,7 @@ public class BusinessTemplateController extends BaseController{
 
 
 
+
         //判断店铺id是否正确 店铺所属人是否正确
         Shop byUserIdShopId = shopService.getByUserIdShopId(currentUser.getId(), template.getShopId());
         if(byUserIdShopId == null){

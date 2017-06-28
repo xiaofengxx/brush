@@ -32,19 +32,7 @@ public class BusinessTemplateController extends BaseController{
     @ApiOperation(value = "添加/修改-自己的-模板")
     public AjaxResult addedit(@RequestBody BusinessTemplate template){
 
-
         User currentUser = getCurrentUser();
-
-
-        /***
-         * 测试
-         */
-        currentUser = new User();
-
-        currentUser.setId(878130826922024960L);
-
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         if(template == null){
             fail(LangConstants.TEMPLATE_MSG_IS_NULL);

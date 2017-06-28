@@ -3,7 +3,10 @@ package site.zido.entity;
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.activerecord.Model;
 import com.baomidou.mybatisplus.annotations.TableName;
+import site.zido.brush.utils.DateUtils;
+
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * <p>
@@ -119,6 +122,47 @@ public class BusinessTemplate extends Model<BusinessTemplate> {
 	 */
 	private Long sort;
 
+	/**
+	 * 创建时间
+	 */
+	@TableField("create_time")
+	private Date createTime;
+
+	@TableField(exist = false)
+	private String createTimelable;
+
+
+	@TableField(exist = false)
+	private String shopName;
+
+
+	public String getCreateTimelable() {
+		return createTimelable;
+	}
+
+	public BusinessTemplate setCreateTimelable(String createTimelable) {
+		this.createTimelable = createTimelable;
+		return this;
+	}
+
+	public Date getCreateTime() {
+		return createTime;
+	}
+
+	public BusinessTemplate setCreateTime(Date createTime) {
+		this.setCreateTimelable(DateUtils.formatDateTime(createTime));
+		this.createTime = createTime;
+		return this;
+	}
+
+	public String getShopName() {
+		return shopName;
+	}
+
+	public BusinessTemplate setShopName(String shopName) {
+		this.shopName = shopName;
+		return this;
+	}
 
 	public String getCollection() {
 		return collection;

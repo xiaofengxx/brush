@@ -219,16 +219,29 @@ public class SubscriberController extends BaseController {
         }
     }
 
-    @PostMapping(value = "searchSubScriberList")
+    @PostMapping(value = "/searchSubScriberList")
     @ApiOperation(value = "多条件搜索")
     public AjaxResult searchSubScriberList(@RequestParam(defaultValue = "1") Integer currentPage, @RequestParam(defaultValue = "0") Integer level,@RequestBody SubscriberCondition condition){
         if(condition == null){
             condition = new SubscriberCondition().setSort(0).setDesc(true);
         }
 
-        Page<SubscriberUserInfoDTO> subscriberUserInfoDTOPage = subscriberService.searchSubscriberList(currentPage, constants.getPageSize(level), condition);
+        Page<SubscriberUserInfoDTO> infoDTOPage = subscriberService.searchSubscriberList(currentPage, constants.getPageSize(level), condition);
 
+        return successData(infoDTOPage);
+    }
 
-        return successData(subscriberUserInfoDTOPage);
+    @PostMapping(value = "/selectById")
+    @ApiOperation(value = "根据id搜索")
+    public AjaxResult selectById(@RequestParam(defaultValue = "1") String userid){
+        Page<SubscriberUserInfoDTO> infoDTOPage = subscriberService.searchSubscriberList(1, 1,
+                new SubscriberCondition().setUserid(userid));
+
+        List<SubscriberUserInfoDTO> records = infoDTOPage.getRecords();
+
+        if(CollectionUtils.isEmpty(records)){
+           return  success();
+        }
+        return successData(records.get(0));
     }
 }

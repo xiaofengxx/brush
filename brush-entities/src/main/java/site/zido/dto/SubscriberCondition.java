@@ -34,9 +34,18 @@ public class SubscriberCondition {
     @ApiModelProperty(value = "状态")
     private Integer[] states;
 
+    @ApiModelProperty
+    private String userid;
 
 
+    public String getUserid() {
+        return userid;
+    }
 
+    public SubscriberCondition setUserid(String userid) {
+        this.userid = userid;
+        return this;
+    }
 
     public Date getStime() {
         return stime;

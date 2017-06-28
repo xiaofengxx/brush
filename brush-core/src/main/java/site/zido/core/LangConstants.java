@@ -92,4 +92,12 @@ public class LangConstants {
     public static final String ANNOUNCEMENT_CAN_NOT_BE_FIND = LangUtils.lang("ANNOUNCEMENT_CAN_NOT_BE_FIND");
 
     public static final String PLEASE_CHOICE_RIGHT_TIME = LangUtils.lang("PLEASE_CHOICE_RIGHT_TIME");
+
+    public static final String RECHARGEMONEY_CAN_NOT_BE_EMPTY = LangUtils.lang("RECHARGEMONEY_CAN_NOT_BE_EMPTY");
+
+    public static final String RECHARGEPICTUREURL_CAN_NOT_BE_EMPTY = LangUtils.lang("RECHARGEPICTUREURL_CAN_NOT_BE_EMPTY");
+
+    public static final String RECHARGENAME_CAN_NOT_BE_EMPTY = LangUtils.lang("RECHARGENAME_CAN_NOT_BE_EMPTY");
+
+    public static final String RECHAEGECHINESE_CAN_NOT_BE_EMPTY = LangUtils.lang("RECHAEGECHINESE_CAN_NOT_BE_EMPTY");
 }
